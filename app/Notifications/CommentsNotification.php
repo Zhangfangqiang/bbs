@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Notifications;
+
+use App\Models\Comments;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
+
+class CommentsNotification extends Notification
+{
+    use Queueable;
+
+    /**
+     * 构造参数
+     *
+     * @var Comments
+     */
+    public $comments;
+
+    /**
+     * Create a new notification instance.
+     *
+     * @return void
+     */
+    public function __construct(Comments $comments)
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function via($notifiable)
+    {
+        return ['database'];
+    }
+
+    /**
+     * 通过写入数据库通知
+     * @param $notifiable
+     * @return array
+     */
+    public function toDatabase($notifiable)
+    {
+        if (is_null($this->comments->parent_id)) {
+            return [
+                'id'      => $this->comments->id,
+                'title'   => $this->comments->user->name . ',对您发布的内容进行了回复。',
+                'content' => $this->comments->content,
+            ];
+        }
+    }
+}
