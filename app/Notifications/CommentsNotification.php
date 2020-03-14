@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Models\Comments;
+use App\Models\Comment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -15,18 +15,18 @@ class CommentsNotification extends Notification
     /**
      * 构造参数
      *
-     * @var Comments
+     * @var Comment
      */
-    public $comments;
+    public $comment;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Comments $comments)
+    public function __construct(Comment $comment)
     {
-        $this->comments = $comments;
+        $this->comment = $comment;
     }
 
     /**
@@ -47,11 +47,11 @@ class CommentsNotification extends Notification
      */
     public function toDatabase($notifiable)
     {
-        if (is_null($this->comments->parent_id)) {
+        if (is_null($this->comment->parent_id)) {
             return [
-                'id'      => $this->comments->id,
-                'title'   => $this->comments->user->name . ',对您发布的内容进行了回复。',
-                'content' => $this->comments->content,
+                'id'      => $this->comment->id,
+                'title'   => $this->comment->user->name . ',对您发布的内容进行了回复。',
+                'content' => $this->comment->content,
             ];
         }
     }

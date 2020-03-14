@@ -8,26 +8,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
-class CommenstController extends Controller
+class CommentsController extends Controller
 {
     /**
      * 创建评论的方法
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function create(Request $request)
+    public function store(Request $request)
     {
         if (!\Auth::check()) {                                                  #如果你没有登录
             if (!$this->login($request)) {                                      #并且登录失败
                 return redirect(redirect()->back()->getTargetUrl() . '#zf-comment-list')->withErrors('用户名或密码错误');
             }
         }
-
         $validate = Validator::make($request->only('content', 'captcha', 'model_type', 'model_id', 'parent_id'),
             [
                 'content'    => ['required', 'string' , 'max:1000'],
                 'captcha'    => ['required', 'captcha', 'max:255'],
-                'model_type' => ['required', 'string' , 'max:255', 'in:App\Models\Article,App\Models\Img'],
+                'model_type' => ['required', 'string' , 'max:255', 'in:App\Models\Content'],
                 'model_id'   => ['required', 'numeric', 'max:255', function ($key, $value) use ($request) {
                     $array = ['App\Models\Article','App\Models\Img'];
                     if (!in_array($request->model_type, $array)) {

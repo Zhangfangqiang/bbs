@@ -71,6 +71,11 @@
           {{--操作结束--}}
         </div>
       </div>
+
+      {{--评论创建表单开始--}}
+      @include('web.shared._error')
+      @include('web.comments._create' , $model = $content)
+      {{--评论创建表单结束--}}
     </div>
     {{--左侧内容结束--}}
 
@@ -91,6 +96,8 @@
           </div>
         </div>
       </div>
+
+
     </div>
     {{--右侧内容结束--}}
   </div>
