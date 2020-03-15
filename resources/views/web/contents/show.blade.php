@@ -72,9 +72,12 @@
         </div>
       </div>
 
+      {{--评论列表开始--}}
+      @include('web.comments._list'   , ['model' =>$content])
+      {{--评论列表结束--}}
+
       {{--评论创建表单开始--}}
-      @include('web.shared._error')
-      @include('web.comments._create' , $model = $content)
+      @include('web.comments._create' , ['model' =>$content])
       {{--评论创建表单结束--}}
     </div>
     {{--左侧内容结束--}}
@@ -96,8 +99,6 @@
           </div>
         </div>
       </div>
-
-
     </div>
     {{--右侧内容结束--}}
   </div>
