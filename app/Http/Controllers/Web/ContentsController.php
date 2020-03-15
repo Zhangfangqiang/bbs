@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Web;
 
 use App\Models\Content;
 use App\Models\CategoryHasContent;
-use Illuminate\Http\Request;
 use App\Http\Requests\Web\ContentRequest;
 use App\Http\Controllers\Controller;
-
 
 class ContentsController extends Controller
 {
@@ -22,9 +20,8 @@ class ContentsController extends Controller
         $contents = Content::with('category', 'user');
 
         if ($request['category'] = $request->get('category')) {
-            $contents = $contents->whereIn('id',
-                                                    CategoryHasContent::whereIn('category_id', findChildren($request['category']))->get()->pluck('content_id')
-                                          );
+            $contentIds = CategoryHasContent::whereIn('category_id', findChildren($request['category']))->get()->pluck('content_id');
+            $contents   = $contents->whereIn('id', $contentIds);
         }
 
         $contents = $contents->whereNotNull('release_at')->customOrder($request->get('field'), $request->get('sort'))->paginate();
@@ -50,7 +47,7 @@ class ContentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContentRequest $request)
     {
         $data            = $request->only('title', 'c_id', 'content');
         $content         = Content::create($data);
@@ -66,7 +63,7 @@ class ContentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request , Content $content)
+    public function show(ContentRequest $request , Content $content)
     {
         if (!empty($content->english_title) && $content->english_title != $request->english_title) {
             return redirect($content->link(), 301);
@@ -97,7 +94,7 @@ class ContentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Content $content)
+    public function update(ContentRequest $request, Content $content)
     {
         $this->authorize('update-post', $content);
         $data            = $request->only('title', 'c_id', 'content');

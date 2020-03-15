@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Models\UploadRecord;
 use App\Models\UserHasUploadRecord;
-use Illuminate\Http\Request;
+use App\Http\Requests\Web\UeditorRequest;
 use App\Handlers\FileUploadHandler;
 use App\Http\Controllers\Controller;
 
@@ -23,10 +23,10 @@ class UeditorController extends Controller
 
     /**
      * 上传控制器总控
-     * @param Request $request
+     * @param UeditorRequest $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    public function upload(Request $request)
+    public function upload(UeditorRequest $request)
     {
         switch ($request->action) {
             #获取配置文件
@@ -74,10 +74,10 @@ class UeditorController extends Controller
 
     /**
      * 上传图片 上传涂鸦 上传视频 上传文件 总控的方法
-     * @param Request $request
+     * @param UeditorRequest $request
      * @return false|string
      */
-    private function actionUpload(Request $request)
+    private function actionUpload(UeditorRequest $request)
     {
         switch ($request->action) {
             case 'uploadimage':
@@ -129,10 +129,10 @@ class UeditorController extends Controller
 
     /**
      * 返回文件列表
-     * @param Request $request
+     * @param UeditorRequest $request
      * @return false|string
      */
-    private function actionList(Request $request)
+    private function actionList(UeditorRequest $request)
     {
         #根据亲戚定义配置文件
         switch ($request->action) {

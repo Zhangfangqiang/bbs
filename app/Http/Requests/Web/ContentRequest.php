@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests\Web;
 
+use App\Models\Category;
+
+
 class ContentRequest extends BaseRequest
 {
     /**
@@ -19,10 +22,32 @@ class ContentRequest extends BaseRequest
                     'sort'     => ['nullable','string' ,'in:asc,desc'],
                 ];
             case 'POST':
-                return [];
+                return [
+                    'title'     =>['required' , 'string' , 'max:255'],
+                    'c_id'      =>['required' , 'string' , 'max:255',  function ($attribute, $value, $fail) {
+                        $c_id   = explode(',', $value);
+                        $count = Category::whereIn('id',$c_id)->count();
+
+                        if (count($c_id) != $count) {
+                            $fail('你搞事情??');
+                        }
+                    }],
+                    'content'   =>['required' , 'string' , 'max:20000']
+                ];
             case'PUT':
             case'PATCH':
-                return [];
+                return [
+                    'title'     =>['required' , 'string' , 'max:255'],
+                    'c_id'      =>['required' , 'string' , 'max:255',  function ($attribute, $value, $fail) {
+                        $c_id   = explode(',', $value);
+                        $count = Category::whereIn('id',$c_id)->count();
+
+                        if (count($c_id) != $count) {
+                            $fail('你搞事情??');
+                        }
+                    }],
+                    'content'   =>['required' , 'string' , 'max:20000']
+                ];
         }
     }
 }
