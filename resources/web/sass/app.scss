@@ -85,3 +85,18 @@ body {
     padding: 0px;
   }
 }
+
+.zf-comments-list{
+  img{
+    height: 64px;
+    width: 64px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 5px;
+  }
+  .media{
+    padding-top: 0.8rem ;
+    .media-body{
+      min-height: 64px;
+    }
+  }
+}

@@ -122,3 +122,12 @@ if ($('.js-check-wrap').length) {
     });
   });
 }
+
+/**
+ * 点击回复的方法
+ */
+if ($('#zf-comment-form').length > 0) {
+  $('.zf-comment-reply').click(function () {
+    $("#zf-comment-form input[name='parent_id']").val($(this).data('id'))
+  });
+}

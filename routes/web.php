@@ -36,7 +36,6 @@ Route::group(['prefix' => 'web', 'namespace' => 'Web'], function () {
         Route::put    ('/contents/{content}'      , 'ContentsController@update')        ->name('web.contents.update');          #内容更新
         Route::delete ('/nav-contents/{content}'  , 'ContentsController@destroy')       ->name('web.contents.destroy');         #内容删除的方法
 
-        Route::post   ('/comments/store'          , 'CommentsController@store')         ->name('web.comments.store');           #创建评论开始
 
 
         Route::get    ('/categories/popup_list'   , 'CategoriesController@popupList')   ->name('web.categories.popup_list');    #分类内容弹出的列表框
@@ -49,4 +48,7 @@ Route::group(['prefix' => 'web', 'namespace' => 'Web'], function () {
 #路由前戳 前端命名空间后置
 Route::group(['prefix' => 'web', 'namespace' => 'Web'], function () {
     Route::get  ('/contents/{content}/{english_title?}'     , 'ContentsController@show')          ->name('web.contents.show');            #内容详情页
+
+    Route::post ('/comments/store'                          , 'CommentsController@store')         ->name('web.comments.store');           #创建评论开始
+
 });

@@ -2,11 +2,17 @@
 
 namespace App\Models;
 
+use TypiCMS\NestableTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    use NestableTrait;
 
+    /**
+     * 设置可以使用的表
+     * @var string
+     */
     protected $table = 'comments';
 
     /**

@@ -2,14 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notifiable;                                    #通知方法
 use Illuminate\Foundation\Auth\User           as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;   #定义MustVerifyEmail接口
 use Illuminate\Auth\MustVerifyEmail           as MustVerifyEmailTrait;      #实现MustVerifyEmail接口
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use Notifiable, MustVerifyEmailTrait;
+    use MustVerifyEmailTrait;
+
+    use Notifiable {
+        #给Notifiable trait 里面的 notify 方法定义个别名 为laravelNotify
+        notify as protected laravelNotify;
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -37,6 +42,26 @@ class User extends Authenticatable implements MustVerifyEmailContract
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * 重写notify里面的方法
+     *
+     * @param $instance
+     */
+    public function notify($instance)
+    {
+        #如果要通知的人是当前用户，就不必通知了！
+        if ($this->id == \Auth::id()) {
+            return;
+        }
+
+        #只有数据库类型通知才需提醒，直接发送 Email 或者其他的都 Pass
+        if (method_exists($instance, 'toDatabase')) {
+            #$this->increment('notification_count');
+        }
+
+        $this->laravelNotify($instance);
+    }
 
     /**
      * 对发送邮件重置密码方法 进行重置

@@ -16913,3 +16913,18 @@ body {
   padding: 0px;
 }
 
+.zf-comments-list img {
+  height: 64px;
+  width: 64px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 5px;
+}
+
+.zf-comments-list .media {
+  padding-top: 0.8rem;
+}
+
+.zf-comments-list .media .media-body {
+  min-height: 64px;
+}
+

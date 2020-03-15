@@ -47,12 +47,10 @@ class CommentsNotification extends Notification
      */
     public function toDatabase($notifiable)
     {
-        if (is_null($this->comment->parent_id)) {
-            return [
-                'id'      => $this->comment->id,
-                'title'   => $this->comment->user->name . ',对您发布的内容进行了回复。',
-                'content' => $this->comment->content,
-            ];
-        }
+        return [
+            'id'      => $this->comment->id,
+            'title'   => $this->comment->user->name . ',对您发布的内容进行了回复。',
+            'content' => $this->comment->content,
+        ];
     }
 }
