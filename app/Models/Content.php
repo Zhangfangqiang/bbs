@@ -48,6 +48,15 @@ class Content extends Model
     }
 
     /**
+     * 多态 一对多 获取评论
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable');
+    }
+
+    /**
      * 自定义排序方法主要告诉你 scope 怎么使用 T_T
      * @param $query
      * @param $field

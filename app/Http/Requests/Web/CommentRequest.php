@@ -16,16 +16,16 @@ class CommentRequest extends BaseRequest
                 return [];
             case 'POST':
                 return [
-                    'content'    => ['required', 'string' , 'max:1000'],
-                    'captcha'    => ['required', 'captcha', 'max:255'],
-                    'model_type' => ['required', 'string' , 'max:255', 'in:App\Models\Content'],
-                    'model_id'   => ['required', 'numeric', 'max:255',  function ($attribute, $value, $fail) {
-                        $model = new $this->model_type;
+                    'content'          => ['required', 'string' , 'max:1000'],
+/*                    'captcha'    => ['required', 'captcha', 'max:255'],*/
+                    'commentable_type' => ['required', 'string' , 'max:255', 'in:App\Models\Content'],
+                    'commentable_id'   => ['required', 'numeric', 'max:255',  function ($attribute, $value, $fail) {
+                        $model = new $this->commentable_type;
                         if(is_null($model->find($value))){
                             return false;
                         }
                     }],
-                    'parent_id'  => ['nullable','numeric','exists:comments,id']
+                    'parent_id'        => ['nullable','numeric','exists:comments,id']
                 ];
             case'PUT':
             case'PATCH':

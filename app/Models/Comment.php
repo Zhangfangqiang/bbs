@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use TypiCMS\NestableTrait;
+use App\Models\Traits\GetPublicData;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
     use NestableTrait;
+    use GetPublicData;
+
 
     /**
      * 设置可以使用的表
@@ -19,8 +22,7 @@ class Comment extends Model
      * 设计可填充的字段
      * @var array
      */
-    protected $fillable = ['content','model_type','model_id','status','user_id','parent_id','to_user_id','level','path'];
-
+    protected $fillable = ['content','commentable_type','commentable_id','status','user_id','parent_id','to_user_id','level','path'];
 
     /**
      * 初始化方法
@@ -41,12 +43,12 @@ class Comment extends Model
     }
 
     /**
-     * 数据关联一对一,查看你评论的什么内容
+     * 多态 一对多 获取内容
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function whatContent()
+    public function commentable()
     {
-        return $this->belongsTo($this->model_type,'model_id','id');
+        return $this->morphTo();
     }
 
     /**
@@ -75,4 +77,5 @@ class Comment extends Model
     {
         return $this->hasMany(Comment::class, 'parent_id');
     }
+
 }

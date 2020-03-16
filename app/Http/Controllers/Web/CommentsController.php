@@ -22,20 +22,22 @@ class CommentsController extends Controller
             }
         }
 
-        $data = $request->only('content', 'captcha', 'model_type', 'model_id', 'parent_id');
+        $data = $request->only('content', 'captcha', 'commentable_type', 'commentable_id', 'parent_id');
 
         #如果是对评论回复就多出这一步骤  ^_^ 略略略
         if (!is_null($data['parent_id'])) {
             $parentComment      = Comment::find($data['parent_id']);
             $data['to_user_id'] = $parentComment->user_id;
-            $parentComment->whatContent->user->commentNotify(new CommentsNotification($parentComment));
+
+            #这里需要写一个评论回复通知 待会写吧
+            #$parentComment->whatContent->user->commentNotify(new CommentsNotification($parentComment));
         }
 
         $data['status']  = 1;
         $data['user_id'] = \Auth::user()->id;
         $comment         = Comment::create($data);
-
-        $comment->whatContent->user->commentNotify(new CommentsNotification($comment));
+        #这里是评论通知
+        $comment->commentable->user->commentNotify(new CommentsNotification($comment));
 
         return redirect(redirect()->back()->getTargetUrl() . '#zf-comment-list');
     }

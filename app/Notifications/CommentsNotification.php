@@ -47,10 +47,19 @@ class CommentsNotification extends Notification implements  ShouldQueue
      */
     public function toDatabase($notifiable)
     {
+        $content = $this->comment->commentable;                             #获取文章
+        $link    =  $content->link(['#reply' . $this->comment->id]);        #通过内容找到该评论 估计评论多的话会有点困难
+
+        #存入数据库里的数据
         return [
-            'id'      => $this->comment->id,
-            'title'   => $this->comment->user->name . ',对您发布的内容进行了回复。',
-            'content' => $this->comment->content,
+            'comment_id'            => $this->comment->id,
+            'comment_content'       => $this->comment->content,
+            'comment_user_id'       => $this->comment->user->id,
+            'comment_user_name'     => $this->comment->user->name,
+            'comment_user_avatar'   => $this->comment->user->avatar,
+            'content_link'          => $link,
+            'content_id'            => $content->id,
+            'content_title'         => $content->title,
         ];
     }
 }

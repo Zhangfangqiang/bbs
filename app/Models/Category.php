@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\GetPublicData;
+
 
 class Category extends Model
 {
+    use GetPublicData;
+
     /**
      * 定义表格
      * @var string
@@ -80,4 +84,5 @@ class Category extends Model
             return $this->whereIn('id', explode(',', $this->path . ',' . $this->id))->get();
         }
     }
+
 }

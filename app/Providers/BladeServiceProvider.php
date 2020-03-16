@@ -28,21 +28,39 @@ class BladeServiceProvider extends ServiceProvider
          * 获取评论数据
          */
         Blade::directive('comments', function ($expression) {
-
             return "<?php
-            \$commentService = new \App\Services\CommentsService;
-
-            \$comments = \$commentService->getCommentDate(" . $expression . ");
+                \$comments = new App\Models\Comment;
+                \$comments = \$comments->getData(" . $expression . ");
             ?>
             ";
-
         });
         /**
-         * 获取评论尾部标签
+         * 获取评论数据尾部标签
          * 这个可以没有但是我就是要好看的双标签 -_-!
          */
         Blade::directive('endcomments' ,function (){
             return '';
         });
+
+        /**
+         * 获取通知数据
+         */
+        Blade::directive('notifications', function ($expression) {
+            return "<?php
+                \$notifications = new App\Models\Notification ;
+                \$notifications = \$notifications->getData(" . $expression . ");
+            ?>
+            ";
+        });
+        /**
+         * 获取通知数据尾部标签
+         * 这个可以没有但是我就是要好看的双标签 -_-!
+         */
+        Blade::directive('endnotifications' ,function (){
+            return '';
+        });
+
+
+
     }
 }

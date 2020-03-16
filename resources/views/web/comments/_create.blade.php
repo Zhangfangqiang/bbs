@@ -32,8 +32,8 @@
 
         <div class="pt-2 col-2">
           @csrf
-          <input type="text"   hidden name="model_type" required  value="{{get_class($model)}}">
-          <input type="number" hidden name="model_id"   required  value="{{$model->id}}">
+          <input type="text"   hidden name="commentable_type" required  value="{{get_class($model)}}">
+          <input type="number" hidden name="commentable_id"   required  value="{{$model->id}}">
           <input type="text"   hidden name="parent_id"            value="{{old('parent_id')}}" >
           <button type="submit" class="btn btn-outline-dark">提交</button>
         </div>

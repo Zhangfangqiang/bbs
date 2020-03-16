@@ -64,9 +64,9 @@
 {{--后置js开始--}}
 @section('after_js')
   {{--百度编辑器开始--}}
-  <script type="text/javascript" charset="utf-8" src="{{asset('/assets/web/ueditor/ueditor.config.js')}}"></script>
-  <script type="text/javascript" charset="utf-8" src="{{asset('/assets/web/ueditor/ueditor.all.min.js')}}"> </script>
-  <script type="text/javascript" charset="utf-8" src="{{asset('/assets/web/ueditor/lang/zh-cn/zh-cn.js')}}"></script>
+  <script type="text/javascript" charset="utf-8" src="{{asset('/web/ueditor/ueditor.config.js')}}"></script>
+  <script type="text/javascript" charset="utf-8" src="{{asset('/web/ueditor/ueditor.all.min.js')}}"> </script>
+  <script type="text/javascript" charset="utf-8" src="{{asset('/web/ueditor/lang/zh-cn/zh-cn.js')}}"></script>
   {{--百度编辑器结束--}}
 
   <script>

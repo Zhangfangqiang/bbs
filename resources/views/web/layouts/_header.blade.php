@@ -36,18 +36,19 @@
           <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">登录</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">注册</a></li>
         @else
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img src="{{imgRe(Auth::user()->avatar , 400 , 400)}}" class="img-responsive img-circle" width="30px" height="30px">
               {{ Auth::user()->name }}
             </a>
 
+            {{--下拉菜单开始--}}
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{ route('web.users.show', Auth::id()) }}">个人中心</a>
               <a class="dropdown-item" href="{{ route('web.contents.create') }}">发布内容</a>
-
+              <a href=""></a>
               <div class="dropdown-divider"></div>
-
               <a class="dropdown-item" id="logout" href="#">
                 <form action="{{ route('logout') }}" method="POST">
                   {{ csrf_field() }}
@@ -55,7 +56,14 @@
                 </form>
               </a>
             </div>
+            {{--下拉菜单结束--}}
           </li>
+
+          {{--消息通知按钮开始--}}
+          <li class="nav-item">
+            <span class="badge badge-danger" {{ Auth::user()->notification_count > 0 ? '' : 'hidden' }} >{{ Auth::user()->notification_count }}</span>
+          </li>
+          {{--消息通知按钮结束--}}
         @endguest
       </ul>
 
