@@ -19,9 +19,7 @@
         @endguest
 
         <div class="pt-2 col-12">
-          <textarea name="content" class="form-control" id="" cols="30" rows="10" required>
-            {{old('content') ?? "写的不错我会关注你的!!!"}}
-          </textarea>
+          <textarea name="content" class="form-control" id="" cols="30" rows="10" required>{{old('content') ?? "写的不错我会关注你的!!!"}}</textarea>
         </div>
 
         <div class="pt-2 pr-2 col-6">

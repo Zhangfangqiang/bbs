@@ -7,7 +7,7 @@
   <title>@yield('title', 'LaraBBS') - Laravel 进阶教程</title>
 
   {{--样式开始--}}
-  <link href="{{ mix('web/css/app.css') }}" rel="stylesheet">
+  <link href="{{ mix('/assets/web/css/app.css') }}" rel="stylesheet">
   {{--样式结束--}}
 
   {{--后置样式开始--}}

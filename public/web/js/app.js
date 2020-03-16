@@ -37045,21 +37045,21 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/web/js/app.js":
-/*!*********************************!*\
-  !*** ./resources/web/js/app.js ***!
-  \*********************************/
+/***/ "./resources/assets/web/js/app.js":
+/*!****************************************!*\
+  !*** ./resources/assets/web/js/app.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/web/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/assets/web/js/bootstrap.js");
 
 /***/ }),
 
-/***/ "./resources/web/js/bootstrap.js":
-/*!***************************************!*\
-  !*** ./resources/web/js/bootstrap.js ***!
-  \***************************************/
+/***/ "./resources/assets/web/js/bootstrap.js":
+/*!**********************************************!*\
+  !*** ./resources/assets/web/js/bootstrap.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37101,10 +37101,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/web/sass/app.scss":
-/*!*************************************!*\
-  !*** ./resources/web/sass/app.scss ***!
-  \*************************************/
+/***/ "./resources/assets/web/sass/app.scss":
+/*!********************************************!*\
+  !*** ./resources/assets/web/sass/app.scss ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -37113,14 +37113,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ }),
 
 /***/ 0:
-/*!*********************************************************************!*\
-  !*** multi ./resources/web/js/app.js ./resources/web/sass/app.scss ***!
-  \*********************************************************************/
+/*!***********************************************************************************!*\
+  !*** multi ./resources/assets/web/js/app.js ./resources/assets/web/sass/app.scss ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/cms.zfajax.com/resources/web/js/app.js */"./resources/web/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/cms.zfajax.com/resources/web/sass/app.scss */"./resources/web/sass/app.scss");
+__webpack_require__(/*! /var/www/cms.zfajax.com/resources/assets/web/js/app.js */"./resources/assets/web/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/cms.zfajax.com/resources/assets/web/sass/app.scss */"./resources/assets/web/sass/app.scss");
 
 
 /***/ })
