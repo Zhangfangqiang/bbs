@@ -9,7 +9,11 @@ use Illuminate\Auth\MustVerifyEmail           as MustVerifyEmailTrait;      #实
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use MustVerifyEmailTrait, Notifiable;
+    use MustVerifyEmailTrait;
+    use Notifiable {
+        #给Notifiable trait 里面的 notify 方法定义个别名 为laravelNotify
+        notify as protected laravelNotify;
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -43,7 +47,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
      *
      * @param $instance
      */
-    public function commentNotify($instance)
+    public function notify($instance)
     {
         #如果要通知的人是当前用户，就不必通知了！
         if ($this->id == \Auth::id()) {
@@ -55,7 +59,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
             $this->increment('notification_count');
         }
 
-        $this->notify($instance);
+        $this->laravelNotify($instance);
     }
 
     /**
@@ -88,5 +92,27 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function contents()
     {
         return $this->hasMany(Content::class);
+    }
+
+    /**
+     * 添加了新的关联方法
+     * @param $type
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function unreadNotificationsType($type)
+    {
+        return $this->notifications()->whereNull('read_at')->where('type', '=', $type);
+    }
+
+    /**
+     * 观看评论后将通知清零 并且将消息已读
+     * @param $type
+     */
+    public function markAsRead($type)
+    {
+        $notifications = $this->unreadNotificationsType($type);                     #没有阅读的消息并且加上类型关联
+        $this->decrement('notification_count',$notifications->count());     #然后减去已读的消息
+        $notifications->get()->markAsRead();                                        #将通知已读
+        $this->save();
     }
 }

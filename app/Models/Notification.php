@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\GetPublicData;
+use Illuminate\Notifications\DatabaseNotification;
 
-class Notification extends Model
+class Notification extends DatabaseNotification
 {
     use GetPublicData;
 
@@ -22,4 +22,6 @@ class Notification extends Model
      * @var string
      */
     protected $table = 'notifications';
+
+
 }

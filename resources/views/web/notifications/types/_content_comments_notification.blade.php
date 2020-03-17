@@ -1,7 +1,7 @@
 <li class="media  ">
   <div class="media-left">
     <a href="{{ route('web.users.show', $notification->data['comment_user_id']) }}">
-      <img class="media-object img-thumbnail mr-3" alt="{{ $notification->data['comment_user_name'] }}" src="{{ $notification->data['comment_user_avatar'] }}" style="width:48px;height:48px;" />
+      <img class="media-object img-thumbnail mr-3" alt="{{ $notification->data['comment_user_name'] }}" src=" {{imgRe( $notification->data['comment_user_avatar'] , 400 , 400 ) }}" style="width:48px;height:48px;" />
     </a>
   </div>
 

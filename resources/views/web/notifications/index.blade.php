@@ -21,7 +21,7 @@
         <div class="card-header">
           <h4>
             <i class="glyphicon glyphicon-edit"></i>
-            @switch(Request::input('type'))
+            @switch($notificationsRequest->type)
               @case('App\Notifications\CommentReplyNotification')
               评论回复通知
               @break
@@ -37,7 +37,7 @@
             $config = [
               'otherWhere' => [
                 ['notifiable_id', '=' , Auth::user()->id],
-                ['type'         , '=' , Request::input('type')],
+                ['type'         , '=' , $notificationsRequest->type],
               ],
               'order'      =>['created_at' ,'desc'],
               'paginate'   => 15
@@ -54,7 +54,7 @@
           @endif
           @endnotifications
 
-          {{$notifications->appends(Request::except('page'))->render() }}
+          {{$notifications->appends($notificationsRequest->except('page'))->render() }}
         </div>
       </div>
     </div>

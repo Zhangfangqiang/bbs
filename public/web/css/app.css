@@ -16829,6 +16829,16 @@ a.text-dark:focus {
   }
 }
 
+@media (min-width: 1200px) {
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container {
+    max-width: 1300px;
+  }
+}
+
 /* 普遍样式 */
 
 body {

@@ -36,11 +36,11 @@ class CommentsController extends Controller
         $comment         = Comment::create($data);
 
         #评论对应的文章文章属于的用户      这里是内容评论通知
-        $comment->commentable->user->commentNotify(new ContentCommentsNotification($comment));
+        $comment->commentable->user->notify(new ContentCommentsNotification($comment));
 
         #如果是对评论回复就多出这一步骤  ^_^ 略略略
         if (!is_null($data['parent_id'])) {
-            $parentComment->user->commentNotify(new CommentReplyNotification($comment));
+            $parentComment->user->notify(new CommentReplyNotification($comment));
         }
 
         return redirect(redirect()->back()->getTargetUrl() . '#zf-comment-list');

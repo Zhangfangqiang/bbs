@@ -41,7 +41,7 @@ class CommentReplyNotification extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toDatabase($notifiable)
     {
         $prentComment = $this->comment->parent;                                                #获得我评论的评论 父评论
         $link         =  $prentComment->commentable->link(['#reply' . $this->comment->id]);    #通过内容找到该评论 估计评论多的话会有点困难  需要给评论单独做一个模块 哇哇哇
