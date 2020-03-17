@@ -13,7 +13,7 @@
           ['commentable_type', '=' , get_class($model) ],
           ['commentable_id'  , '=' , $model->id        ]
          ],
-        'paginate'      => 15
+         'order'        => ['paths' , 'desc'],
       ];
     @endphp
     {{--评论列表开始--}}

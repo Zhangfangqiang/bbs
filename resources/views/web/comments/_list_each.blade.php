@@ -4,9 +4,7 @@
     <h5 class="mt-0">{{$value->user->name}}</h5>
     <p>
       {{$value->content}}
-
-      <a class="btn btn-sm btn-outline-dark float-lg-right zf-comment-reply"
-         data-id="{{$value['id']}}" href="#zf-comment-form">
+      <a class="btn btn-sm btn-outline-dark float-lg-right zf-comment-reply" data-id="{{$value['id']}}" href="#zf-comment-form" id="reply{{$value['id']}}">
         回复
       </a>
     </p>

@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Web;
 use App\Models\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\CommentRequest;
-use App\Notifications\CommentsNotification;
+use App\Notifications\CommentReplyNotification;
+use App\Notifications\ContentCommentsNotification;
 
 class CommentsController extends Controller
 {
@@ -28,16 +29,19 @@ class CommentsController extends Controller
         if (!is_null($data['parent_id'])) {
             $parentComment      = Comment::find($data['parent_id']);
             $data['to_user_id'] = $parentComment->user_id;
-
-            #这里需要写一个评论回复通知 待会写吧
-            #$parentComment->whatContent->user->commentNotify(new CommentsNotification($parentComment));
         }
 
         $data['status']  = 1;
         $data['user_id'] = \Auth::user()->id;
         $comment         = Comment::create($data);
-        #这里是评论通知
-        $comment->commentable->user->commentNotify(new CommentsNotification($comment));
+
+        #评论对应的文章文章属于的用户      这里是内容评论通知
+        $comment->commentable->user->commentNotify(new ContentCommentsNotification($comment));
+
+        #如果是对评论回复就多出这一步骤  ^_^ 略略略
+        if (!is_null($data['parent_id'])) {
+            $parentComment->user->commentNotify(new CommentReplyNotification($comment));
+        }
 
         return redirect(redirect()->back()->getTargetUrl() . '#zf-comment-list');
     }

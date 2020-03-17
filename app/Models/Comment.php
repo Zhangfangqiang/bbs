@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use TypiCMS\NestableTrait;
+use TypiCMS\NestableTrait;                      #三级分类
 use App\Models\Traits\GetPublicData;
 use Illuminate\Database\Eloquent\Model;
 

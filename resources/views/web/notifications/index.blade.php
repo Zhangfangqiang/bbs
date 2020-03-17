@@ -12,7 +12,7 @@
   <div class="row">
 
     {{--左侧内容开始--}}
-    @include('web.users._left_nav' , $user = \Auth::user())
+    @include('web.notifications._left_nav' , $user = \Auth::user())
     {{--左侧内容结束--}}
 
     {{--右侧内容开始--}}
@@ -20,17 +20,27 @@
       <div class="card">
         <div class="card-header">
           <h4>
-            <i class="glyphicon glyphicon-edit"></i>消息通知
+            <i class="glyphicon glyphicon-edit"></i>
+            @switch(Request::input('type'))
+              @case('App\Notifications\CommentReplyNotification')
+              评论回复通知
+              @break
+              @case('App\Notifications\ContentCommentsNotification')
+              内容评论通知
+              @break
+            @endswitch
           </h4>
         </div>
 
         <div class="card-body">
-
           @php
             $config = [
               'otherWhere' => [
-                ['notifiable_id', '=', Auth::user()->id]
-              ]
+                ['notifiable_id', '=' , Auth::user()->id],
+                ['type'         , '=' , Request::input('type')],
+              ],
+              'order'      =>['created_at' ,'desc'],
+              'paginate'   => 15
             ];
           @endphp
 
@@ -43,6 +53,8 @@
             暂无通知
           @endif
           @endnotifications
+
+          {{$notifications->appends(Request::except('page'))->render() }}
         </div>
       </div>
     </div>

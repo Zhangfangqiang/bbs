@@ -19,7 +19,7 @@ class CommentRequest extends BaseRequest
                     'content'          => ['required', 'string' , 'max:1000'],
 /*                    'captcha'    => ['required', 'captcha', 'max:255'],*/
                     'commentable_type' => ['required', 'string' , 'max:255', 'in:App\Models\Content'],
-                    'commentable_id'   => ['required', 'numeric', 'max:255',  function ($attribute, $value, $fail) {
+                    'commentable_id'   => ['required', 'numeric', function ($attribute, $value, $fail) {
                         $model = new $this->commentable_type;
                         if(is_null($model->find($value))){
                             return false;
