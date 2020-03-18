@@ -15,13 +15,15 @@ class CategoryHasContentsTableSeeder extends Seeder
      */
     public function run()
     {
-        $content_ids  = Content::all()->pluck('id')->toArray();            #获取文章数据
-        $category_ids = Category::all()->pluck('id')->toArray();           #获取分类
 
-        collect($content_ids)->each(
-            function ($content_id, $index) use ($category_ids) {
-                $category_id = $category_ids[array_rand($category_ids)];
-                CategoryHasContent::create(['category_id' => $category_id, 'content_id' => $content_id]);
+        $category_ids = Category::all()->pluck('id')->toArray();                                                                  #获取分类
+
+        Content::all()->each(
+            function ($item) use ($category_ids) {
+                $category_id = $category_ids[array_rand($category_ids)];                                                                #随机获得一个分类
+                if (CategoryHasContent::where('category_id', '=', $item->id)->where('content_id', '=', $category_id)->count() == 0) {   #没有任何关联
+                    $item->category()->attach($category_id);
+                }
             }
         );
     }

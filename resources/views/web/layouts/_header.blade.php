@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
   <div class="container">
-    <!-- Branding Image -->
+
     <a class="navbar-brand " href="{{ url('/') }}">
-      LaraBBS
+      多人博客
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -13,23 +13,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item {{active_class( if_route('web.contents.index') && Request::input('category') == '' )}}">
-          <a class="nav-link" href="{{ route('web.contents.index') }}">话题</a>
-        </li>
-        <li class="nav-item {{active_class( if_route('web.contents.index') && Request::input('category') == 23  )}}">
-          <a class="nav-link" href="{{ route('web.contents.index', ['category' =>23 ]) }}">分享</a>
-        </li>
-        <li class="nav-item {{active_class( if_route('web.contents.index') && Request::input('category') == 24)}}">
-          <a class="nav-link" href="{{ route('web.contents.index', ['category' =>24 ]) }}">教程</a>
-        </li>
-        <li class="nav-item {{active_class( if_route('web.contents.index') && Request::input('category') == 25)}}">
-          <a class="nav-link" href="{{ route('web.contents.index', ['category' =>25 ]) }}">问答</a>
-        </li>
-        <li class="nav-item {{active_class( if_route('web.contents.index') && Request::input('category') == 26 )}}">
-          <a class="nav-link" href="{{ route('web.contents.index', ['category' =>26 ]) }}">公告</a>
-        </li>
+        {{--分类标签循环开始--}}
+        @category
+          @foreach($categories as $key => $value)
+            <li class="nav-item {{active_class( if_route('web.contents.index') && Request::input('category') == $value->id )}}">
+              <a class="nav-link" href="{{ route('web.contents.index',['category' =>$value->id ]) }}">{{$value->name}}</a>
+            </li>
+          @endforeach
+        @endcategory
+        {{--分类标签循环结束--}}
       </ul>
-
 
       <ul class="navbar-nav navbar-right">
         @guest
@@ -61,7 +54,9 @@
 
           {{--消息通知按钮开始--}}
           <li class="nav-item">
-            <span class="badge badge-danger" {{ Auth::user()->notification_count > 0 ? '' : 'hidden' }} >{{ Auth::user()->notification_count }}</span>
+            <a href="{{ route('web.notifications.index', ['type' => 'App\Notifications\ContentCommentsNotification' ]) }}">
+              <span class="badge badge-danger" {{ Auth::user()->notification_count > 0 ? '' : 'hidden' }} >{{ Auth::user()->notification_count }}</span>
+            </a>
           </li>
           {{--消息通知按钮结束--}}
         @endguest

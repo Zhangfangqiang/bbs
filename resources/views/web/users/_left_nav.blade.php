@@ -15,7 +15,10 @@
     @can('user', $user)
     <a class="list-group-item list-group-item-action" href="{{ route('web.users.edit', $user->id) }}">编辑个人资料</a>
     <a class="list-group-item list-group-item-action" href="{{ route('web.contents.create', $user->id) }}">创建内容</a>
-    <a class="list-group-item list-group-item-action" href="{{ route('web.notifications.index', ['type' => 'App\Notifications\ContentCommentsNotification' ]) }}">消息通知</a>
+    <a class="list-group-item list-group-item-action" href="{{ route('web.notifications.index', ['type' => 'App\Notifications\ContentCommentsNotification' ]) }}">
+      消息通知
+      <span class="badge badge-danger float-right" {{ Auth::user()->notification_count > 0 ? '' : 'hidden' }} >{{ Auth::user()->notification_count }}</span>
+    </a>
     @endcan
   </div>
 </div>

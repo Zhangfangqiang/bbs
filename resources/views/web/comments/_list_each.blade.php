@@ -9,14 +9,15 @@
         <i class="far fa-edit"></i>
         回复
       </a>
-
-      <a class="zf-delete btn btn-sm btn-outline-danger btn-sm float-right mr-1"
-         href="javascript:void(0)"
-         data-toggle="tooltip"
-         data-original-title="评论删除"
-         data-url="{{route('web.comments.destroy',$value->id)}}">
-        <i class="far fa-trash-alt"></i> 删除
-      </a>
+      @can('post-data', $value)
+        <a class="zf-delete btn btn-sm btn-outline-danger btn-sm float-right mr-1"
+           href="javascript:void(0)"
+           data-toggle="tooltip"
+           data-original-title="评论删除"
+           data-url="{{route('web.comments.destroy',$value->id)}}">
+          <i class="far fa-trash-alt"></i> 删除
+        </a>
+      @endcan
     </p>
 
     @if(!empty($value->items))

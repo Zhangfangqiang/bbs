@@ -16,7 +16,7 @@ class ContentsTableSeeder extends Seeder
         $user_ids = User::all()->pluck('id')->toArray();            #获取用户数据
         $faker    = app(Faker\Generator::class);                  #获取 Faker 实例
 
-        $contents = factory(Content::class)->times(200)->make()->each(
+        $contents = factory(Content::class)->times(500)->make()->each(
             function ($content, $index) use ($user_ids, $faker) {
                 $content->user_id = $faker->randomElement($user_ids);         #从用户 ID 数组中随机取出一个并赋值
             }

@@ -77,5 +77,23 @@ class BladeServiceProvider extends ServiceProvider
         Blade::directive('endactiveuser' ,function (){
             return '';
         });
+
+        /**
+         * 获取分类数据标签
+         */
+        Blade::directive('category', function ($expression) {
+            return "<?php
+                \$categories = new App\Models\Category ;
+                \$categories = \$categories->getData(" . $expression . ");
+            ?>
+            ";
+        });
+        /**
+         * 获取分类数据标签
+         * 这个可以没有但是我就是要好看的双标签 -_-!
+         */
+        Blade::directive('endcategory' ,function (){
+            return '';
+        });
     }
 }

@@ -52,7 +52,7 @@
           {{--内容结束--}}
 
           {{--操作开始--}}
-          @can('update-post', $content)
+          @can('post-data', $content)
             <div class="operate">
               <hr>
               <a href="{{ route('web.contents.edit', $content->id) }}" class="btn btn-outline-secondary btn-sm" role="button">

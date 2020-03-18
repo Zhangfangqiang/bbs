@@ -38,7 +38,7 @@ $factory->define(Content::class, function (Faker $faker) {
         'seo_key'         => $sentence,
         'excerpt'         => $sentence,
         'source'          => $faker->word,
-        'content'         => $faker->text(200),
+        'content'         => $faker->text(2000),
         'img'             => $faker->imageUrl(),
         'video'           => null,
         'more'            => null,

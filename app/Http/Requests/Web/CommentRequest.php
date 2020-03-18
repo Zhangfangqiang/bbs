@@ -17,7 +17,7 @@ class CommentRequest extends BaseRequest
             case 'POST':
                 return [
                     'content'          => ['required', 'string' , 'max:1000'],
-/*                    'captcha'    => ['required', 'captcha', 'max:255'],*/
+                    'captcha'          => ['required', 'captcha', 'max:255'],
                     'commentable_type' => ['required', 'string' , 'max:255', 'in:App\Models\Content'],
                     'commentable_id'   => ['required', 'numeric', function ($attribute, $value, $fail) {
                         $model = new $this->commentable_type;

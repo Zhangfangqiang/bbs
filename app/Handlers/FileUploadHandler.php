@@ -148,9 +148,9 @@ class FileUploadHandler
             if (Storage::disk('web_user_upload')->put($this->fullName, $fileData)){
                 #移动成功
                 $this->fullName  = Storage::disk('web_user_upload')->url($this->fullName);                   #获取文件url
-                $this->stateInfo = $this->stateMap[0];                                                              #定义文件成功状态
+                $this->stateInfo = $this->stateMap[0];                                                             #定义文件成功状态
                 $uploadRecord    = UploadRecord::create(['path' => $this->fullName, 'size' => $this->fileSize, 'md5' => $this->fileMd5]);
-                UserHasUploadRecord::create(['user_id' => \Auth::user()->id, 'upload_record_id' => $uploadRecord->id]);
+                $uploadRecord->user()->attach(\Auth::user()->id);                                                  #进行关系关联
             }else{
                 #移动失败
                 $this->stateInfo = $this->getStateInfo("ERROR_FILE_MOVE");
@@ -161,7 +161,8 @@ class FileUploadHandler
             $this->fileName  = $this->getFileName();                                                            #获取移动后 文件名
             $this->filePath  = $this->getFilePath();                                                            #获取文件路径
             $this->stateInfo = $this->stateMap[0];                                                              #定义文件成功状态
-            UserHasUploadRecord::create(['user_id' => \Auth::user()->id, 'upload_record_id' => $uploadRecord->id]);
+            $uploadRecord->user()->attach(\Auth::user()->id);                                                   #进行关系关联
+
         }
     }
 
