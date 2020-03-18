@@ -31,7 +31,10 @@ class AuthServiceProvider extends ServiceProvider
             return 'App\Policies\\'.class_basename($modelClass).'Policy';
         });
 
-        Gate::define('update-post', function ($user, $post) {
+        /**
+         * 添加新权限post-data
+         */
+        Gate::define('post-data', function ($user, $post) {
             return $user->id === $post->user_id;
         });
     }

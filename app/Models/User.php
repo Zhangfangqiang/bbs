@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;                                    #通知方法
+use App\Models\Traits\ActiveUserHelper;                                     #活跃用户计算计算方法接口
 use Illuminate\Foundation\Auth\User           as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;   #定义MustVerifyEmail接口
 use Illuminate\Auth\MustVerifyEmail           as MustVerifyEmailTrait;      #实现MustVerifyEmail接口
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use MustVerifyEmailTrait;
+    use MustVerifyEmailTrait, ActiveUserHelper;
     use Notifiable {
         #给Notifiable trait 里面的 notify 方法定义个别名 为laravelNotify
         notify as protected laravelNotify;

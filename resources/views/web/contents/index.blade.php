@@ -101,11 +101,24 @@
 
     {{--右侧内容开始--}}
     <div class="col-lg-3 col-md-3 sidebar">
-      <div class="card ">
-        <div class="card-body">
-          右边导航栏
-        </div>
-      </div>
+      @activeuser
+        @if (count($activeusers) > 0)
+          <div class="card">
+            <div class="card-body active-users pt-2">
+              <div class="text-center mt-1 mb-0 text-muted">活跃用户</div>
+              <hr class="mt-2">
+              @foreach ($activeusers as $value)
+                <a class="media mt-2" href="{{ route('web.users.show', $value->id) }}">
+                  <div class="media-middle mr-2 ml-1">
+                    <img src="{{ imgRe( $value->avatar ,400 ,400 )}}" width="36px" height="36px" class="media-object">
+                    <small class="media-heading text-secondary "style="vertical-align: center;">{{ $value->name }}</small>
+                  </div>
+                </a>
+              @endforeach
+            </div>
+          </div>
+        @endif
+      @endactiveuser
     </div>
     {{--右侧内容结束--}}
   </div>

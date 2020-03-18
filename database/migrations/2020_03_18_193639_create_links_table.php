@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUploadRecordsTable extends Migration
+class CreateLinksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateUploadRecordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('upload_records', function (Blueprint $table) {
+        Schema::create('links', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('md5','32')->unique()->comment('文件唯一md5');
-            $table->string('path')->unique()         ->comment('文件路径');
-            $table->unsignedBigInteger('size')       ->comment('文件大小');
+            $table->string('title')->index()->comment('资源的标题 添加一个普通索引');
+            $table->string('description')   ->comment('简介');
+            $table->string('link') ->index()->comment('资源的链接 添加一个普通索引');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateUploadRecordsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('upload_records');
+        Schema::dropIfExists('links');
     }
 }

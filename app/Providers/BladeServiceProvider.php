@@ -60,7 +60,22 @@ class BladeServiceProvider extends ServiceProvider
             return '';
         });
 
-
-
+        /**
+         * 活跃用户标签
+         */
+        Blade::directive('activeuser', function () {
+            return "<?php
+                \$user        = new App\Models\User ;
+                \$activeusers = \$user->getActiveUsers();
+            ?>
+            ";
+        });
+        /**
+         * 活跃用户标签
+         * 这个可以没有但是我就是要好看的双标签 -_-!
+         */
+        Blade::directive('endactiveuser' ,function (){
+            return '';
+        });
     }
 }

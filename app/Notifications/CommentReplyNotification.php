@@ -32,7 +32,7 @@ class CommentReplyNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','mail'];
     }
 
     /**
@@ -58,5 +58,19 @@ class CommentReplyNotification extends Notification implements ShouldQueue
             'prent_comment_id'      => $prentComment->id,
             'prent_comment_content'   => $prentComment->content,
         ];
+    }
+
+    /**
+     * 发送通知邮件
+     * @param $notifiable
+     * @return MailMessage
+     */
+    public function toMail($notifiable)
+    {
+        $url = $this->comment->commentable->link(['#reply' . $this->comment->id]);
+
+        return (new MailMessage)
+            ->line('你的话题有新回复！')
+            ->action('查看回复', $url);
     }
 }

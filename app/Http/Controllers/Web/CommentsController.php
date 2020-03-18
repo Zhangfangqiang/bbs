@@ -45,4 +45,18 @@ class CommentsController extends Controller
 
         return redirect(redirect()->back()->getTargetUrl() . '#zf-comment-list');
     }
+
+    /**
+     * 内容删除的方法
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Comment $comment)
+    {
+        $this->authorize('post-data', $comment);
+        $comment->delete();                                 #删除数据
+        return response(['url' => redirect()->back()->getTargetUrl()], 200);
+    }
 }

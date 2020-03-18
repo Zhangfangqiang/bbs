@@ -34,14 +34,15 @@ Route::group(['prefix' => 'web', 'namespace' => 'Web'], function () {
         Route::post   ('/contents/store'          , 'ContentsController@store')         ->name('web.contents.store');           #内容创建
         Route::get    ('/contents/{content}/edit' , 'ContentsController@edit')          ->name('web.contents.edit');            #内容编辑页
         Route::put    ('/contents/{content}'      , 'ContentsController@update')        ->name('web.contents.update');          #内容更新
-        Route::delete ('/nav-contents/{content}'  , 'ContentsController@destroy')       ->name('web.contents.destroy');         #内容删除的方法
+        Route::delete ('/contents/{content}'      , 'ContentsController@destroy')       ->name('web.contents.destroy');         #内容删除的方法
 
         Route::get    ('/notifications/index'     , 'NotificationsController@index')    ->name('web.notifications.index');      #消息通知
 
         Route::get    ('/categories/popup_list'   , 'CategoriesController@popupList')   ->name('web.categories.popup_list');    #分类内容弹出的列表框
 
-    });
+        Route::delete ('/comments/{comment}'      , 'CommentsController@destroy')       ->name('web.comments.destroy');         #评论删除的方法
 
+    });
 });
 
 

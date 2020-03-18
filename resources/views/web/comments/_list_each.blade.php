@@ -4,8 +4,18 @@
     <h5 class="mt-0">{{$value->user->name}}</h5>
     <p>
       {{$value->content}}
-      <a class="btn btn-sm btn-outline-dark float-lg-right zf-comment-reply" data-id="{{$value['id']}}" href="#zf-comment-form" id="reply{{$value['id']}}">
+
+      <a class="btn btn-sm btn-outline-dark float-right zf-comment-reply" data-id="{{$value['id']}}" href="#zf-comment-form" id="reply{{$value['id']}}">
+        <i class="far fa-edit"></i>
         回复
+      </a>
+
+      <a class="zf-delete btn btn-sm btn-outline-danger btn-sm float-right mr-1"
+         href="javascript:void(0)"
+         data-toggle="tooltip"
+         data-original-title="评论删除"
+         data-url="{{route('web.comments.destroy',$value->id)}}">
+        <i class="far fa-trash-alt"></i> 删除
       </a>
     </p>
 

@@ -82,7 +82,7 @@ class ContentsController extends Controller
      */
     public function edit(Content $content)
     {
-        $this->authorize('update-post', $content);
+        $this->authorize('post-data', $content);
         return view('web.contents.edit', compact('content'));
     }
 
@@ -96,7 +96,7 @@ class ContentsController extends Controller
      */
     public function update(ContentRequest $request, Content $content)
     {
-        $this->authorize('update-post', $content);
+        $this->authorize('post-data', $content);
         $data            = $request->only('title', 'c_id', 'content');
         $content->category()->detach();                                                                                 #先删除关系
         $content->category()->attach(explode(',',$data['c_id']));                                              #进行关系关联
@@ -114,6 +114,7 @@ class ContentsController extends Controller
      */
     public function destroy(Content $content)
     {
+        $this->authorize('post-data', $content);
         $content->category()->detach();                     #删除关系
         $content->delete();                                 #删除数据
         return response(['url' => route('web.contents.index')], 200);
