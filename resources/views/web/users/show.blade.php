@@ -18,25 +18,32 @@
 
     {{--右侧内容开始--}}
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+      {{--一个简单的用户信息开始--}}
       <div class="card ">
         <div class="card-body">
           <h1 class="mb-0" style="font-size:22px;">{{ $user->name }} <small>{{ $user->email }}</small></h1>
         </div>
       </div>
-      <hr>
+      {{--一个简单的用户信息结束--}}
 
       {{--用户发布的内容开始--}}
-      <div class="card ">
+      <div class="card">
+        <h5 class="card-header">最近发布内容</h5>
         <div class="card-body">
-          <ul class="nav nav-tabs">
-            <li class="nav-item"><a class="nav-link active bg-transparent" href="#">Ta 发布的内容</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Ta 的回复</a></li>
-          </ul>
-
           {{--发布的内容开始--}}
-          @include('web.users._contents_list', ['contents' => $user->contents()->customOrder()->paginate(5)])
+          @include('web.users._contents_list')
           {{--发布的内容结束--}}
+        </div>
+      </div>
+      {{--用户发布的内容结束--}}
 
+      {{--用户发布的内容开始--}}
+      <div class="card">
+        <h5 class="card-header">最近回复的内容</h5>
+        <div class="card-body">
+          {{--发布的内容开始--}}
+          @include('web.users._contents_list')
+          {{--发布的内容结束--}}
         </div>
       </div>
       {{--用户发布的内容结束--}}

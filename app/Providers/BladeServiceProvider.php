@@ -95,5 +95,23 @@ class BladeServiceProvider extends ServiceProvider
         Blade::directive('endcategory' ,function (){
             return '';
         });
+
+        /**
+         * 获取内容数据标签
+         */
+        Blade::directive('content', function ($expression) {
+            return "<?php
+                \$contents = new App\Models\Content ;
+                \$contents = \$contents->getData(" . $expression . ");
+            ?>
+            ";
+        });
+        /**
+         * 获取内容数据标签
+         * 这个可以没有但是我就是要好看的双标签 -_-!
+         */
+        Blade::directive('endcontent' ,function (){
+            return '';
+        });
     }
 }

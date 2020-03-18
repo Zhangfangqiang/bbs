@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Traits\GetPublicData;
 use Illuminate\Database\Eloquent\Model;
 
 class Content extends Model
 {
+    use GetPublicData;
 
     /**
      * 定义表格
