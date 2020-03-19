@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -37,6 +38,10 @@ class UsersTableSeeder extends Seeder
          * User 模型 $hidden 属性里指定隐藏的字段，此操作确保入库时数据库不会报错
          */
         $user_array = $users->makeVisible(['password', 'remember_token'])->toArray();
+
         User::insert($user_array);
+        User::where('id', 1)->update(['email'=>'zf18600004319@aliyun.com', 'name' => '张舫1'  , 'password' => Hash::make('admin123123')]);
+        User::where('id', 2)->update(['email'=>'1069303772@qq.com'       , 'name' => '张舫2'  , 'password' => Hash::make('admin123123')]);
+        User::where('id', 2)->update(['email'=>'admin@admin.com'         , 'name' => 'admin' , 'password' => Hash::make('admin123123')]);
     }
 }

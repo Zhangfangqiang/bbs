@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoriesTableSeeder::class);          #创建分类
         $this->call(ContentsTableSeeder::class);            #创建内容
         $this->call(CategoryHasContentsTableSeeder::class); #关联内容
+        $this->call(LinksTableSeeder::class);               #创建友情链接
     }
 }

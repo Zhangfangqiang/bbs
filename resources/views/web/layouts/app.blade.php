@@ -12,7 +12,7 @@
   @yield('header',View::make('web.layouts._header'))
   {{--头部内容结束--}}
 
-  <div class="container">
+  <div class="container mb-90">
 
     {{--共享提示开始--}}
     @include('web.shared._messages')

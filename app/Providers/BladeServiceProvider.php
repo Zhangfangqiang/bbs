@@ -113,5 +113,24 @@ class BladeServiceProvider extends ServiceProvider
         Blade::directive('endcontent' ,function (){
             return '';
         });
+
+
+        /**
+         * 获取内容数据标签
+         */
+        Blade::directive('link', function () {
+            return "<?php
+                \$links = new App\Models\Link ;
+                \$links = \$links->getAllDate();
+            ?>
+            ";
+        });
+        /**
+         * 获取内容数据标签
+         * 这个可以没有但是我就是要好看的双标签 -_-!
+         */
+        Blade::directive('endlink' ,function (){
+            return '';
+        });
     }
 }

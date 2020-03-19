@@ -59,22 +59,6 @@ class Content extends Model
     }
 
     /**
-     * 自定义排序方法主要告诉你 scope 怎么使用 T_T
-     * @param $query
-     * @param $field
-     * @param $roder
-     * @return mixed
-     */
-    public function scopeCustomOrder($query, $field = null, $sort = null)
-    {
-        if (is_null($field) || is_null($sort)) {
-          return  $query->orderBy('release_at', 'desc');
-        }
-
-        return $query->orderBy($field, $sort);
-    }
-
-    /**
      * 返回新的连接
      * @param array $params
      * @return string

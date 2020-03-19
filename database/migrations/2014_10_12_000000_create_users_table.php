@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password')                                         ->comment('登录密码')  ;
             $table->rememberToken()                                                    ->comment('和重置密码有关的Token');
             $table->unsignedBigInteger('notification_count')->default(0) ->comment('通知数量');
+            $table->timestamp('last_login_at')->nullable()                     ->comment('最后登录时间');
             $table->timestamps();
         });
     }

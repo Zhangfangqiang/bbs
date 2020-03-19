@@ -9,7 +9,7 @@
 
 {{--中间内容开始--}}
 @section('content')
-  <div class="row mb-5">
+  <div class="row">
     <div class="col-lg-9 col-md-9 topic-list">
       <div class="card ">
 
@@ -116,7 +116,7 @@
     </div>
 
     {{--右侧内容开始--}}
-    <div class="col-lg-3 col-md-3 sidebar">
+    <div class="col-lg-3 col-md-3 sidebar d-none d-md-block d-lg-block d-xl-block">
       @activeuser
         @if (count($activeusers) > 0)
           <div class="card">
@@ -135,6 +135,23 @@
           </div>
         @endif
       @endactiveuser
+
+      @link
+      @if(count($links) > 0)
+        <div class="card mt-30">
+          <div class="card-body active-users pt-2">
+            <div class="text-center mt-1 mb-0 text-muted">友情链接</div>
+            <hr class="mt-2">
+            @foreach ($links as $value)
+              <a class="media mt-2" href="{{$value->link}}">
+                {{$value->title}}
+              </a>
+            @endforeach
+          </div>
+        </div>
+      @endif
+      @endlink
+
     </div>
     {{--右侧内容结束--}}
   </div>

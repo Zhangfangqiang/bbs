@@ -27,7 +27,7 @@
       {{--一个简单的用户信息结束--}}
 
       {{--用户发布的内容开始--}}
-      <div class="card">
+      <div class="card mt-30">
         <h5 class="card-header">最近发布内容</h5>
         <div class="card-body">
           {{--发布的内容开始--}}
@@ -38,7 +38,7 @@
       {{--用户发布的内容结束--}}
 
       {{--用户发布的内容开始--}}
-      <div class="card">
+      <div class="card mt-30">
         <h5 class="card-header">最近回复的内容</h5>
         <div class="card-body">
           {{--发布的内容开始--}}

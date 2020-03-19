@@ -15,9 +15,9 @@ class CreateLinksTable extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title')->index()->comment('资源的标题 添加一个普通索引');
-            $table->string('description')   ->comment('简介');
-            $table->string('link') ->index()->comment('资源的链接 添加一个普通索引');
+            $table->string('title',700 )->index()->comment('资源的标题 添加一个普通索引');
+            $table->string('description',1000 )   ->comment('简介');
+            $table->string('link',700 ) ->index()->comment('资源的链接 添加一个普通索引');
             $table->timestamps();
         });
     }
