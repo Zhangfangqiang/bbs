@@ -15,12 +15,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         #注册事件监听
         \Illuminate\Auth\Events\Registered::class => [
-            \App\Listeners\SendEmailVerificationNotification::class,
-            \App\Listeners\RegisterSuccessTips::class,
+            \App\Listeners\Web\SendEmailVerificationNotification::class,
+            \App\Listeners\Web\RegisterSuccessTips::class,
         ],
         #验证邮件发送事件
         \Illuminate\Auth\Events\Verified::class => [
-            \App\Listeners\EmailVerified::class,
+            \App\Listeners\Web\EmailVerified::class,
         ],
         #登录事件
         \Illuminate\Auth\Events\Login::class =>[

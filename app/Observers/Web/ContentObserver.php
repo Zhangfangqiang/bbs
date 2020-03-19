@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers;
+namespace App\Observers\Web;
 
 use App\Models\Content;
 
@@ -29,7 +29,7 @@ class ContentObserver
     {
         #如果英语标题为空
         if (!$content->english_title) {
-            dispatch(new \App\Jobs\Translate($content, 'title', 'english_title'));
+            dispatch(new \App\Jobs\Web\Translate($content, 'title', 'english_title'));
         }
     }
 }

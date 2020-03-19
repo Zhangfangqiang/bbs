@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \App\Models\Content::observe(\App\Observers\ContentObserver::class);            #模型观察者绑定
+        \App\Models\Content::observe(\App\Observers\Web\ContentObserver::class);            #模型观察者绑定
     }
 }

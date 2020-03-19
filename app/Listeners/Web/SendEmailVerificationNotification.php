@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\Web;
 
 use Illuminate\Auth\Events\Registered;                                  #获取注册事件
 use Illuminate\Contracts\Auth\MustVerifyEmail;
