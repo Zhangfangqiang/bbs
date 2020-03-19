@@ -10,11 +10,7 @@ use Illuminate\Auth\MustVerifyEmail           as MustVerifyEmailTrait;      #实
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use MustVerifyEmailTrait, ActiveUserHelper;
-    use Notifiable {
-        #给Notifiable trait 里面的 notify 方法定义个别名 为laravelNotify
-        notify as protected laravelNotify;
-    }
+    use MustVerifyEmailTrait, ActiveUserHelper ,Notifiable ;
 
     /**
      * The attributes that are mass assignable.
@@ -48,7 +44,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
      *
      * @param $instance
      */
-    public function notify($instance)
+    public function excludeOwnNotify($instance)
     {
         #如果要通知的人是当前用户，就不必通知了！
         if ($this->id == \Auth::id()) {
@@ -60,7 +56,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
             $this->increment('notification_count');
         }
 
-        $this->laravelNotify($instance);
+        $this->notify($instance);
     }
 
     /**
@@ -72,7 +68,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new \App\Notifications\ResetPasswordNotification($token));
+        $this->notify(new \App\Notifications\Web\ResetPasswordNotification($token));
     }
 
     /**
@@ -83,7 +79,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
      */
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new \App\Notifications\VerifyEmail);
+        $this->notify(new \App\Notifications\Web\VerifyEmail);
     }
 
     /**

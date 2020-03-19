@@ -53,7 +53,7 @@ class VerificationController extends Controller
         $request->validate([
             'captcha'         => 'required|captcha',
         ]);
-
+        
         if ($request->user()->hasVerifiedEmail()) {
             return redirect($this->redirectPath());
         }

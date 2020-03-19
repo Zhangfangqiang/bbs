@@ -14,7 +14,7 @@ class CreateCategoryHasContentsTable extends Migration
     public function up()
     {
         Schema::create('category_has_contents', function (Blueprint $table) {
-
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('category_id')                                                                         ->comment('用户id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('CASCADE');
             $table->unsignedBigInteger('content_id')                                                                          ->comment('上传文件id');

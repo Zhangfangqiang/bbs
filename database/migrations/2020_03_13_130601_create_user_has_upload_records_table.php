@@ -14,6 +14,7 @@ class CreateUserHasUploadRecordsTable extends Migration
     public function up()
     {
         Schema::create('user_has_upload_records', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')                                                                                   ->comment('用户id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->unsignedBigInteger('upload_record_id')                                                                          ->comment('上传文件id');

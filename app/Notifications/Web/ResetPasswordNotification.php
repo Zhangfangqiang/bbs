@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Web;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Lang;

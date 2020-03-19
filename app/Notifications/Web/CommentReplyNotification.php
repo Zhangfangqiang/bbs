@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Web;
 
 use App\Models\Comment;
 use Illuminate\Bus\Queueable;
@@ -10,9 +10,15 @@ use Illuminate\Notifications\Notification;
 
 class CommentReplyNotification extends Notification implements ShouldQueue
 {
-    public $comment;
 
     use Queueable;
+
+    /**
+     * 构造参数
+     * @var Comment
+     */
+    public $comment;
+
 
     /**
      * Create a new notification instance.
@@ -56,7 +62,7 @@ class CommentReplyNotification extends Notification implements ShouldQueue
 
             'prent_comment_link'    => $link,
             'prent_comment_id'      => $prentComment->id,
-            'prent_comment_content'   => $prentComment->content,
+            'prent_comment_content' => $prentComment->content,
         ];
     }
 

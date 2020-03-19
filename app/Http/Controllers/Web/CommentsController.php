@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Web;
 use App\Models\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\CommentRequest;
-use App\Notifications\CommentReplyNotification;
-use App\Notifications\ContentCommentsNotification;
+use App\Notifications\Web\CommentReplyNotification;
+use App\Notifications\Web\ContentCommentsNotification;
 
 class CommentsController extends Controller
 {
@@ -36,11 +36,11 @@ class CommentsController extends Controller
         $comment         = Comment::create($data);
 
         #评论对应的文章文章属于的用户      这里是内容评论通知
-        $comment->commentable->user->notify(new ContentCommentsNotification($comment));
+        $comment->commentable->user->excludeOwnNotify(new ContentCommentsNotification($comment));
 
         #如果是对评论回复就多出这一步骤  ^_^ 略略略
         if (!is_null($data['parent_id'])) {
-            $parentComment->user->notify(new CommentReplyNotification($comment));
+            $parentComment->user->excludeOwnNotify(new CommentReplyNotification($comment));
         }
 
         return redirect(redirect()->back()->getTargetUrl() . '#zf-comment-list');

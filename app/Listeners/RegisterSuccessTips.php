@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class RegisterSuccessTips
 {

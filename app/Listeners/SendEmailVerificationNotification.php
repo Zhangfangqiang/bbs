@@ -2,11 +2,10 @@
 
 namespace App\Listeners;
 
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Auth\Events\Registered;                                  #获取注册事件
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class SendEmailVerificationNotification implements ShouldQueue          #让这个监听器异步执行,队列
+class SendEmailVerificationNotification
 {
     /**
      * Handle the event.
