@@ -34,7 +34,14 @@ trait GetPublicData
         #whereIn条件
         if (isset($configArray['otherWhereIn']) && !empty($configArray['otherWhereIn'])) {
             foreach ($configArray['otherWhereIn'] as $snap) {
-                $data = $data->whereIn($snap[0], explode(' ', $snap[1]));
+                $data = $data->whereIn($snap[0], explode(',', $snap[1]));
+            }
+        }
+
+        #whereNotNull
+        if (isset($configArray['whereNotNull']) && !empty($configArray['whereNotNull'])) {
+            foreach ($configArray['whereNotNull'] as $snap) {
+                $data = $data->whereNotNull($snap);
             }
         }
 

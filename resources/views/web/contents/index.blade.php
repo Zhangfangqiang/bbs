@@ -31,6 +31,21 @@
 
         <div class="card-body">
           {{-- 话题列表开始 --}}
+          @php
+            $config = [
+                'with'          =>['category', 'user'],
+                'paginate'      => 15,
+            ];
+            if ($request->category) {
+                $config['otherWhereIn'][] = ['id' , App\Models\CategoryHasContent::whereIn('category_id', findChildren($request->get('category')))->get()->pluck('content_id')];
+            }
+            if ($request->field && $request->sort){
+                $config['order']          = [$request->get('field'),$request->get('sort')];
+            }else{
+                $config['order']          = ['release_at' ,'desc'];
+            }
+          @endphp
+          @content($config)
           @if (count($contents))
             <ul class="list-unstyled">
               @foreach ($contents as $key => $value)
@@ -87,11 +102,12 @@
           @else
             <div class="empty-block">暂无数据 ~_~ </div>
           @endif
+          @endcontent
           {{-- 话题列表结束 --}}
 
           {{-- 分页开始 --}}
           <div class="mt-5">
-            {!! $contents->appends(Request::except('page'))->render() !!}
+            {!! $contents->appends($request->except('page'))->render() !!}
           </div>
           {{-- 分页结束 --}}
 

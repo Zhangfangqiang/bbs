@@ -17,16 +17,7 @@ class ContentsController extends Controller
      */
     public function index(ContentRequest $request)
     {
-        $contents = Content::with('category', 'user');
-
-        if ($request['category'] = $request->get('category')) {
-            $contentIds = CategoryHasContent::whereIn('category_id', findChildren($request['category']))->get()->pluck('content_id');
-            $contents   = $contents->whereIn('id', $contentIds);
-        }
-
-        $contents = $contents->whereNotNull('release_at')->customOrder($request->get('field'), $request->get('sort'))->paginate();
-
-        return view('web.contents.index', compact('contents'));
+        return view('web.contents.index', compact('request'));
     }
 
     /**
