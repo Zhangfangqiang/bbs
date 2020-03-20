@@ -39,14 +39,17 @@ class Init extends Command
     {
         $this->info("创建表格开始...");
         \Artisan::call('migrate');
-        $this->info("创建表格成功");
 
         $this->info("测试数据填充开始...");
         \Artisan::call('db:seed');
-        $this->info("测试数据填充结束...");
 
         $this->info("用户活跃度计算开始...");
         \Artisan::call('web:calculate-active-user');
-        $this->info("用户活跃度计算结束...");
+
+        $this->info("清除重复数据开始...");
+        \Artisan::call('web:data-check');
+
+        $this->info("计算用户静态数据开始...");
+        \Artisan::call('web:user-static-data-calculate');
     }
 }

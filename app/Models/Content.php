@@ -67,4 +67,13 @@ class Content extends Model
     {
         return route('web.contents.show', array_merge([$this->id, $this->english_title], $params));
     }
+
+    /**
+     * 这个内容有多少用户点赞
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function awesomeUser()
+    {
+        return $this->belongsToMany(User::class,'user_has_contents','content_id','user_id');
+    }
 }

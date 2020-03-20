@@ -92,7 +92,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
     }
 
     /**
-     * 添加了新的关联方法
+     * 添加了新的关联方法 通知加上类型
      * @param $type
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
@@ -111,5 +111,32 @@ class User extends Authenticatable implements MustVerifyEmailContract
         $this->decrement('notification_count',$notifications->count());     #然后减去已读的消息
         $notifications->get()->markAsRead();                                        #将通知已读
         $this->save();
+    }
+
+    /**
+     * 跟随用户的方法 也就是我的粉丝  ^_^  你有粉丝吗?
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function followUser()
+    {
+        return $this->belongsToMany(User::class,'user_has_users','user_id','follow_user_id','id','id');
+    }
+
+    /**
+     * 我关注的用户  你写代码都关注那些大神??
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function attentionUser()
+    {
+        return $this->belongsToMany(User::class,'user_has_users','follow_user_id','user_id','id','id');
+    }
+
+    /**
+     * 我点赞的内容
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function awesomeContent()
+    {
+        return $this->belongsToMany(Content::class,'user_has_contents','user_id','content_id');
     }
 }

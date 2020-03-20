@@ -59,8 +59,26 @@ and id not in
         (select min(id) id from user_has_upload_records group by user_id,upload_record_id having count(user_id)>1) as tmp2);
        ');
 
+        #删除user_has_users 的重复数据
+        \DB::select('
+delete from user_has_users where (user_id,follow_user_id) in
+    (select user_id,follow_user_id from
+        (select user_id,follow_user_id from user_has_users group by user_id,follow_user_id having count(user_id)>1) as tmp1)
+and id not in
+    (select id from
+        (select min(id) id from user_has_users group by user_id,follow_user_id having count(user_id)>1) as tmp2);
+       ');
+
+        #删除user_has_contents 的重复数据
+        \DB::select('
+delete from user_has_contents where (user_id,content_id) in
+    (select user_id,content_id from
+        (select user_id,content_id from user_has_contents group by user_id,content_id having count(user_id)>1) as tmp1)
+and id not in
+    (select id from
+        (select min(id) id from user_has_contents group by user_id,content_id having count(user_id)>1) as tmp2);
+       ');
 
         $this->info("检查完毕已删除重复关联数据");
-
     }
 }

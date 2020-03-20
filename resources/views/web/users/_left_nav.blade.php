@@ -12,6 +12,8 @@
 
   <div class="list-group mt-30">
     <a class="list-group-item list-group-item-action" href="{{ route('web.users.show', $user->id) }}">个人中心</a>
+    <a class="list-group-item list-group-item-action" href="">发布内容</a>
+    <a class="list-group-item list-group-item-action" href="">评论内容</a>
     @can('user', $user)
     <a class="list-group-item list-group-item-action" href="{{ route('web.users.edit', $user->id) }}">编辑个人资料</a>
     <a class="list-group-item list-group-item-action" href="{{ route('web.contents.create', $user->id) }}">创建内容</a>

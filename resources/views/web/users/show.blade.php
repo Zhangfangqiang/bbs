@@ -13,7 +13,6 @@
 
     {{--左侧内容开始--}}
     @include('web.users._left_nav')
-
     {{--左侧内容结束--}}
 
     {{--右侧内容开始--}}
@@ -22,6 +21,13 @@
       <div class="card ">
         <div class="card-body">
           <h1 class="mb-0" style="font-size:22px;">{{ $user->name }} <small>{{ $user->email }}</small></h1>
+          <div class="mt-2">
+            <a>获赞数:{{$user->awesome_count}}</a>
+            <a>给赞数:{{$user->give_count}}</a>
+            <a>粉丝数:{{$user->follow_count}}</a>
+            <a>关注数:{{$user->attention_count}}</a>
+            <button class="btn btn-sm btn-outline-primary float-right">关注+</button>
+          </div>
         </div>
       </div>
       {{--一个简单的用户信息结束--}}
@@ -39,7 +45,7 @@
 
       {{--用户发布的内容开始--}}
       <div class="card mt-30">
-        <h5 class="card-header">最近回复的内容</h5>
+        <h5 class="card-header">最近评论的内容</h5>
         <div class="card-body">
           {{--发布的内容开始--}}
           @include('web.users._contents_list')
@@ -54,7 +60,6 @@
   </div>
 @endsection
 {{--中间内容结束--}}
-
 
 {{--后置js开始--}}
 @section('after_js')
