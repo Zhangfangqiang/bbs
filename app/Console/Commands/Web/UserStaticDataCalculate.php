@@ -40,10 +40,10 @@ class UserStaticDataCalculate extends Command
     public function handle()
     {
         User::all()->each(function($item){
-            $data['follow_count']    = $item->followUser()->count();
-            $data['attention_count'] = $item->attentionUser()->count();
-            $data['give_count']      = $item->awesomeContent()->count();
-            $data['awesome_count']   = UserHasContent::whereIn('content_id',$item->contents()->get()->pluck('id'))->count();
+            $data['follow_count']       = $item->followUser()->count();
+            $data['attention_count']    = $item->attentionUser()->count();
+            $data['give_awesome_count'] = $item->awesomeContent()->count();
+            $data['awesome_count']      = UserHasContent::whereIn('content_id',$item->contents()->get()->pluck('id'))->count();
 
             User::where('id', $item->id)->update($data);
         });

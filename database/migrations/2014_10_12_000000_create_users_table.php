@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('notification_count')->default(0)  ->comment('通知数量');
             $table->unsignedBigInteger('follow_count')->default(0)        ->comment('粉丝数量');
             $table->unsignedBigInteger('attention_count')->default(0)     ->comment('我关注的数量');
-            $table->unsignedBigInteger('give_count')->default(0)          ->comment('给赞数量');
+            $table->unsignedBigInteger('give_awesome_count')->default(0) ->comment('给赞数量');
             $table->unsignedBigInteger('awesome_count')->default(0)       ->comment('获赞数量');
             $table->timestamp('last_login_at')->nullable()                      ->comment('最后登录时间');
             $table->timestamps();

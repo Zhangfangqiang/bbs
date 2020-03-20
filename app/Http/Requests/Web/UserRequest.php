@@ -15,7 +15,9 @@ class UserRequest extends BaseRequest
             case 'GET':
                 return [];
             case 'POST':
-                return [];
+                return [
+                    'id' => ['nullable','numeric','exists:users,id'],
+                ];
             case'PUT':
             case'PATCH':
                 return [

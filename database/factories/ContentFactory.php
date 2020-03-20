@@ -32,7 +32,7 @@ $factory->define(Content::class, function (Faker $faker) {
         'type'            => 1,
         'watch_count'     => $faker->numberBetween(0, 999),
         'favorites_count' => $faker->numberBetween(0, 999),
-        'like_count'      => $faker->numberBetween(0, 999),
+        'awesome_count'   => $faker->numberBetween(0, 999),
         'comment_count'   => $faker->numberBetween(0, 999),
         'title'           => $sentence,
         'seo_key'         => $sentence,

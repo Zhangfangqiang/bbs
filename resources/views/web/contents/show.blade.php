@@ -52,10 +52,10 @@
           {{--内容结束--}}
 
           {{--操作开始--}}
-          @can('post-data', $content)
-            <div class="operate">
-              <hr>
-              <a href="{{ route('web.contents.edit', $content->id) }}" class="btn btn-outline-secondary btn-sm" role="button">
+          <div class="operate">
+            <hr>
+            @can('post-data', $content)
+              <a href="{{ route('web.contents.edit', $content->id) }}" class="btn btn-outline-secondary btn-sm">
                 <i class="far fa-edit"></i> 编辑
               </a>
 
@@ -66,9 +66,25 @@
                  data-url="{{route('web.contents.destroy',$content->id)}}">
                 <i class="far fa-trash-alt"></i> 删除
               </a>
-            </div>
-          @endcan
+            @endcan
+
+            {{--关注开始--}}
+            @can('attention',App\Models\User::find($content->user_id))
+              <button class="btn btn-sm btn-outline-primary float-right zf-post" data-url="{{route('web.users.attention')}}" data-title="确定要关注?" data-data="{'id':'{{$content->user_id}}'} ">关注+</button>
+            @else
+              @if(Auth::user()->id != $content->user_id)
+                <button class="btn btn-sm btn-outline-primary float-right zf-post" data-url="{{route('web.users.cancel_attention')}}" data-title="确定要取消关注?" data-data="{'id':'{{$content->user_id}}'} ">取消关注</button>
+              @endif
+            @endcan
+            {{--关注结束--}}
+
+            <a class="float-right zf-post btn btn-outline-danger btn-sm mr-1">
+              <i class="fas fa-mouse"></i>
+              点赞
+            </a>
+          </div>
           {{--操作结束--}}
+
         </div>
       </div>
 

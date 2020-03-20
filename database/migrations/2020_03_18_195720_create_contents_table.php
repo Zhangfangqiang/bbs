@@ -29,7 +29,7 @@ class CreateContentsTable extends Migration
 
             $table->unsignedBigInteger('watch_count')       ->nullable()->default(0)                        ->comment('查看数');
             $table->unsignedBigInteger('favorites_count')   ->nullable()->default(0)                        ->comment('收藏数');
-            $table->unsignedBigInteger('like_count')        ->nullable()->default(0)                        ->comment('点赞数');
+            $table->unsignedBigInteger('awesome_count')     ->nullable()->default(0)                        ->comment('点赞数');
             $table->unsignedBigInteger('comment_count')     ->nullable()->default(0)                        ->comment('评论数');
 
             $table->string('title')                                                                               ->comment('标题');

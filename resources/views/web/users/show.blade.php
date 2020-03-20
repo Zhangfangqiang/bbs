@@ -23,10 +23,16 @@
           <h1 class="mb-0" style="font-size:22px;">{{ $user->name }} <small>{{ $user->email }}</small></h1>
           <div class="mt-2">
             <a>获赞数:{{$user->awesome_count}}</a>
-            <a>给赞数:{{$user->give_count}}</a>
+            <a>给赞数:{{$user->give_awesome_count}}</a>
             <a>粉丝数:{{$user->follow_count}}</a>
             <a>关注数:{{$user->attention_count}}</a>
-            <button class="btn btn-sm btn-outline-primary float-right">关注+</button>
+            @can('attention',$user)
+              <button class="btn btn-sm btn-outline-primary float-right zf-post" data-url="{{route('web.users.attention')}}" data-title="确定要关注?" data-data="{'id':'{{$user->id}}'} ">关注+</button>
+            @else
+              @if(Auth::user()->id != $user->id)
+                <button class="btn btn-sm btn-outline-primary float-right zf-post" data-url="{{route('web.users.cancel_attention')}}" data-title="确定要取消关注?" data-data="{'id':'{{$user->id}}'} ">取消关注</button>
+              @endif
+            @endcan
           </div>
         </div>
       </div>
@@ -48,7 +54,7 @@
         <h5 class="card-header">最近评论的内容</h5>
         <div class="card-body">
           {{--发布的内容开始--}}
-          @include('web.users._contents_list')
+          @include('web.users._contents_list' ,$user)
           {{--发布的内容结束--}}
         </div>
       </div>

@@ -29,6 +29,9 @@ Route::group(['prefix' => 'web', 'namespace' => 'Web'], function () {
         Route::get    ('/users/{user}/edit'       , 'UsersController@edit')             ->name('web.users.edit');               #用户信息编辑页
         Route::put    ('/users/{user}'            , 'UsersController@update')           ->name('web.users.update');             #用户信息更新
         Route::get    ('/users/{user}'            , 'UsersController@show')             ->name('web.users.show');               #用户个人信息页
+        Route::post   ('/users/attention'         , 'UsersController@attention')        ->name('web.users.attention');          #用户关注.
+        Route::post   ('/users/cancelAttention'   , 'UsersController@cancelAttention')  ->name('web.users.cancel_attention');   #取消用户关注.
+
 
         Route::get    ('/contents/create'         , 'ContentsController@create')        ->name('web.contents.create');          #内容创建页
         Route::post   ('/contents/store'          , 'ContentsController@store')         ->name('web.contents.store');           #内容创建
@@ -41,15 +44,13 @@ Route::group(['prefix' => 'web', 'namespace' => 'Web'], function () {
         Route::get    ('/categories/popup_list'   , 'CategoriesController@popupList')   ->name('web.categories.popup_list');    #分类内容弹出的列表框
 
         Route::delete ('/comments/{comment}'      , 'CommentsController@destroy')       ->name('web.comments.destroy');         #评论删除的方法
-
     });
+
+    Route::post('/comments/store', 'CommentsController@store')->name('web.comments.store');           #创建评论开始
 });
 
 
 #路由前戳 前端命名空间后置
 Route::group(['prefix' => 'web', 'namespace' => 'Web'], function () {
-    Route::get  ('/contents/{content}/{english_title?}'     , 'ContentsController@show')          ->name('web.contents.show');            #内容详情页
-
-    Route::post ('/comments/store'                          , 'CommentsController@store')         ->name('web.comments.store');           #创建评论开始
-
+    Route::get('/contents/{content}/{english_title?}', 'ContentsController@show')->name('web.contents.show');            #内容详情页
 });

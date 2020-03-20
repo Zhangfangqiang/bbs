@@ -35,27 +35,62 @@ $('.zf-delete').click(function () {
     btn: ['确定删除', '点错了']
   }, function () {
 
-    axios.delete($url)
-      .then(function (data) {
-
-
+    axios.delete($url).then(
+      function (data) {
         layer.msg('删除成功', {icon: 1});
-
-        if(data.data.url){
+        if (data.data.url) {
           setTimeout(function () {
-            window.location.href=data.data.url;
+            window.location.href = data.data.url;
           }, 1000);
-        }else{
+        } else {
           setTimeout(function () {
             location.reload();
           }, 1000);
         }
-      })
-      .catch(function (error) {
+
+      }).catch(
+      function (error) {
         if (error.response.status == 403) {
           layer.msg(error.response.data, {icon: 2});
         }
+
       })
+  });
+})
+
+/**
+ * 点击提交数据的方法
+ */
+$('.zf-post').click(function () {
+
+  $url   = $(this).data('url');
+  $title = $(this).data('title');
+  $data  = eval('(' + $(this).data('data') + ')');
+
+
+  layer.confirm($title, {
+    btn: ['确定', '取消']
+  }, function () {
+    axios.post($url, $data).then(
+      function (response) {
+        layer.msg(response.data.success,{icon: 1})
+
+        if (response.data.url) {
+          setTimeout(function () {
+            window.location.href = data.data.url;
+          }, 1000);
+        } else {
+          setTimeout(function () {
+            location.reload();
+          }, 1000);
+        }
+
+      }).catch(
+      function (error) {
+        if (error.response.status == 403) {
+          layer.msg(error.response.data, {icon: 2});
+        }
+      });
   });
 })
 
