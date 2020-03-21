@@ -15,7 +15,7 @@ class UserHasContentTableSeeder extends Seeder
     public function run()
     {
         $user_ids = User::all()->pluck('id')->toArray();                                                                      #获取用户
-        $types    = UserHasContent::$TYPES;
+        $types    = UserHasContent::$TYPES;                                                                                         #数据类型分类
 
         for ($i = 0; $i < 10; $i++) {
             Content::all()->each(
