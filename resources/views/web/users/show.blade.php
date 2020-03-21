@@ -27,10 +27,10 @@
             <a>粉丝数:{{$user->follow_count}}</a>
             <a>关注数:{{$user->attention_count}}</a>
             @can('attention',$user)
-              <button class="btn btn-sm btn-outline-primary float-right zf-post" data-url="{{route('web.users.attention')}}" data-title="确定要关注?" data-data="{'id':'{{$user->id}}'} ">关注+</button>
+              <button class="btn btn-sm btn-outline-primary float-right zf-post" data-url="{{route('web.users.attention')}}" data-title="确定要关注?" data-data="{'user_id':'{{$user->id}}'} ">关注+</button>
             @else
               @if(Auth::user()->id != $user->id)
-                <button class="btn btn-sm btn-outline-primary float-right zf-post" data-url="{{route('web.users.cancel_attention')}}" data-title="确定要取消关注?" data-data="{'id':'{{$user->id}}'} ">取消关注</button>
+                <button class="btn btn-sm btn-outline-primary float-right zf-post" data-url="{{route('web.users.cancel_attention')}}" data-title="确定要取消关注?" data-data="{'user_id':'{{$user->id}}'} ">取消关注</button>
               @endif
             @endcan
           </div>

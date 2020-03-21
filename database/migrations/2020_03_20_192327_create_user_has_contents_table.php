@@ -19,6 +19,7 @@ class CreateUserHasContentsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->unsignedBigInteger('content_id')    ->comment('关联内容');
             $table->foreign('content_id')->references('id')->on('contents')->onDelete('CASCADE');
+            $table->string('type')->index()             ->comment('定义用户与内容关联的关系');
 
         });
     }

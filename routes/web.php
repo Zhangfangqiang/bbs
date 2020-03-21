@@ -32,12 +32,14 @@ Route::group(['prefix' => 'web', 'namespace' => 'Web'], function () {
         Route::post   ('/users/attention'         , 'UsersController@attention')        ->name('web.users.attention');          #用户关注.
         Route::post   ('/users/cancelAttention'   , 'UsersController@cancelAttention')  ->name('web.users.cancel_attention');   #取消用户关注.
 
-
         Route::get    ('/contents/create'         , 'ContentsController@create')        ->name('web.contents.create');          #内容创建页
         Route::post   ('/contents/store'          , 'ContentsController@store')         ->name('web.contents.store');           #内容创建
         Route::get    ('/contents/{content}/edit' , 'ContentsController@edit')          ->name('web.contents.edit');            #内容编辑页
         Route::put    ('/contents/{content}'      , 'ContentsController@update')        ->name('web.contents.update');          #内容更新
         Route::delete ('/contents/{content}'      , 'ContentsController@destroy')       ->name('web.contents.destroy');         #内容删除的方法
+        Route::post   ('/contents/awesome'        , 'ContentsController@awesome')       ->name('web.contents.awesome');         #内容点赞.
+        Route::post   ('/contents/cancelAwesome'  , 'ContentsController@cancelAwesome') ->name('web.contents.cancel_awesome');  #取消内容点赞.
+
 
         Route::get    ('/notifications/index'     , 'NotificationsController@index')    ->name('web.notifications.index');      #消息通知
 

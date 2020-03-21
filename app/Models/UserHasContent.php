@@ -17,4 +17,10 @@ class UserHasContent extends Model
      * @var array
      */
     protected $fillable = ['content_id', 'user_id'];
+
+    /**
+     * 定义字段的数据类型
+     * @var array
+     */
+    public static $TYPES = ['FAVORITES','AWESOME'];
 }

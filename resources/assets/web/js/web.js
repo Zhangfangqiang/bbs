@@ -95,6 +95,30 @@ $('.zf-post').click(function () {
 })
 
 /**
+ * 点击提交数据的测试方法不刷新
+ */
+$('.zf-post-test').click(function () {
+
+  $url   = $(this).data('url');
+  $title = $(this).data('title');
+  $data  = eval('(' + $(this).data('data') + ')');
+
+  layer.confirm($title, {
+    btn: ['确定', '取消']
+  }, function () {
+    axios.post($url, $data).then(
+      function (response) {
+        console.log(response.data)
+      }).catch(
+      function (error) {
+        if (error.response.status == 403) {
+          layer.msg(error.response.data, {icon: 2});
+        }
+      });
+  });
+})
+
+/**
  * 表格点击行,选中input 选项的方法
  */
 $('.data-item-tr').click(function (e) {

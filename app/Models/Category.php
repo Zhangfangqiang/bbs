@@ -74,6 +74,7 @@ class Category extends Model
 
     /**
      * 获取路径上的值
+     * @return array
      */
     public function pathValue()
     {

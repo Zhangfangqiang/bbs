@@ -47,11 +47,10 @@ class CommentsController extends Controller
     }
 
     /**
-     * 内容删除的方法
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * 删除评论的方法
+     * @param Comment $comment
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy(Comment $comment)
     {

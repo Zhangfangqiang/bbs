@@ -9,7 +9,10 @@ use App\Http\Requests\Web\CategoriesRequest;
 class CategoriesController extends Controller
 {
     /**
-     * 弹出分类选项开始
+     * 弹出分类选项页面
+     * @param CategoriesRequest $request
+     * @param Category $category
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function popupList(CategoriesRequest $request ,Category $category)
     {

@@ -128,7 +128,7 @@ class UeditorController extends Controller
     }
 
     /**
-     * 返回文件列表
+     * 返回上传文件列表
      * @param UeditorRequest $request
      * @return false|string
      */
