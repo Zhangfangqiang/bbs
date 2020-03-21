@@ -26,9 +26,8 @@ $factory->define(User::class, function (Faker $faker) {
         'email'             => $faker->unique()->safeEmail,
         'remember_token'    => Str::random(10),
         'email_verified_at' => now(),
-        'password'          => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+        'password'          => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
         'introduction'      => $faker->sentence(),
-        'awesome_count'     => $faker->numberBetween(0, 999),
         'created_at'        => $date_time,
         'updated_at'        => $date_time,
     ];

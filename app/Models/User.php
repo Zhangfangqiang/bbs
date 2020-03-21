@@ -107,17 +107,17 @@ class User extends Authenticatable implements MustVerifyEmailContract
      */
     public function markAsRead($type)
     {
-        $notifications = $this->unreadNotificationsType($type);                     #没有阅读的消息并且加上类型关联
+        $notifications = $this->unreadNotificationsType($type);                    #没有阅读的消息并且加上类型关联
         $this->decrement('notification_count',$notifications->count());     #然后减去已读的消息
-        $notifications->get()->markAsRead();                                        #将通知已读
+        $notifications->get()->markAsRead();                                       #将通知已读
         $this->save();
     }
 
     /**
-     * 跟随用户的方法 也就是我的粉丝  ^_^  你有粉丝吗?
+     * 我被别人关注的数量  也就是我的(粉丝)
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function followUser()
+    public function beFollowUser()
     {
         return $this->belongsToMany(User::class,'user_has_users','user_id','follow_user_id','id','id');
     }
@@ -126,9 +126,18 @@ class User extends Authenticatable implements MustVerifyEmailContract
      * 我关注的用户  你写代码都关注那些大神??
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function attentionUser()
+    public function followUser()
     {
         return $this->belongsToMany(User::class,'user_has_users','follow_user_id','user_id','id','id');
+    }
+
+    /**
+     * 我关联过的内容
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function relationContent()
+    {
+        return $this->belongsToMany(Content::class,'user_has_contents','user_id','content_id');
     }
 
     /**
@@ -137,6 +146,15 @@ class User extends Authenticatable implements MustVerifyEmailContract
      */
     public function awesomeContent()
     {
-        return $this->belongsToMany(Content::class,'user_has_contents','user_id','content_id');
+        return $this->relationContent()->wherePivot('type','AWESOME');
+    }
+
+    /**
+     * 我收藏的内容
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function favoriteContent()
+    {
+        return $this->relationContent()->wherePivot('type','FAVORITE');
     }
 }

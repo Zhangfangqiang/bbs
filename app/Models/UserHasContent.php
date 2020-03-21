@@ -22,5 +22,5 @@ class UserHasContent extends Model
      * 定义字段的数据类型
      * @var array
      */
-    public static $TYPES = ['FAVORITES','AWESOME'];
+    public static $TYPES = ['FAVORITE','AWESOME'];
 }

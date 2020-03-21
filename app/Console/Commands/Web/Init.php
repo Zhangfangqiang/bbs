@@ -49,7 +49,7 @@ class Init extends Command
         $this->info("清除重复数据开始...");
         \Artisan::call('web:data-check');
 
-        $this->info("计算用户静态数据开始...");
-        \Artisan::call('web:user-static-data-calculate');
+        $this->info("计算数据关联数据统计...");
+        \Artisan::call('web:calculate-data');
     }
 }

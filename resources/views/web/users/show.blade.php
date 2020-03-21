@@ -22,10 +22,15 @@
         <div class="card-body">
           <h1 class="mb-0" style="font-size:22px;">{{ $user->name }} <small>{{ $user->email }}</small></h1>
           <div class="mt-2">
-            <a>获赞数:{{$user->awesome_count}}</a>
-            <a>给赞数:{{$user->give_awesome_count}}</a>
-            <a>粉丝数:{{$user->follow_count}}</a>
-            <a>关注数:{{$user->attention_count}}</a>
+            <a>获赞数:{{$user->be_awesome_count}}</a>
+            <a>给赞数:{{$user->awesome_count}}</a>
+            <span>|</span>
+            <a>粉丝:{{$user->be_follow_count}}</a>
+            <a>关注数:{{$user->follow_count}}</a>
+            <span>|</span>
+            <a>被收藏:{{$user->be_favorite_count}}</a>
+            <a>收藏:{{$user->favorite_count}}</a>
+
             @can('attention',$user)
               <button class="btn btn-sm btn-outline-primary float-right zf-post" data-url="{{route('web.users.attention')}}" data-title="确定要关注?" data-data="{'user_id':'{{$user->id}}'} ">关注+</button>
             @else

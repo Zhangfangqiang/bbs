@@ -52,6 +52,7 @@
           {{--内容结束--}}
 
           {{--操作开始--}}
+          @auth
           <div class="operate">
             <hr>
             {{--删除编辑开始--}}
@@ -74,13 +75,13 @@
             @can('attention',App\Models\User::find($content->user_id))
               <button class="btn btn-sm btn-outline-primary float-right zf-post"
                       data-url="{{route('web.users.attention')}}" data-title="确定要关注?"
-                      data-data="{'user_id':'{{$content->user_id}}'} ">关注+
+                      data-data="{'user_id':'{{$content->user_id}}'} ">+关注
               </button>
             @else
               @if(Auth::user()->id != $content->user_id)
                 <button class="btn btn-sm btn-outline-primary float-right zf-post"
                         data-url="{{route('web.users.cancel_attention')}}" data-title="确定要取消关注?"
-                        data-data="{'user_id':'{{$content->user_id}}'} ">取消关注
+                        data-data="{'user_id':'{{$content->user_id}}'} ">-取消关注
                 </button>
               @endif
             @endcan
@@ -107,9 +108,27 @@
             {{--点赞结束--}}
 
             {{--收藏开始--}}
+            @can('favorite',App\Models\Content::find($content->id))
+              <button class="float-right zf-post btn btn-outline-warning btn-sm mr-1" style="color: #212529"
+                      data-url="{{route('web.contents.favorite')}}" data-title="确定收藏"
+                      data-data="{'content_id':'{{$content->id}}'}">
+                <i class="fas fa-mouse"></i>
+                收藏
+              </button>
+            @else
+              @if(Auth::user()->id != $content->user_id)
+                <button class="float-right zf-post btn btn-outline-warning btn-sm mr-1" style="color: #212529"
+                        data-url="{{route('web.contents.cancel_favorite')}}" data-title="确定取消收藏"
+                        data-data="{'content_id':'{{$content->id}}'}">
+                  <i class="fas fa-mouse"></i>
+                  取消收藏
+                </button>
+              @endif
+            @endcan
             {{--收藏结束--}}
 
           </div>
+          @endguest
           {{--操作结束--}}
 
         </div>

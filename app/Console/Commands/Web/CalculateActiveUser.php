@@ -3,7 +3,6 @@
 namespace App\Console\Commands\Web;
 
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class CalculateActiveUser extends Command

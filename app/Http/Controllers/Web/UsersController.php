@@ -73,8 +73,8 @@ class UsersController extends Controller
         ]);
         $this->authorize('attention',User::find($request->user_id));            #验证权限
         $request->user()->attentionUser()->attach($request->user_id);                 #创建关注关系
-        $request->user()->increment('attention_count',1);                             #我关注的用户+1
-        User::where('id',$request->user_id)->increment('follow_count',1);             #它跟随用户(粉丝) +1
+        $request->user()->increment('follow_count',1);                                #我关注的用户+1
+        User::where('id',$request->user_id)->increment('be_follow_count',1);          #它跟随用户(粉丝) +1
 
         return response(['success' => '关注成功'], 200);
     }
@@ -92,8 +92,8 @@ class UsersController extends Controller
         ]);
         $this->authorize('cancelAttention',User::find($request->user_id));            #验证权限
         $request->user()->attentionUser()->detach($request->user_id);                       #取消关系
-        $request->user()->decrement('attention_count',1);                                   #我关注的用户-1
-        User::where('id',$request->user_id)->decrement('follow_count',1);                   #它跟随用户(粉丝)  -1
+        $request->user()->decrement('follow_count',1);                                      #我关注的用户-1
+        User::where('id',$request->user_id)->decrement('be_follow_count',1);                #它跟随用户(粉丝)  -1
 
         return response(['success' => '取消关注成功'], 200);
     }

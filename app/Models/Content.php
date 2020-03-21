@@ -21,7 +21,7 @@ class Content extends Model
      */
     protected $fillable = [
         'user_id', 'is_release', 'is_comment', 'is_top', 'is_recommended', 'type',
-        'watch_count', 'favorites_count', 'like_count', 'comment_count', 'title', 'seo_key', 'excerpt', 'source',
+        'watch_count', 'favorite_count', 'like_count', 'comment_count', 'title', 'seo_key', 'excerpt', 'source',
         'content', 'img', 'video', 'more', 'release_at', 'delete_at',
     ];
 
@@ -55,7 +55,7 @@ class Content extends Model
      */
     public function comments()
     {
-        return $this->morphMany('App\Comment', 'commentable');
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     /**
@@ -69,11 +69,29 @@ class Content extends Model
     }
 
     /**
-     * 这个内容有多少用户点赞
+     * 内容有多少人关联
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function relationUser()
+    {
+        return $this->belongsToMany(Content::class,'user_has_contents','content_id','user_id');
+    }
+
+    /**
+     * 我点赞的用户
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function awesomeUser()
     {
-        return $this->belongsToMany(User::class,'user_has_contents','content_id','user_id');
+        return $this->relationUser()->wherePivot('type','AWESOME');
+    }
+
+    /**
+     * 我收藏的用户
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function favoriteUser()
+    {
+        return $this->relationUser()->wherePivot('type','FAVORITE');
     }
 }

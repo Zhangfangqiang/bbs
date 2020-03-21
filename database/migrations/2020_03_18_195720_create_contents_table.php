@@ -28,7 +28,7 @@ class CreateContentsTable extends Migration
             $table->tinyInteger('type')                     ->nullable()->default(1)                        ->comment('定义这条数据类型 1文章 ... 后面按照所需定义');
 
             $table->unsignedBigInteger('watch_count')       ->nullable()->default(0)                        ->comment('查看数');
-            $table->unsignedBigInteger('favorites_count')   ->nullable()->default(0)                        ->comment('收藏数');
+            $table->unsignedBigInteger('favorite_count')    ->nullable()->default(0)                        ->comment('收藏数');
             $table->unsignedBigInteger('awesome_count')     ->nullable()->default(0)                        ->comment('点赞数');
             $table->unsignedBigInteger('comment_count')     ->nullable()->default(0)                        ->comment('评论数');
 

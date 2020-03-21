@@ -102,7 +102,6 @@ class ContentsController extends Controller
         return response(['url' => route('web.contents.index')], 200);
     }
 
-
     /**
      * 内容点赞
      * @param UserRequest $request
@@ -110,15 +109,7 @@ class ContentsController extends Controller
      */
     public function awesome(Request $request)
     {
-        $request->validate([
-            'content_id' => ['nullable','numeric','exists:contents,id'],
-        ]);
-        $this->authorize('awesome',Content::find($request->content_id));
-        $request->user()->awesomeContent()->attach($request->content_id);                           #创建关系
-        $request->user()->increment('give_awesome_count',1);                                        #给赞数量 +1
-        Content::where('id',$request->content_id)->increment('awesome_count',1);                    #内容点赞 +1
-        Content::find($request->content_id)->user()->increment('awesome_count',1);   #内容的作者 点赞+1
-
+        $this->changePublicCountData($request, __FUNCTION__, 'AWESOME', 'awesome_count', 1);
         return response(['success' => '点赞成功'], 200);
     }
 
@@ -129,14 +120,60 @@ class ContentsController extends Controller
      */
     public function cancelAwesome(Request $request)
     {
+        $this->changePublicCountData($request, __FUNCTION__, 'AWESOME', 'awesome_count');
+        return response(['success' => '取消点赞成功'], 200);
+    }
+
+    /**
+     * 内容收藏
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function favorite(Request $request)
+    {
+        $this->changePublicCountData($request, __FUNCTION__, 'FAVORITE', 'favorite_count', 1);
+        return response(['success' => '点赞成功'], 200);
+    }
+
+    /**
+     * 取消内容收藏
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function cancelFavorite(Request $request)
+    {
+        $this->changePublicCountData($request, __FUNCTION__, 'FAVORITE', 'favorite_count');
+        return response(['success' => '取消点赞成功'], 200);
+    }
+
+    /**
+     * 改变公共统计总数
+     * @param Request $request
+     * @param $authorizationName
+     * @param $type
+     * @param $field
+     * @param null $increase
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    private function changePublicCountData(Request $request, $authorizationName, $type, $field, $increase = null)
+    {
         $request->validate([
             'content_id' => ['nullable','numeric','exists:contents,id'],
         ]);
-        $request->user()->awesomeContent()->detach($request->content_id);                           #删除关系
-        $request->user()->decrement('give_awesome_count',1);                                        #给赞数量 -1
-        Content::where('id',$request->content_id)->decrement('awesome_count',1);                    #内容点赞 -1
-        Content::find($request->content_id)->user()->decrement('awesome_count',1);   #内容的作者 点赞-1
 
-        return response(['success' => '取消点赞成功'], 200);
+        $this->authorize($authorizationName, Content::find($request->content_id));
+
+        if (is_null($increase)) {
+            $request->user()->relationContent()->wherePivot('type', $type)->detach($request->content_id);
+            $request->user()->decrement($field, 1);
+            Content::where('id', $request->content_id)->decrement($field, 1);
+            Content::find($request->content_id)->user()->decrement('be_'.$field, 1);
+        } else {
+            $request->user()->relationContent()->wherePivot('type', $type)->attach($request->content_id, ['type' => $type]);
+            $request->user()->increment($field, 1);
+            Content::where('id', $request->content_id)->increment($field, 1);
+            Content::find($request->content_id)->user()->increment('be_'.$field, 1);
+        }
     }
 }
