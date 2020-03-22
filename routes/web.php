@@ -24,29 +24,31 @@ Route::group(['prefix' => 'web', 'namespace' => 'Web'], function () {
 
     #登录 && 邮件认证 后可以访问的地址
     Route::group(['middleware' => ['auth', 'verified']], function () {
-        Route::any    ('/ueditor/upload'            , 'UeditorController@upload')           ->name('web.ueditor.upload');           #百度编辑器主控文件
+        Route::any    ('/ueditor/upload'                        , 'UeditorController@upload')                          ->name('web.ueditor.upload');                                #百度编辑器主控文件
 
-        Route::get    ('/users/{user}/edit'         , 'UsersController@edit')               ->name('web.users.edit');               #用户信息编辑页
-        Route::put    ('/users/{user}'              , 'UsersController@update')             ->name('web.users.update');             #用户信息更新
-        Route::get    ('/users/{user}'              , 'UsersController@show')               ->name('web.users.show');               #用户个人信息页
-        Route::post   ('/users/attention'           , 'UsersController@attention')          ->name('web.users.attention');          #用户关注.
-        Route::post   ('/users/cancelAttention'     , 'UsersController@cancelAttention')    ->name('web.users.cancel_attention');   #取消用户关注.
+        Route::get    ('/users/{user}/edit'                     , 'UsersController@edit')                              ->name('web.users.edit');                                    #用户信息编辑页
+        Route::put    ('/users/{user}'                          , 'UsersController@update')                            ->name('web.users.update');                                  #用户信息更新
+        Route::get    ('/users/{user}'                          , 'UsersController@show')                              ->name('web.users.show');                                    #用户个人信息页
+        Route::post   ('/users/attention'                       , 'UsersController@attention')                         ->name('web.users.attention');                               #用户关注.
+        Route::post   ('/users/cancelAttention'                 , 'UsersController@cancelAttention')                   ->name('web.users.cancel_attention');                        #取消用户关注.
 
-        Route::get    ('/contents/create'           , 'ContentsController@create')          ->name('web.contents.create');          #内容创建页
-        Route::post   ('/contents/store'            , 'ContentsController@store')           ->name('web.contents.store');           #内容创建
-        Route::get    ('/contents/{content}/edit'   , 'ContentsController@edit')            ->name('web.contents.edit');            #内容编辑页
-        Route::put    ('/contents/{content}'        , 'ContentsController@update')          ->name('web.contents.update');          #内容更新
-        Route::delete ('/contents/{content}'        , 'ContentsController@destroy')         ->name('web.contents.destroy');         #内容删除的方法
-        Route::post   ('/contents/awesome'          , 'ContentsController@awesome')         ->name('web.contents.awesome');         #内容点赞.
-        Route::post   ('/contents/cancel_awesome'   , 'ContentsController@cancelAwesome')   ->name('web.contents.cancel_awesome');  #取消内容点赞.
-        Route::post   ('/contents/favorite'         , 'ContentsController@favorite')        ->name('web.contents.favorite');        #内容收藏
-        Route::post   ('/contents/cancel_favorite'  , 'ContentsController@cancelFavorite')  ->name('web.contents.cancel_favorite'); #取消内容收藏.
+        Route::get    ('/contents/create'                       , 'ContentsController@create')                         ->name('web.contents.create');                               #内容创建页
+        Route::post   ('/contents/store'                        , 'ContentsController@store')                          ->name('web.contents.store');                                #内容创建
+        Route::get    ('/contents/{content}/edit'               , 'ContentsController@edit')                           ->name('web.contents.edit');                                 #内容编辑页
+        Route::put    ('/contents/{content}'                    , 'ContentsController@update')                         ->name('web.contents.update');                               #内容更新
+        Route::delete ('/contents/{content}'                    , 'ContentsController@destroy')                        ->name('web.contents.destroy');                              #内容删除的方法
+        Route::post   ('/contents/awesome'                      , 'ContentsController@awesome')                        ->name('web.contents.awesome');                              #内容点赞.
+        Route::post   ('/contents/cancel_awesome'               , 'ContentsController@cancelAwesome')                  ->name('web.contents.cancel_awesome');                       #取消内容点赞.
+        Route::post   ('/contents/favorite'                     , 'ContentsController@favorite')                       ->name('web.contents.favorite');                             #内容收藏
+        Route::post   ('/contents/cancel_favorite'              , 'ContentsController@cancelFavorite')                 ->name('web.contents.cancel_favorite');                      #取消内容收藏.
+        Route::get    ('/contents/awesome_and_favorite_list'    , 'ContentsController@awesomeAndFavoriteList')         ->name('web.contents.awesome_and_favorite_list');            #查看我点赞和收藏的内容.
 
-        Route::get    ('/notifications/index'       , 'NotificationsController@index')      ->name('web.notifications.index');      #消息通知
 
-        Route::get    ('/categories/popup_list'     , 'CategoriesController@popupList')     ->name('web.categories.popup_list');    #分类内容弹出的列表框
+        Route::get    ('/notifications/index'                   , 'NotificationsController@index')                     ->name('web.notifications.index');                           #消息通知
 
-        Route::delete ('/comments/{comment}'        , 'CommentsController@destroy')         ->name('web.comments.destroy');         #评论删除的方法
+        Route::get    ('/categories/popup_list'                 , 'CategoriesController@popupList')                    ->name('web.categories.popup_list');                         #分类内容弹出的列表框
+
+        Route::delete ('/comments/{comment}'                    , 'CommentsController@destroy')                        ->name('web.comments.destroy');                              #评论删除的方法
     });
 
     Route::post('/comments/store', 'CommentsController@store')->name('web.comments.store');           #创建评论开始

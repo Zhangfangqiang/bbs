@@ -104,7 +104,7 @@ class ContentsController extends Controller
 
     /**
      * 内容点赞
-     * @param UserRequest $request
+     * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function awesome(Request $request)
@@ -115,7 +115,7 @@ class ContentsController extends Controller
 
     /**
      * 取消给内容点赞
-     * @param UserRequest $request
+     * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function cancelAwesome(Request $request)
@@ -145,6 +145,20 @@ class ContentsController extends Controller
     {
         $this->changePublicCountData($request, __FUNCTION__, 'FAVORITE', 'favorite_count');
         return response(['success' => '取消点赞成功'], 200);
+    }
+
+    /**
+     * 点赞内容列表
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function awesomeAndFavoriteList(Request $request)
+    {
+        $request->validate([
+            'type' => ['required', 'string', 'in:AWESOME,FAVORITE'],
+        ]);
+
+        return view('web.contents.awesome_and_favorite_list', compact('request'));
     }
 
     /**

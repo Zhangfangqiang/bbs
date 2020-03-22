@@ -98,7 +98,7 @@
             @else
               @if(Auth::user()->id != $content->user_id)
                 <button class="float-right zf-post btn btn-outline-danger btn-sm mr-1"
-                        data-url="{{route('web.contents.cancel_awesome')}}" data-title="确定要取消关注?"
+                        data-url="{{route('web.contents.cancel_awesome')}}" data-title="确定要取消点赞?"
                         data-data="{'content_id':'{{$content->id}}'}">
                   <i class="fas fa-mouse"></i>
                   取消点赞
