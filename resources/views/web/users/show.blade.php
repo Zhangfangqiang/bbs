@@ -45,7 +45,10 @@
 
       {{--用户发布的内容开始--}}
       <div class="card mt-30">
-        <h5 class="card-header">最近发布内容</h5>
+        <div class="card-header">
+          <h5 class="float-left">最近发布内容</h5>
+          <a class="float-right" href="">查看更多</a>
+        </div>
         <div class="card-body">
           {{--发布的内容开始--}}
           @include('web.users._contents_list')
@@ -56,16 +59,65 @@
 
       {{--用户发布的内容开始--}}
       <div class="card mt-30">
-        <h5 class="card-header">最近评论的内容</h5>
+        <div class="card-header">
+          <h5 class="float-left">最近评论内容</h5>
+          <a class="float-right" href="">查看更多</a>
+        </div>
         <div class="card-body">
           {{--发布的内容开始--}}
-          @include('web.users._contents_list' ,$user)
+          @include('web.users._comment_list' ,$user)
           {{--发布的内容结束--}}
         </div>
       </div>
       {{--用户发布的内容结束--}}
 
-    </div>
+      {{--点赞分析开始--}}
+      <div class="row mt-30">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="card ">
+          <div class="card-header">
+            <h5 class="float-left">那些用户给我的内容点赞</h5>
+            <a class="float-right" href="">查看跟多</a>
+          </div>
+            <div class="card-body">
+              @php
+                $beAwesomeUsers = $user->beAllContentAwesomeUsers()->offset(0)->limit(15)->get();
+              @endphp
+              @if(count($beAwesomeUsers) > 0)
+                @foreach($beAwesomeUsers as $beAwesomeUser)
+                  <a href="{{route('web.users.show',$beAwesomeUser->id)}}">
+                    <img src="{{imgRe($beAwesomeUser->avatar ,400 ,400)}}" width="40" height="40" class="rounded-circle m-1">
+                  </a>
+                @endforeach
+              @endif
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="card ">
+          <div class="card-header">
+            <h5 class="float-left">我给那些用户内容点赞</h5>
+            <a class="float-right" href="">查看跟多</a>
+          </div>
+            <div class="card-body">
+              @php
+                $awesomeUsers = $user->allContentAwesomeUsers()->offset(0)->limit(15)->get();
+              @endphp
+              @if(count($awesomeUsers) > 0)
+                @foreach($awesomeUsers as $awesomeUser)
+                  <a href="{{route('web.users.show',$awesomeUser->id)}}">
+                    <img src="{{imgRe($awesomeUser->avatar ,400 ,400)}}" width="40" height="40" class="rounded-circle m-1">
+                  </a>
+                @endforeach
+              @endif
+            </div>
+          </div>
+        </div>
+      </div>
+      {{--点赞分析结束--}}
+
+      </div>
     {{--右侧内容结束--}}
 
   </div>

@@ -157,4 +157,30 @@ class User extends Authenticatable implements MustVerifyEmailContract
     {
         return $this->relationContent()->wherePivot('type','FAVORITE');
     }
+
+    /**
+     * 那些用户给我的内容点赞
+     * @return mixed
+     */
+    public function beAllContentAwesomeUsers()
+    {
+        # 首先查找我创建的内容 , 然后通过内容查找点赞用户
+       return $this->whereIn('id',
+            UserHasContent::whereIn('content_id',
+                $this->contents->pluck('id')
+            )->where('type', 'AWESOME')->pluck('user_id')->unique()
+        );
+    }
+
+    /**
+     * 我给那些用户内容点赞
+     * @return mixed
+     */
+    public function allContentAwesomeUsers()
+    {
+        #通过我点赞过的文章的user_id 查找我点赞的用户
+        return $this->whereIn('id',
+            $this->awesomeContent->pluck('user_id')->unique()
+        );
+    }
 }

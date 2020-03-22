@@ -23,7 +23,7 @@ class UserHasContentTableSeeder extends Seeder
                     $user_id = $user_ids[array_rand($user_ids)];                                                                   #随机获得一个用户
                     $type    = $types[array_rand($types)];                                                                         #随机获得 点赞 或 收藏
 
-                    if (UserHasContent::where('user_id', '=', $user_id)->where('content_id', '=', $item->id)->count() == 0) {      #如果没有任何关联
+                    if (($item->user_id != $user_id) && (UserHasContent::where('user_id', '=', $user_id)->where('content_id', '=', $item->id)->count() == 0)) {      #如果没有任何关联
                         $item->awesomeUser()->attach($user_id, ['type' => $type]);                                                 #添加关系
                     }
                 }
