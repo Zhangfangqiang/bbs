@@ -12,13 +12,13 @@
 
   <div class="list-group mt-30">
     <a class="list-group-item list-group-item-action" href="{{ route('web.users.show', $user->id) }}">个人中心</a>
+    <a class="list-group-item list-group-item-action" href="{{ route('web.contents.content_list' , ['type' => 'RELEASE']) }}">发布的内容</a>
 
 
     @can('user', $user)
-      <a class="list-group-item list-group-item-action" href="{{ route('web.contents.awesome_and_favorite_list' , ['type' => 'AWESOME']) }}">我点赞的内容</a>
-      <a class="list-group-item list-group-item-action" href="{{ route('web.contents.awesome_and_favorite_list' , ['type' => 'FAVORITE']) }}">我收藏的内容</a>
+      <a class="list-group-item list-group-item-action" href="{{ route('web.contents.content_list' , ['type' => 'AWESOME']) }}">我点赞的内容</a>
+      <a class="list-group-item list-group-item-action" href="{{ route('web.contents.content_list' , ['type' => 'FAVORITE']) }}">我收藏的内容</a>
       <a class="list-group-item list-group-item-action" href="{{ route('web.users.edit', $user->id) }}">编辑个人资料</a>
-{{--    <a class="list-group-item list-group-item-action" href="{{ route('web.contents.create', $user->id) }}">创建内容</a>--}}
       <a class="list-group-item list-group-item-action" href="{{ route('web.notifications.index', ['type' => 'App\Notifications\ContentCommentsNotification' ]) }}">
       消息通知
       <span class="badge badge-danger float-right" {{ Auth::user()->notification_count > 0 ? '' : 'hidden' }} >{{ Auth::user()->notification_count }}</span>

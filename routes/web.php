@@ -41,7 +41,7 @@ Route::group(['prefix' => 'web', 'namespace' => 'Web'], function () {
         Route::post   ('/contents/cancel_awesome'               , 'ContentsController@cancelAwesome')                  ->name('web.contents.cancel_awesome');                       #取消内容点赞.
         Route::post   ('/contents/favorite'                     , 'ContentsController@favorite')                       ->name('web.contents.favorite');                             #内容收藏
         Route::post   ('/contents/cancel_favorite'              , 'ContentsController@cancelFavorite')                 ->name('web.contents.cancel_favorite');                      #取消内容收藏.
-        Route::get    ('/contents/awesome_and_favorite_list'    , 'ContentsController@awesomeAndFavoriteList')         ->name('web.contents.awesome_and_favorite_list');            #查看我点赞和收藏的内容.
+        Route::get    ('/contents/content_list'                 , 'ContentsController@contentList')                    ->name('web.contents.content_list');                         #内容列表.
 
 
         Route::get    ('/notifications/index'                   , 'NotificationsController@index')                     ->name('web.notifications.index');                           #消息通知

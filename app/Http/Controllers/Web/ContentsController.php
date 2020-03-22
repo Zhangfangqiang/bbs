@@ -152,13 +152,13 @@ class ContentsController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function awesomeAndFavoriteList(Request $request)
+    public function contentList(Request $request)
     {
         $request->validate([
-            'type' => ['required', 'string', 'in:AWESOME,FAVORITE'],
+            'type' => ['required', 'string', 'in:AWESOME,FAVORITE,RELEASE'],
         ]);
 
-        return view('web.contents.awesome_and_favorite_list', compact('request'));
+        return view('web.contents.content_list', compact('request'));
     }
 
     /**
