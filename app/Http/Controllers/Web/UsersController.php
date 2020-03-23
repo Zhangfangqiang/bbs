@@ -61,6 +61,21 @@ class UsersController extends Controller
     }
 
     /**
+     * 查看我的粉丝和我关注的用户
+     * @param Request $request
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function relationUser(Request $request, User $user)
+    {
+        $request->validate([
+            'type' => ['required', 'string', 'in:FOLLOW,BEFOLLOW'],
+        ]);
+        $this->authorize('user',$user);
+        return view('web.users.relation_list', compact('user','request'));
+    }
+
+    /**
      * 关注用户的方法
      * @param Request $request
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response

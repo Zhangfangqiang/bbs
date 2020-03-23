@@ -28,9 +28,11 @@ Route::group(['prefix' => 'web', 'namespace' => 'Web'], function () {
 
         Route::get    ('/users/{user}/edit'                     , 'UsersController@edit')                              ->name('web.users.edit');                                    #用户信息编辑页
         Route::put    ('/users/{user}'                          , 'UsersController@update')                            ->name('web.users.update');                                  #用户信息更新
-        Route::get    ('/users/{user}'                          , 'UsersController@show')                              ->name('web.users.show');                                    #用户个人信息页
         Route::post   ('/users/attention'                       , 'UsersController@attention')                         ->name('web.users.attention');                               #用户关注.
         Route::post   ('/users/cancelAttention'                 , 'UsersController@cancelAttention')                   ->name('web.users.cancel_attention');                        #取消用户关注.
+        Route::get    ('/user/{user}/relation_user'             , 'UsersController@relationUser')                      ->name('web.users.relation_user');                           #用户和用户之间的关联
+        Route::get    ('/users/{user}'                          , 'UsersController@show')                              ->name('web.users.show');                                    #用户个人信息页
+
 
         Route::get    ('/contents/create'                       , 'ContentsController@create')                         ->name('web.contents.create');                               #内容创建页
         Route::post   ('/contents/store'                        , 'ContentsController@store')                          ->name('web.contents.store');                                #内容创建
@@ -41,8 +43,7 @@ Route::group(['prefix' => 'web', 'namespace' => 'Web'], function () {
         Route::post   ('/contents/cancel_awesome'               , 'ContentsController@cancelAwesome')                  ->name('web.contents.cancel_awesome');                       #取消内容点赞.
         Route::post   ('/contents/favorite'                     , 'ContentsController@favorite')                       ->name('web.contents.favorite');                             #内容收藏
         Route::post   ('/contents/cancel_favorite'              , 'ContentsController@cancelFavorite')                 ->name('web.contents.cancel_favorite');                      #取消内容收藏.
-        Route::get    ('/contents/content_list'                 , 'ContentsController@contentList')                    ->name('web.contents.content_list');                         #内容列表.
-
+        Route::get    ('/contents/{user}/content_list'          , 'ContentsController@contentList')                    ->name('web.contents.content_list');                         #内容列表.
 
         Route::get    ('/notifications/index'                   , 'NotificationsController@index')                     ->name('web.notifications.index');                           #消息通知
 

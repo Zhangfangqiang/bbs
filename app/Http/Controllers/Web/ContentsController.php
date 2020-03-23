@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Models\User;
 use App\Models\Content;
 use Illuminate\Http\Request;
 use App\Http\Requests\Web\ContentRequest;
@@ -152,13 +153,17 @@ class ContentsController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function contentList(Request $request)
+    public function contentList(Request $request , User $user)
     {
         $request->validate([
             'type' => ['required', 'string', 'in:AWESOME,FAVORITE,RELEASE'],
         ]);
 
-        return view('web.contents.content_list', compact('request'));
+        if (in_array($request->type, ['AWESOME', 'FAVORITE'])) {
+            $this->authorize('user', $user);
+        }
+
+        return view('web.contents.content_list', compact('request','user'));
     }
 
     /**
