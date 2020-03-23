@@ -2,7 +2,7 @@
   <div class="container">
 
     <a class="navbar-brand " href="{{ url('/') }}">
-      多人博客
+      {{env('APP_NAME')}}
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
