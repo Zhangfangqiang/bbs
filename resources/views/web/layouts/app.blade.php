@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 
 {{--head标签内容开始--}}
-@include('web.layouts._head')
+@yield('head',View::make('web.layouts._head'))
 {{--head标签内容结束--}}
 
 <body>
@@ -30,7 +30,7 @@
 </div>
 
 {{--js脚本开始--}}
-@include('web.layouts._js')
+@yield('js',View::make('web.layouts._js'))
 {{--js脚本结束--}}
 
 </body>
