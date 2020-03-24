@@ -48,7 +48,6 @@
                 <a href="{{route('web.users.show',$user->id)}}">
                   <img src="{{imgRe($user->avatar , 400 ,400)}}" class="card-img-top" alt="...">
                 </a>
-
                 <div class="card-body">
                     <h5 class="card-title">{{$user->name}}</h5>
                     <p class="card-text">{{$user->introduction}}</p>

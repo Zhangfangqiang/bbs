@@ -11,13 +11,15 @@
   </div>
 
   <div class="list-group mt-30">
-    <a class="list-group-item list-group-item-action {{active_class( if_route('web.users.show') )}}" href="{{ route('web.users.show', $user->id) }}">个人中心</a>
-    <a class="list-group-item list-group-item-action {{active_class( if_route('web.contents.content_list')   && Request::input('type') == 'RELEASE' )}}"  href="{{ route('web.contents.content_list' , ['user' => $user->id, 'type' => 'RELEASE' ]) }}">发布的内容</a>
-    <a class="list-group-item list-group-item-action {{active_class( if_route('web.users.relation_user')     && Request::input('type') == 'BEFOLLOW' )}}" href="{{ route('web.users.relation_user'   , ['user' => $user->id , 'type'=>'BEFOLLOW'])  }}">我的粉丝</a>
+    <a class="list-group-item list-group-item-action {{active_class( if_route('web.users.show') )}}"                                                      href="{{ route('web.users.show', $user->id) }}">个人中心</a>
+    <a class="list-group-item list-group-item-action {{active_class( if_route('web.users.content_list')      && Request::input('type') == 'RELEASE' )}}"  href="{{ route('web.users.content_list' , ['user' => $user->id, 'type' => 'RELEASE' ]) }}">发布的内容</a>
+    <a class="list-group-item list-group-item-action {{active_class( if_route('web.users.comment_list') )}}"                                              href="{{ route('web.users.comment_list' , $user->id) }}">评论的内容</a>
+
     @can('user', $user)
+      <a class="list-group-item list-group-item-action {{active_class( if_route('web.users.relation_user')   && Request::input('type') == 'BEFOLLOW' )}}"                                      href="{{ route('web.users.relation_user'   , ['user' => $user->id , 'type'=>'BEFOLLOW'])  }}">我的粉丝</a>
       <a class="list-group-item list-group-item-action {{active_class( if_route('web.users.relation_user')   && Request::input('type') == 'FOLLOW' )}}"                                        href="{{ route('web.users.relation_user'   , ['user' => $user->id, 'type'=>'FOLLOW' ]) }}">我关注的用户</a>
-      <a class="list-group-item list-group-item-action {{active_class( if_route('web.contents.content_list') && Request::input('type') == 'AWESOME' )}}"                                       href="{{ route('web.contents.content_list' , ['user' => $user->id , 'type' => 'AWESOME' ]) }}">我点赞的内容</a>
-      <a class="list-group-item list-group-item-action {{active_class( if_route('web.contents.content_list') && Request::input('type') == 'FAVORITE' )}}"                                      href="{{ route('web.contents.content_list' , ['user' => $user->id , 'type' => 'FAVORITE']) }}">我收藏的内容</a>
+      <a class="list-group-item list-group-item-action {{active_class( if_route('web.users.content_list')    && Request::input('type') == 'AWESOME' )}}"                                       href="{{ route('web.users.content_list' , ['user' => $user->id , 'type' => 'AWESOME' ]) }}">我点赞的内容</a>
+      <a class="list-group-item list-group-item-action {{active_class( if_route('web.users.content_list')    && Request::input('type') == 'FAVORITE' )}}"                                      href="{{ route('web.users.content_list' , ['user' => $user->id , 'type' => 'FAVORITE']) }}">我收藏的内容</a>
       <a class="list-group-item list-group-item-action {{active_class( if_route('web.users.edit') )}}"                                                                                         href="{{ route('web.users.edit'            , $user->id) }}">编辑个人资料</a>
       <a class="list-group-item list-group-item-action {{active_class( if_route('web.notifications.index')   && Request::input('type') == 'App\Notifications\ContentCommentsNotification' )}}" href="{{ route('web.notifications.index'   , ['type' => 'App\Notifications\ContentCommentsNotification' ]) }}">
       消息通知

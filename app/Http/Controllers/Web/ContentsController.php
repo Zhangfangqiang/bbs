@@ -147,25 +147,7 @@ class ContentsController extends Controller
         $this->changePublicCountData($request, __FUNCTION__, 'FAVORITE', 'favorite_count');
         return response(['success' => '取消点赞成功'], 200);
     }
-
-    /**
-     * 点赞内容列表
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function contentList(Request $request , User $user)
-    {
-        $request->validate([
-            'type' => ['required', 'string', 'in:AWESOME,FAVORITE,RELEASE'],
-        ]);
-
-        if (in_array($request->type, ['AWESOME', 'FAVORITE'])) {
-            $this->authorize('user', $user);
-        }
-
-        return view('web.contents.content_list', compact('request','user'));
-    }
-
+    
     /**
      * 改变公共统计总数
      * @param Request $request

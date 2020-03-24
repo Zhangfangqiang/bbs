@@ -10,9 +10,11 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
+        "fukuball/jieba-php": "dev-master",
         "guzzlehttp/guzzle": "~6.3",
         "intervention/image": "^2.5",
         "laravel/framework": "^6.2",
+        "laravel/scout": "^8.0",
         "laravel/tinker": "^2.0",
         "mews/captcha": "~3.0",
         "mews/purifier": "~3.0",
@@ -20,6 +22,7 @@
         "overtrue/pinyin": "~4.0",
         "predis/predis": "^1.1",
         "summerblue/laravel-active": "6.*",
+        "teamtnt/laravel-scout-tntsearch-driver": "^8.1",
         "typicms/nestablecollection": "^1.1"
     },
     "require-dev": {

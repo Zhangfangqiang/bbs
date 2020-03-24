@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Laravel\Scout\Searchable;
 use App\Models\Traits\GetPublicData;
 use Illuminate\Database\Eloquent\Model;
 
 class Content extends Model
 {
-    use GetPublicData;
+    use Searchable, GetPublicData;
 
     /**
      * 定义表格
@@ -24,6 +25,27 @@ class Content extends Model
         'watch_count', 'favorite_count', 'like_count', 'comment_count', 'title', 'seo_key', 'excerpt', 'source',
         'content', 'img', 'video', 'more', 'release_at', 'delete_at',
     ];
+
+    /**
+     * 定义文件索引名称
+     * 你需要添加
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'contents';
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return $this->toArray();
+    }
 
     /**
      * 获取该文章作者

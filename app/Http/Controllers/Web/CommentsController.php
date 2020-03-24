@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Models\User;
 use App\Models\Comment;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\Web\CommentRequest;
 use App\Notifications\Web\CommentReplyNotification;
 use App\Notifications\Web\ContentCommentsNotification;
@@ -31,10 +33,7 @@ class CommentsController extends Controller
             $data['to_user_id'] = $parentComment->user_id;
         }
 
-        $data['status']  = 1;
-        $data['user_id'] = \Auth::user()->id;
         $comment         = Comment::create($data);
-
         #评论对应的文章文章属于的用户      这里是内容评论通知
         $comment->commentable->user->excludeOwnNotify(new ContentCommentsNotification($comment));
 
@@ -45,7 +44,7 @@ class CommentsController extends Controller
 
         return redirect(redirect()->back()->getTargetUrl() . '#zf-comment-list');
     }
-
+    
     /**
      * 删除评论的方法
      * @param Comment $comment

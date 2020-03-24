@@ -2,9 +2,9 @@
 
 namespace App\Models\Traits;
 
-
 trait GetPublicData
 {
+
     /**
      * 获取数据的方法
      * @param $configArray
@@ -22,6 +22,11 @@ trait GetPublicData
         #select 选项
         if (isset($configArray['select']) && !empty($configArray['select'])) {
             $data = $data->select($configArray['select']);
+        }
+
+        #tntsearch 选项
+        if (isset($configArray['search']) && !empty($configArray['search'])) {
+            $data = $data->whereIn('id', $this->search($configArray['search'])->get()->pluck('id'));
         }
 
         #其他条件

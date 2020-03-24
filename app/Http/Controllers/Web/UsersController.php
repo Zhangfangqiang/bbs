@@ -112,4 +112,33 @@ class UsersController extends Controller
 
         return response(['success' => '取消关注成功'], 200);
     }
+
+    /**
+     * 与用户有关系的内容列表
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function contentList(Request $request , User $user)
+    {
+        $request->validate([
+            'type' => ['required', 'string', 'in:AWESOME,FAVORITE,RELEASE'],
+        ]);
+
+        if (in_array($request->type, ['AWESOME', 'FAVORITE'])) {
+            $this->authorize('user', $user);
+        }
+
+        return view('web.users.content_list', compact('request','user'));
+    }
+
+    /**
+     * 评论列表用户开始
+     * @param Request $request
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function commentList(Request $request, User $user)
+    {
+        return view('web.users.comment_list', compact('request', 'user'));
+    }
 }

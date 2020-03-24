@@ -1,9 +1,9 @@
 <div class="media @if($key == 0) pt-0 @endif">
   <img src="{{ImgRe($value->user->avatar ,400 ,400)}}" class="mr-3" alt="{{$value->user->name}}">
-  <div class="media-body">
+  <div class="media-body son-p-mb-5">
     <h5 class="mt-0">{{$value->user->name}}</h5>
-    <p>
-      {{$value->content}}
+
+      {!! $value->content !!}
 
       <a class="btn btn-sm btn-outline-dark float-right zf-comment-reply" data-id="{{$value['id']}}" href="#zf-comment-form" id="reply{{$value['id']}}">
         <i class="far fa-edit"></i>
@@ -18,7 +18,6 @@
           <i class="far fa-trash-alt"></i> 删除
         </a>
       @endcan
-    </p>
 
     @if(!empty($value->items))
       @each('web.comments._list_each',$value->items , 'value')

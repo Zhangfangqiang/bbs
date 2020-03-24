@@ -19,7 +19,7 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
       <div class="card">
         <div class="card-body">
-          <form action="{{route('web.contents.content_list', ['user' => $user->id])}}">
+          <form action="{{route('web.users.content_list', ['user' => $user->id])}}">
             <div class="row">
               <div class="col">
                 <input type="text" name="title" value="{{$request->title ?? $request->title}}" class="form-control" placeholder="标题名">
@@ -27,7 +27,7 @@
               <div class="col">
                 <input type="text" name="type" value="{{$request->type}}" hidden>
                 <button class="btn btn-primary" type="submit">搜索</button>
-                <a class="btn btn-warning" href="{{route('web.contents.content_list',['user' => $user->id ,'type'=>$request->type])}}" type="submit">重置</a>
+                <a class="btn btn-warning" href="{{route('web.users.content_list',['user' => $user->id ,'type'=>$request->type])}}" type="submit">重置</a>
                 @if($request->type == 'RELEASE')
                   <a class="btn btn-danger" href="{{ route('web.contents.create', $user->id) }}">创建</a>
                 @endif

@@ -14,19 +14,36 @@
       <div class="card ">
 
         <div class="card-header bg-transparent">
-          <ul class="nav nav-pills">
-            <li class="nav-item">
-              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                排序方式
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{route('web.contents.index', array_merge(Request::except('page') , ['field'=>'release_at','sort'=>'asc'] ))}}">发布时间正序</a>
-                <a class="dropdown-item" href="{{route('web.contents.index', array_merge(Request::except('page') , ['field'=>'release_at','sort'=>'desc']))}}">发布时间倒序</a>
-                <a class="dropdown-item" href="{{route('web.contents.index', array_merge(Request::except('page') , ['field'=>'updated_at','sort'=>'asc'] ))}}">最后活跃时间正序</a>
-                <a class="dropdown-item" href="{{route('web.contents.index', array_merge(Request::except('page') , ['field'=>'updated_at','sort'=>'desc']))}}">最后活跃时间倒序</a>
-              </div>
-            </li>
-          </ul>
+          <div class="row no-gutters">
+            <div class="col-9">
+              <form action="{{route('web.contents.index')}}">
+                <div class="row no-gutters">
+                  <div class="col">
+                    <input type="text" class="form-control" name="search" value="{{$request->search ?? $request->search}}">
+                  </div>
+                  <div class="col">
+                    <button type="submit" class="btn btn-primary ml-1">搜索</button>
+                    <a href="{{route('web.contents.index')}}" class="btn btn-dark">清空</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-3">
+              <ul class="nav nav-pills float-right">
+                <li class="nav-item">
+                  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    排序方式
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{route('web.contents.index', array_merge(Request::except('page') , ['field'=>'release_at','sort'=>'asc'] ))}}">发布时间正序</a>
+                    <a class="dropdown-item" href="{{route('web.contents.index', array_merge(Request::except('page') , ['field'=>'release_at','sort'=>'desc']))}}">发布时间倒序</a>
+                    <a class="dropdown-item" href="{{route('web.contents.index', array_merge(Request::except('page') , ['field'=>'updated_at','sort'=>'asc'] ))}}">最后活跃时间正序</a>
+                    <a class="dropdown-item" href="{{route('web.contents.index', array_merge(Request::except('page') , ['field'=>'updated_at','sort'=>'desc']))}}">最后活跃时间倒序</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <div class="card-body">
@@ -36,9 +53,15 @@
                 'with'          =>['category', 'user'],
                 'paginate'      => 15,
             ];
+
             if ($request->category) {
                 $config['otherWhereIn'][] = ['id' , App\Models\CategoryHasContent::whereIn('category_id', findChildren($request->get('category')))->get()->pluck('content_id')];
             }
+
+            if($request->search){
+                $config['search'] = $request->search;
+            }
+
             if ($request->field && $request->sort){
                 $config['order']          = [$request->get('field'),$request->get('sort')];
             }else{

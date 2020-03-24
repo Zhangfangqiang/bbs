@@ -55,7 +55,7 @@
       <div class="card mt-30">
         <div class="card-header">
           <h5 class="float-left">最近发布内容</h5>
-          <a class="float-right" href="">查看更多</a>
+          <a class="float-right" href="{{ route('web.users.content_list' , ['user' => $user->id, 'type' => 'RELEASE' ]) }}">查看更多</a>
         </div>
         <div class="card-body">
           {{--发布的内容开始--}}
@@ -100,8 +100,7 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="card ">
             <div class="card-header">
-              <h5 class="float-left">那些用户给我的内容点赞</h5>
-              <a class="float-right" href="">查看更多</a>
+              <h5 class="float-left">最近那些用户给我的内容点赞</h5>
             </div>
             <div class="card-body">
               @php
@@ -123,8 +122,7 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="card ">
             <div class="card-header">
-              <h5 class="float-left">我给那些用户内容点赞</h5>
-              <a class="float-right" href="">查看更多</a>
+              <h5 class="float-left">最近我给那些用户内容点赞</h5>
             </div>
             <div class="card-body">
               @php
@@ -171,9 +169,12 @@
                 <img src="{{ImgRe( $comment->user->avatar ,400 ,400)}}" class="mr-3" alt="" width="40" height="40">
                 <div class="media-body">
                   <h5 class="mt-0">你对 : "{{$comment->commentable->title}}" 进行了评论</h5>
-                  {{$comment->content}}
+                  {!! $comment->content !!}
                 </div>
               </div>
+              @if(!$loop->last)
+              <hr class="mt-0 mb-4">
+              @endif
             @endforeach
           @else
             还没有人评论,抢占前排沙发
