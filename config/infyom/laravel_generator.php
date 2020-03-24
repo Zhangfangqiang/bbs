@@ -23,13 +23,13 @@ return [
 
         'api_routes'        => base_path('routes/api.php'),
 
-        'request'           => app_path('Http/Requests/'),
+        'request'           => app_path('Http/Requests/Admin'),             /*改*/
 
-        'api_request'       => app_path('Http/Requests/API/'),
+        'api_request'       => app_path('Http/Requests/API/Admin'),         /*改*/
 
-        'controller'        => app_path('Http/Controllers/'),
+        'controller'        => app_path('Http/Controllers/Admin'),          /*改*/
 
-        'api_controller'    => app_path('Http/Controllers/API/'),
+        'api_controller'    => app_path('Http/Controllers/API/Admin'),      /*改*/
 
         'repository_test'   => base_path('tests/Repositories/'),
 
@@ -37,7 +37,7 @@ return [
 
         'tests'             => base_path('tests/'),
 
-        'views'             => resource_path('views/'),
+        'views'             => resource_path('views/Admin'),
 
         'schema_files'      => resource_path('model_schemas/'),
 
@@ -69,13 +69,13 @@ return [
 
         'repository'        => 'App\Repositories',
 
-        'controller'        => 'App\Http\Controllers',
+        'controller'        => 'App\Http\Controllers\Admin',            /*改*/
 
-        'api_controller'    => 'App\Http\Controllers\API',
+        'api_controller'    => 'App\Http\Controllers\API\Admin',    /*改*/
 
-        'request'           => 'App\Http\Requests',
+        'request'           => 'App\Http\Requests\Admin',   /*改*/
 
-        'api_request'       => 'App\Http\Requests\API',
+        'api_request'       => 'App\Http\Requests\API\Admin', /*改*/
 
         'repository_test'   => 'Tests\Repositories',
 
@@ -172,7 +172,7 @@ return [
 
             'enabled'       => true,
 
-            'menu_file'     => 'layouts/menu.blade.php',
+            'menu_file'     => false,
         ],
     ],
 
