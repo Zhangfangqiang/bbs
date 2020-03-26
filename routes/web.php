@@ -93,20 +93,12 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
         #框架外部需要嵌套的页面
         Route::get    ('/layouts/index'                         , function () {return view('admin.layouts.index');})  ->name('layouts.index');
 
-        Route::get    ('/operation_log/index'                   , 'OperationgLogController@index')                           ->name('operation_log.index');      #数据展示页
-        Route::get    ('/operation_log/create'                  , 'OperationgLogController@create')                          ->name('operation_log.create');     #创建页
-        Route::get    ('/operation_log/{permission}/edit'       , 'OperationgLogController@edit')                            ->name('operation_log.edit');       #编辑页
+        Route::get    ('/operationg_logs/index'                   , 'OperationgLogController@index')                           ->name('operationg_logs.index');      #数据展示页
+        Route::get    ('/operationg_logs/create'                  , 'OperationgLogController@create')                          ->name('operationg_logs.create');     #创建页
+        Route::get    ('/operationg_logs/{permission}/edit'       , 'OperationgLogController@edit')                            ->name('operationg_logs.edit');       #编辑页
 
     });
 });
 
-
-Route::resource('operationgLogs', 'OperationgLogController');
-
-Route::resource('operationgLogs', 'OperationgLogController');
-
-Route::resource('operationgLogs', 'OperationgLogController');
-
-Route::resource('operationgLogs', 'OperationgLogController');
 
 Route::resource('operationgLogs', 'OperationgLogController');
