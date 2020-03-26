@@ -179,3 +179,15 @@ if (!function_exists('categoryHtmlTag')) {
         }
     }
 }
+
+/**
+ * 创建一个符合layui框架条件的URL
+ * @param $string
+ * @return string|string[]|null
+ */
+if (!function_exists("layuiRoute")) {
+    function layuiRoute($string)
+    {
+        return preg_replace("/(^http(s*):)|(\?[\s\S]*$)/", "", route($string));
+    }
+}

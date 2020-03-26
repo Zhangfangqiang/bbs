@@ -23,21 +23,21 @@ return [
 
         'api_routes'        => base_path('routes/api.php'),
 
-        'request'           => app_path('Http/Requests/Admin'),             /*改*/
+        'request'           => app_path('Http/Requests/Admin/'),         /*改*/
 
-        'api_request'       => app_path('Http/Requests/API/Admin'),         /*改*/
+        'api_request'       => app_path('Http/Requests/Api/Admin/'),     /*改*/
 
-        'controller'        => app_path('Http/Controllers/Admin'),          /*改*/
+        'controller'        => app_path('Http/Controllers/Admin/'),      /*改*/
 
-        'api_controller'    => app_path('Http/Controllers/API/Admin'),      /*改*/
+        'api_controller'    => app_path('Http/Controllers/Api/Admin/'),  /*改*/
 
         'repository_test'   => base_path('tests/Repositories/'),
 
-        'api_test'          => base_path('tests/APIs/'),
+        'api_test'          => base_path('tests/Apis/'),
 
         'tests'             => base_path('tests/'),
 
-        'views'             => resource_path('views/Admin'),
+        'views'             => resource_path('views/admin/'),            /*改*/
 
         'schema_files'      => resource_path('model_schemas/'),
 
@@ -69,17 +69,17 @@ return [
 
         'repository'        => 'App\Repositories',
 
-        'controller'        => 'App\Http\Controllers\Admin',            /*改*/
+        'controller'        => 'App\Http\Controllers\Admin',  /*改*/
 
-        'api_controller'    => 'App\Http\Controllers\API\Admin',    /*改*/
+        'api_controller'    => 'App\Http\Controllers\Api\Admin',    /*改*/
 
-        'request'           => 'App\Http\Requests\Admin',   /*改*/
+        'request'           => 'App\Http\Requests\Admin',       /*改*/
 
-        'api_request'       => 'App\Http\Requests\API\Admin', /*改*/
+        'api_request'       => 'App\Http\Requests\Api\Admin',   /*改*/
 
         'repository_test'   => 'Tests\Repositories',
 
-        'api_test'          => 'Tests\APIs',
+        'api_test'          => 'Tests\Apis',
 
         'tests'             => 'Tests',
     ],
@@ -104,12 +104,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | API routes prefix & version
+    | Api routes prefix & version
     |--------------------------------------------------------------------------
     |
     */
 
-    'api_prefix'  => 'api',
+    'api_prefix'  => 'api/admin',               /*改*/
 
     'api_version' => 'v1',
 
@@ -170,9 +170,9 @@ return [
 
         'menu'          => [
 
-            'enabled'       => true,
+            'enabled'       => false,                               /*改*/
 
-            'menu_file'     => false,
+            'menu_file'     => 'layouts/menu.blade.php',
         ],
     ],
 
