@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\GetPublicData;
 use Illuminate\Database\Eloquent\Model;
 
 class UploadRecord extends Model
 {
+    use GetPublicData;
+
     /**
      * 定义表格
      * @var string

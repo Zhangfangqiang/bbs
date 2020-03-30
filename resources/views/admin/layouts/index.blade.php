@@ -25,7 +25,7 @@
     {{--主体内容开始--}}
     <div class="layui-body" id="LAY_app_body">
       <div class="layadmin-tabsbody-item layui-show">
-        <iframe src="home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
+        <iframe src="{{layuiRoute('admin.operationg_logs.index')}}" frameborder="0" class="layadmin-iframe"></iframe>
       </div>
     </div>
     {{--主体内容结束--}}

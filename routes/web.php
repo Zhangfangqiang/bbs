@@ -60,30 +60,8 @@ Route::prefix('web')->name('web.')->namespace('Web')->group(function () {
     Route::get('/contents/{content}/{english_title?}', 'ContentsController@show')->name('contents.show');            #内容详情页
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#路由跳转
+Route::redirect('/zfadmin', '/admin/layouts/index');
 
 #后台路由
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
@@ -91,14 +69,34 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
     Route::group(['middleware' => ['auth', 'verified']], function () {
 
         #框架外部需要嵌套的页面
-        Route::get    ('/layouts/index'                         , function () {return view('admin.layouts.index');})  ->name('layouts.index');
+        Route::get    ('/layouts/index'                           , function () {return view('admin.layouts.index');})  ->name('layouts.index');
 
         Route::get    ('/operationg_logs/index'                   , 'OperationgLogController@index')                           ->name('operationg_logs.index');      #数据展示页
         Route::get    ('/operationg_logs/create'                  , 'OperationgLogController@create')                          ->name('operationg_logs.create');     #创建页
         Route::get    ('/operationg_logs/{permission}/edit'       , 'OperationgLogController@edit')                            ->name('operationg_logs.edit');       #编辑页
 
+        Route::get    ('/users/index'                             , 'UserController@index')                                    ->name('users.index');                #数据展示页
+        Route::get    ('/users/create'                            , 'UserController@create')                                   ->name('users.create');               #创建页
+        Route::get    ('/users/{permission}/edit'                 , 'UserController@edit')                                     ->name('users.edit');                 #编辑页
+
+        Route::get    ('/categories/index'                        , 'CategoryController@index')                                ->name('categories.index');           #数据展示页
+        Route::get    ('/categories/create'                       , 'CategoryController@create')                               ->name('categories.create');          #创建页
+        Route::get    ('/categories/{permission}/edit'            , 'CategoryController@edit')                                 ->name('categories.edit');            #编辑页
+
+        Route::get    ('/upload_records/index'                    , 'UploadRecordController@index')                            ->name('upload_records.index');       #数据展示页
+        Route::get    ('/upload_records/create'                   , 'UploadRecordController@create')                           ->name('upload_records.create');      #创建页
+        Route::get    ('/upload_records/{permission}/edit'        , 'UploadRecordController@edit')                             ->name('upload_records.edit');        #编辑页
+
+        Route::get    ('/links/index'                             , 'LinkController@index')                                    ->name('links.index');                #数据展示页
+        Route::get    ('/links/create'                            , 'LinkController@create')                                   ->name('links.create');               #创建页
+        Route::get    ('/links/{permission}/edit'                 , 'LinkController@edit')                                     ->name('links.edit');                 #编辑页
+
+        Route::get    ('/contents/index'                          , 'ContentController@index')                                 ->name('contents.index');             #数据展示页
+        Route::get    ('/contents/create'                         , 'ContentController@create')                                ->name('contents.create');            #创建页
+        Route::get    ('/contents/{permission}/edit'              , 'ContentController@edit')                                  ->name('contents.edit');              #编辑页
+
     });
 });
 
 
-Route::resource('operationgLogs', 'OperationgLogController');
+

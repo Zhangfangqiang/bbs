@@ -31,8 +31,14 @@ trait GetPublicData
 
         #其他条件
         if (isset($configArray['otherWhere']) && !empty($configArray['otherWhere'])) {
-            foreach ($configArray['otherWhere'] as $snap) {
-                $data = $data->where($snap[0], $snap[1], $snap[2]);
+            foreach ($configArray['otherWhere'] as $key => $snap) {
+                if (!is_numeric($key) && !empty($key)) {
+                    if (!is_null($snap)) {
+                        $data = $data->where($key, $snap);
+                    }
+                } else {
+                    $data = $data->where($snap[0], $snap[1], $snap[2]);
+                }
             }
         }
 

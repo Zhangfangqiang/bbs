@@ -25,4 +25,13 @@ class OperationgLog extends Model
         'methods',
         'data'
     ];
+
+    /**
+     * 获取用户
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

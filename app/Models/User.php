@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;                                    #通知方法
 use App\Models\Traits\ActiveUserHelper;                                     #活跃用户计算计算方法接口
+use App\Models\Traits\GetPublicData;
 use Illuminate\Foundation\Auth\User           as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;   #定义MustVerifyEmail接口
 use Illuminate\Auth\MustVerifyEmail           as MustVerifyEmailTrait;      #实现MustVerifyEmail接口
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use MustVerifyEmailTrait, ActiveUserHelper ,Notifiable ;
+    use MustVerifyEmailTrait, ActiveUserHelper ,Notifiable ,GetPublicData;
 
     /**
      * The attributes that are mass assignable.
@@ -165,7 +166,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function beAllContentAwesomeUsers()
     {
         # 首先查找我创建的内容 , 然后通过内容查找点赞用户
-       return $this->whereIn('id',
+        return $this->whereIn('id',
             UserHasContent::whereIn('content_id',
                 $this->contents->pluck('id')
             )->where('type', 'AWESOME')->pluck('user_id')->unique()

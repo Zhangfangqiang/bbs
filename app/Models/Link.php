@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\GetPublicData;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
 
 class Link extends Model
 {
+    use GetPublicData;
+
     /**
      * 定义表格
      * @var string

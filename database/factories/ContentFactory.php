@@ -4,44 +4,33 @@
 
 use App\Models\Content;
 use Faker\Generator as Faker;
-use Illuminate\Support\Str;
-
-/*
-|--------------------------------------------------------------------------
-| Model Factories  定义一条假用户数据的模型
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
 
 $factory->define(Content::class, function (Faker $faker) {
 
-
-    $sentence   = $faker->sentence();
-    $updated_at = $faker->dateTimeThisMonth();                  #随机取一个月以内的时间]
-    $created_at = $faker->dateTimeThisMonth($updated_at);       #传参为生成最大时间不超过，因为创建时间需永远比更改时间要早
-
     return [
-        'is_release'      => $faker->numberBetween(0, 1),
-        'is_comment'      => $faker->numberBetween(0, 1),
-        'is_top'          => $faker->numberBetween(0, 1),
-        'is_recommended'  => $faker->numberBetween(0, 1),
-        'type'            => 1,
-        'watch_count'     => $faker->numberBetween(0, 999),
-        'title'           => $sentence,
-        'seo_key'         => $sentence,
-        'excerpt'         => $sentence,
-        'source'          => $faker->word,
-        'content'         => $faker->text(2000),
-        'img'             => $faker->imageUrl(),
-        'video'           => null,
-        'more'            => null,
-        'release_at'      => $created_at,
-        'delete_at'       => null,
-        'created_at'      => $created_at,
-        'updated_at'      => $updated_at,
+        'user_id' => $faker->word,
+        'parent_id' => $faker->word,
+        'is_release' => $faker->word,
+        'is_comment' => $faker->word,
+        'is_top' => $faker->word,
+        'is_recommended' => $faker->word,
+        'type' => $faker->word,
+        'watch_count' => $faker->word,
+        'favorite_count' => $faker->word,
+        'awesome_count' => $faker->word,
+        'comment_count' => $faker->word,
+        'title' => $faker->word,
+        'english_title' => $faker->word,
+        'seo_key' => $faker->word,
+        'excerpt' => $faker->word,
+        'source' => $faker->word,
+        'content' => $faker->text,
+        'video' => $faker->text,
+        'img' => $faker->word,
+        'more' => $faker->text,
+        'release_at' => $faker->date('Y-m-d H:i:s'),
+        'delete_at' => $faker->date('Y-m-d H:i:s'),
+        'created_at' => $faker->date('Y-m-d H:i:s'),
+        'updated_at' => $faker->date('Y-m-d H:i:s')
     ];
 });
