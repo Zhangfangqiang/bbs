@@ -21,7 +21,7 @@ class Content extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'is_release', 'is_comment', 'is_top', 'is_recommended', 'type',
+        'user_id', 'is_comment', 'is_top', 'is_recommended', 'type',
         'watch_count', 'favorite_count', 'like_count', 'comment_count', 'title', 'seo_key', 'excerpt', 'source',
         'content', 'img', 'video', 'more', 'release_at', 'delete_at',
     ];

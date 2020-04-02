@@ -26,14 +26,6 @@
 
 
 
-<div class="layui-form-item">
-    <label class="layui-form-label">Is Release:</label>
-    <div class="layui-input-block">
-        <input type="text"  name="is_release" hidden>
-        <input type="checkbox" name="is_release" value="1" lay-skin="primary" title="写作" checked="">
-    </div>
-</div>
-
 
 
 <div class="layui-form-item">

@@ -6,12 +6,9 @@ use App\Models\Link;
 use Faker\Generator as Faker;
 
 $factory->define(Link::class, function (Faker $faker) {
-
     return [
-        'title' => $faker->word,
-        'description' => $faker->word,
-        'link' => $faker->word,
-        'created_at' => $faker->date('Y-m-d H:i:s'),
-        'updated_at' => $faker->date('Y-m-d H:i:s')
+        'title'       => $faker->sentence(3,true),
+        'description' => $faker->sentence(8, true),
+        'link'        => $faker->url,
     ];
 });

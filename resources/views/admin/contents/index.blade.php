@@ -34,12 +34,6 @@
             </div>
           </div>
           <div class='layui-inline'>
-            <label class='layui-form-label'>是否发布</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='is_release' placeholder='请输入' autocomplete='off' class='layui-input'>
-            </div>
-          </div>
-          <div class='layui-inline'>
             <label class='layui-form-label'>是否评论</label>
             <div class='layui-input-inline'>
               <input type='text' name='is_comment' placeholder='请输入' autocomplete='off' class='layui-input'>
@@ -336,7 +330,6 @@
           {width: 50 , field: "id", title: "id"},
           {width: 120 , field: "user_id", title: "用户"},
           {width: 100 , field: "parent_id", title: "parent_id"},
-          {width: 80 , field: "is_release", title: "发布"},
           {width: 80 , field: "is_comment", title: "评论"},
           {width: 80 , field: "is_top", title: "置顶"},
           {width: 80 , field: "is_recommended", title: "回复"},

@@ -23,16 +23,12 @@ class CreateUsersTable extends Migration
             $table->string('password')                                          ->comment('登录密码')  ;
             $table->rememberToken()                                                     ->comment('和重置密码有关的Token');
             $table->unsignedBigInteger('notification_count')->default(0)  ->comment('通知数量');
-
             $table->unsignedBigInteger('be_follow_count')->default(0)     ->comment('我被别人关注的数量');
             $table->unsignedBigInteger('follow_count')->default(0)        ->comment('我关注的数量');
-
             $table->unsignedBigInteger('be_awesome_count')->default(0)    ->comment('我被别人赞的数量');
             $table->unsignedBigInteger('awesome_count')->default(0)       ->comment('我赞的数量');
-
             $table->unsignedBigInteger('be_favorite_count')->default(0)   ->comment('我被别人收藏的数量');
             $table->unsignedBigInteger('favorite_count')->default(0)      ->comment('我收藏的数量');
-
             $table->timestamp('last_login_at')->nullable()                      ->comment('最后登录时间');
             $table->timestamps();
         });

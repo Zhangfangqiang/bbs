@@ -21,7 +21,6 @@ class CreateContentsTable extends Migration
             $table->unsignedBigInteger('parent_id')         ->nullable()                                          ->comment('父类id');
             $table->foreign('parent_id')->references('id')->on('contents')->onDelete('CASCADE');
 
-            $table->tinyInteger('is_release')               ->nullable()->default(0)                        ->comment('是否发布  1已发布 0未发布');
             $table->tinyInteger('is_comment')               ->nullable()->default(0)                        ->comment('是否评论  1允许   0不允许');
             $table->tinyInteger('is_top')                   ->nullable()->default(0)                        ->comment('是否置顶  1置顶   0不置顶');
             $table->tinyInteger('is_recommended')           ->nullable()->default(0)                        ->comment('是否推荐  1推荐   0不推荐');
