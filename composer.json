@@ -17,7 +17,6 @@
         "laravel/framework": "^6.2",
         "laravel/scout": "^8.0",
         "laravel/tinker": "^2.0",
-        "laravelcollective/html": "^6.1",
         "mews/captcha": "~3.0",
         "mews/purifier": "~3.0",
         "overtrue/laravel-lang": "~3.0",
@@ -25,14 +24,13 @@
         "predis/predis": "^1.1",
         "summerblue/laravel-active": "6.*",
         "teamtnt/laravel-scout-tntsearch-driver": "^8.1",
-        "typicms/nestablecollection": "^1.1"
+        "typicms/nestablecollection": "^1.1",
+        "zhang-fang/laravel-generator": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "~3.2",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.4",
-        "infyomlabs/adminlte-templates": "^6.0",
-        "infyomlabs/laravel-generator": "^6.0",
         "laravel/ui": "^1.2",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
