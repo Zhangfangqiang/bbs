@@ -66,7 +66,7 @@ Route::redirect('/zfadmin', '/admin/layouts/index');
 #后台路由
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
     #登录 && 邮件认证 后可以访问的地址
-    Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::group(['middleware' => ['auth', 'verified', 'wol']], function () {
 
         #框架外部需要嵌套的页面
         Route::get    ('/layouts/index'                           , function () {return view('admin.layouts.index');})  ->name('layouts.index');

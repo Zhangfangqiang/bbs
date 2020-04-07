@@ -24,8 +24,8 @@
 
           <div class='layui-inline'>
             <label class='layui-form-label'>用户名</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='user_id' placeholder='请输入' autocomplete='off' class='layui-input'>
+            <div class='layui-input-inline xm-select-demo' id="user_id_form">
+
             </div>
           </div>
 
@@ -39,7 +39,13 @@
           <div class='layui-inline'>
             <label class='layui-form-label'>类型</label>
             <div class='layui-input-inline'>
-              <input type='text' name='methods' placeholder='请输入' autocomplete='off' class='layui-input' data-where="=">
+              <select name="methods" required data-where="=">
+                <option value=""></option>
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+              </select>
             </div>
           </div>
 
@@ -79,21 +85,10 @@
 
       {{--数据展现开始--}}
       <div class="layui-card-body">
-        <div style="overflow: hidden;padding-bottom: 10px;">
-          <button id="operationg_logs-create" class="layui-btn layuiadmin-btn-list" data-type="add" style="float: right;">添加</button>
-        </div>
 
         {{--表格数据内容开始--}}
         <table id="operationg_logs-table" lay-filter="operationg_logs-table"></table>
         {{--表格数据内容结束--}}
-
-        {{--对这条数据进行操作的操作栏开始--}}
-        <script type="text/html" id="operationg_logs-operation">
-          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
-          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete"><i
-              class="layui-icon layui-icon-delete"></i>删除</a>
-        </script>
-        {{--对这条数据进行操作的操作栏结束--}}
 
       </div>
       {{--数据展现结束--}}
@@ -131,7 +126,9 @@
      * 设置ajax csrf_token
      */
     $.ajaxSetup({
-      data: {_token: '{{csrf_token()}}', with: ['user']},
+      data: {
+        _token: '{{csrf_token()}}',
+      },
     });
 
     /**
@@ -142,57 +139,17 @@
     })
 
     /**
-     * 创建
-     */
-    $('#operationg_logs-create').click(function () {
-      layer.open({
-        type   : 2,
-        title  : '添加operationg_logs',
-        content: "/admin/operationg_logs/create",
-        area   : ['500px', '625px'],
-        btn    : ['确定', '取消'],
-        yes    : function (index, layero) {
-
-          var iframeWindow = window['layui-layer-iframe' + index];                         //获取弹出的iframe 标签内容 ,和 layero 的区别,layero 带一个外边框
-          var submitID     = 'operationg_logs-back-submit';                     //设置弹出框里面的提交按钮id
-          var submit       = layero.find('iframe').contents().find('#' + submitID);        //获取弹出框表单中,定义的提交按钮
-
-          //监听提交
-          iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
-            var field = data.field; //获取提交的字段
-
-            //提交 Ajax 成功后，静态更新表格中的数据
-            $.ajax({
-              url     : "{{route('api.admin.v1.operationg_logs.index')}}",
-              type    : 'POST',
-              dataType: 'json',
-              data    : field,
-              success: function (data) {
-                console.log(data);
-                alert(data);
-                layer.msg(data);
-              }
-            })
-            location.reload();           //刷新页面
-          });
-          submit.trigger('click');          //自动触发点击事件
-        }
-      })
-    })
-
-    /**
      * 监听表单搜索按钮
      */
     form.on('submit(operationg_logs-search)', function (data) {
 
       var array = [];
-
-      $('.layui-form-item input').each(function (index, item) {
+      $('.layui-form-item input[name] , .layui-form-item select[name]').each(function (index, item) {
         var val       = $(this).val();
         var inputName = $(this).attr('name');
         var where     = $(this).data('where');
 
-        if ('' != val) {
+        if ('' != val && '' != inputName) {
 
           /*如果是模糊查询*/
           if ('like' == where) {
@@ -216,11 +173,9 @@
         }
       });
 
-      var field = {'otherWhere': array};
-
       //执行重载
       table.reload('operationg_logs-table', {
-        where: field,
+        where: {'otherWhere': array},
       });
     });
 
@@ -228,8 +183,12 @@
      * 监听表格渲染
      */
     table.render({
-      elem    : "#operationg_logs-table",
-      url     : "{{route('api.admin.v1.operationg_logs.index')}}",
+      elem: "#operationg_logs-table",
+      url : "{{route('api.admin.v1.operationg_logs.index')}}",
+      where: {
+        with : ['user'],
+        order: ['created_at', 'desc'],
+      },
       request : {
         limitName: 'paginate'
       },
@@ -243,14 +202,13 @@
       },
       cols: [[
         {width: 50 ,type : "numbers"    , fixed: "left"},
-        {width: 50 ,field: "id"         , title: "ID"},
+        {width: 100 ,field: "id"         , title: "ID"},
         {width: 128 ,title: "用户名"      , templet: '<div>@{{d.user.name}}</div>'},
         {width: 220 ,field: "uri"        , title: "URI"},
         {width: 60 ,field: "methods"    , title: "类型"},
         {           field: "data"       , title: "提交数据"},
         {width: 170 ,field: "created_at" , title: "创建时间"},
         {width: 170 ,field: "updated_at" , title: "更新时间"},
-        {width: 160 ,title: "操作", align: "center", fixed: "right", toolbar: "#operationg_logs-operation"}
       ]],
       page  : !0,
       limit : 15,
