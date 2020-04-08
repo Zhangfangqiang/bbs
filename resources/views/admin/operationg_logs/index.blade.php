@@ -121,16 +121,7 @@
       elem : '#created_at',
       range: true
     });
-
-    /**
-     * 设置ajax csrf_token
-     */
-    $.ajaxSetup({
-      data: {
-        _token: '{{csrf_token()}}',
-      },
-    });
-
+    
     /**
      * 刷新
      */

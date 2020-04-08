@@ -22,19 +22,19 @@
           <div class='layui-inline'>
             <label class='layui-form-label'>标题</label>
             <div class='layui-input-inline'>
-              <input type='text' name='title' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <input type='text' name='title' placeholder='请输入' autocomplete='off' class='layui-input' data-where="like">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>描述</label>
             <div class='layui-input-inline'>
-              <input type='text' name='description' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <input type='text' name='description' placeholder='请输入' autocomplete='off' class='layui-input' data-where="like">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>链接</label>
             <div class='layui-input-inline'>
-              <input type='text' name='link' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <input type='text' name='link' placeholder='请输入' autocomplete='off' class='layui-input' data-where="like">
             </div>
           </div>
           <div class="layui-inline">
@@ -225,14 +225,14 @@
           }
         },
         cols: [[
-          {type: "numbers", fixed: "left"},
-          {field: "id", title: "ID"},
-          {field: "title", title: "标题"},
-          {field: "description", title: "描述"},
-          {field: "link", title: "链接"},
-          {field: "created_at", title: "创建时间"},
-          {field: "updated_at", title: "更新时间"},
-          {title: "操作", align: "center", fixed: "right", toolbar: "#links-operation"}
+          {width: 50  ,type: "numbers", fixed: "left"},
+          {width: 80  ,field: "id",          title: "ID"},
+          {width: 200 ,field: "title",       title: "标题"},
+          {width: 200 ,field: "description", title: "描述"},
+          {widthMin: 100 ,                   title: "链接" , templet:"<div><a href='@{{d.link}}' target='_blank'>@{{d.link}}</a></div>"},
+          {width: 170 ,field: "created_at",  title: "创建时间"},
+          {width: 170 ,field: "updated_at",  title: "更新时间"},
+          {width: 160 ,title: "操作", align: "center", fixed: "right", toolbar: "#links-operation"}
         ]],
         page: !0,
         limit: 15,

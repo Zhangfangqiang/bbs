@@ -13,8 +13,7 @@
       {{--搜索框开始--}}
       <div class="layui-form layui-card-header layuiadmin-card-header-auto">
         <div class="layui-form-item">
-
-          {{--表单搜索字段开始--}}
+          {{--表单搜索开始--}}
           <div class='layui-inline'>
             <label class='layui-form-label'>id</label>
             <div class='layui-input-inline'>
@@ -35,58 +34,76 @@
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>我的粉丝数</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='be_follow_count' placeholder='请输入' autocomplete='off' class='layui-input'>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="be_follow_count" placeholder="0" autocomplete="off" class="layui-input" data-where=">=">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="be_follow_count" placeholder="0" autocomplete="off" class="layui-input" data-where="<=">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>我关注的数</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='follow_count' placeholder='请输入' autocomplete='off' class='layui-input'>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="follow_count" placeholder="0" autocomplete="off" class="layui-input" data-where=">=">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="follow_count" placeholder="0" autocomplete="off" class="layui-input" data-where="<=">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>被点赞数</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='be_awesome_count' placeholder='请输入' autocomplete='off' class='layui-input'>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="be_awesome_count" placeholder="0" autocomplete="off" class="layui-input" data-where=">=">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="be_awesome_count" placeholder="0" autocomplete="off" class="layui-input" data-where="<=">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>点赞数</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='awesome_count' placeholder='请输入' autocomplete='off' class='layui-input'>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="awesome_count" placeholder="0" autocomplete="off" class="layui-input" data-where=">=">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="awesome_count" placeholder="0" autocomplete="off" class="layui-input" data-where="<=">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>被收藏数</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='be_favorite_count' placeholder='请输入' autocomplete='off' class='layui-input'>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="be_favorite_count" placeholder="0" autocomplete="off" class="layui-input" data-where=">=">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="be_favorite_count" placeholder="0" autocomplete="off" class="layui-input" data-where="<=">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>收藏数</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='favorite_count' placeholder='请输入' autocomplete='off' class='layui-input'>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="favorite_count" placeholder="0" autocomplete="off" class="layui-input" data-where=">=">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="favorite_count" placeholder="0" autocomplete="off" class="layui-input" data-where="<=">
             </div>
           </div>
-          {{--表单搜索字段开始--}}
-
           <div class="layui-inline">
             <label class="layui-form-label">创建时间</label>
             <div class="layui-input-block">
-              <input type="text" name="created_at" placeholder=" - " autocomplete="off" class="layui-input"
-                     id="users-created_at">
+              <input type="text" name="created_at" placeholder=" - " autocomplete="off" class="layui-input" id="users-created_at">
             </div>
           </div>
-
           <div class="layui-inline">
             <label class="layui-form-label">更新时间</label>
             <div class="layui-input-block">
-              <input type="text" name="updated_at" placeholder=" - " autocomplete="off" class="layui-input"
-                     id="users-updated_at">
+              <input type="text" name="updated_at" placeholder=" - " autocomplete="off" class="layui-input" id="users-updated_at">
             </div>
           </div>
-
           <div class="layui-inline">
             <button class="layui-btn layuiadmin-btn-list" lay-submit id="users-search" lay-filter="users-search">
               <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
@@ -95,6 +112,7 @@
               <i class="layui-icon layui-icon-refresh-3 layuiadmin-button-btn"></i>
             </button>
           </div>
+          {{--表单搜索开始--}}
         </div>
       </div>
       {{--搜索框结束--}}
@@ -146,13 +164,6 @@
       });
 
       /**
-       * 设置ajax csrf_token
-       */
-      $.ajaxSetup({
-        data: {_token: '{{csrf_token()}}'},
-      });
-
-      /**
        * 刷新
        */
       $('#users-refresh').click(function () {
@@ -166,12 +177,12 @@
 
         var array = [];
 
-        $('.layui-form-item input').each(function (index, item) {
+        $('.layui-form-item input[name] , .layui-form-item select[name]').each(function (index, item) {
           var val = $(this).val();
           var inputName = $(this).attr('name');
           var where = $(this).data('where');
 
-          if ('' != val) {
+          if ('' != val && '' != inputName) {
             /*如果是模糊查询*/
             if ('like' == where) {
               val = '%' + val + '%';
@@ -192,11 +203,9 @@
           }
         });
 
-        var field = {'otherWhere': array};
-
         //执行重载
         table.reload('users-table', {
-          where: field
+          where: {'otherWhere': array},
         });
       });
 
@@ -220,9 +229,9 @@
         cols: [[
           {width:50, type: "numbers", fixed: "left"},
           {width:50, field: "id", title: "id"},
+          {width:70, field: "avatar", title: "avatar" , templet:'<div><img src="@{{d.avatar}}" width="30" height="30" alt=""></div>'},
           {width:120, field: "name", title: "名称"},
-          {minWidth:120,           field: "email", title: "邮箱"},
-          {width:150, field: "avatar", title: "avatar"},
+          {minWidth:120,field: "email", title: "邮箱"},
           {width:100, field: "be_follow_count", title: "我的粉丝数"},
           {width:100, field: "follow_count", title: "我关注的数"},
           {width:100, field: "be_awesome_count", title: "被点赞数"},

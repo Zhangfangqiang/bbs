@@ -24,19 +24,18 @@
           <div class='layui-inline'>
             <label class='layui-form-label'>分类名</label>
             <div class='layui-input-inline'>
-              <input type='text' name='name' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <input type='text' name='name' placeholder='请输入' autocomplete='off' class='layui-input' data-where="like">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>描述</label>
             <div class='layui-input-inline'>
-              <input type='text' name='description' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <input type='text' name='description' placeholder='请输入' autocomplete='off' class='layui-input' data-where="like">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>父类</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='parent_id' placeholder='请输入' autocomplete='off' class='layui-input'>
+            <div class='layui-input-inline' id="parent_id_form">
             </div>
           </div>
           <div class='layui-inline'>
@@ -48,36 +47,30 @@
           <div class='layui-inline'>
             <label class='layui-form-label'>路径</label>
             <div class='layui-input-inline'>
-              <input type='text' name='path' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <input type='text' name='path' placeholder='请输入' autocomplete='off' class='layui-input' data-where="like">
             </div>
           </div>
-          {{--表单搜索字段开始--}}
-
           <div class="layui-inline">
             <label class="layui-form-label">创建时间</label>
             <div class="layui-input-block">
-              <input type="text" name="created_at" placeholder=" - " autocomplete="off" class="layui-input"
-                     id="categories-created_at">
+              <input type="text" name="created_at" placeholder=" - " autocomplete="off" class="layui-input" id="categories-created_at">
             </div>
           </div>
-
           <div class="layui-inline">
             <label class="layui-form-label">更新时间</label>
             <div class="layui-input-block">
-              <input type="text" name="updated_at" placeholder=" - " autocomplete="off" class="layui-input"
-                     id="categories-updated_at">
+              <input type="text" name="updated_at" placeholder=" - " autocomplete="off" class="layui-input" id="categories-updated_at">
             </div>
           </div>
-
           <div class="layui-inline">
-            <button class="layui-btn layuiadmin-btn-list" lay-submit id="categories-search"
-                    lay-filter="categories-search">
+            <button class="layui-btn layuiadmin-btn-list" lay-submit id="categories-search" lay-filter="categories-search">
               <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
             </button>
             <button class="layui-btn layuiadmin-btn-order" id="categories-refresh">
               <i class="layui-icon layui-icon-refresh-3 layuiadmin-button-btn"></i>
             </button>
           </div>
+          {{--表单搜索字段开始--}}
         </div>
       </div>
       {{--搜索框结束--}}
@@ -97,8 +90,7 @@
         {{--对这条数据进行操作的操作栏开始--}}
         <script type="text/html" id="categories-operation">
           <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
-          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete"><i
-              class="layui-icon layui-icon-delete"></i>删除</a>
+          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete"><i class="layui-icon layui-icon-delete"></i>删除</a>
         </script>
         {{--对这条数据进行操作的操作栏结束--}}
 
@@ -117,9 +109,9 @@
       /**
        * 定义引入模块的调用变量 和 php new 一个类使用差不多吧?_?
        */
-      var $ = layui.$;
-      var form = layui.form;
-      var table = layui.table;
+      var $       = layui.$;
+      var form    = layui.form;
+      var table   = layui.table;
       var laydate = layui.laydate;
 
       /**
@@ -133,14 +125,7 @@
         elem: '#categories-created_at',
         range: true
       });
-
-      /**
-       * 设置ajax csrf_token
-       */
-      $.ajaxSetup({
-        data: {_token: '{{csrf_token()}}'},
-      });
-
+      
       /**
        * 刷新
        */
@@ -156,13 +141,13 @@
           type: 2,
           title: '添加categories',
           content: "/admin/categories/create",
-          area: ['720px', '800px'],
+          area: ['500px', '470px'],
           btn: ['确定', '取消'],
           yes: function (index, layero) {
 
             var iframeWindow = window['layui-layer-iframe' + index];                         //获取弹出的iframe 标签内容 ,和 layero 的区别,layero 带一个外边框
-            var submitID = 'categories-back-submit';                     //设置弹出框里面的提交按钮id
-            var submit = layero.find('iframe').contents().find('#' + submitID);        //获取弹出框表单中,定义的提交按钮
+            var submitID     = 'categories-back-submit';                                     //设置弹出框里面的提交按钮id
+            var submit       = layero.find('iframe').contents().find('#' + submitID);        //获取弹出框表单中,定义的提交按钮
 
             //监听提交
             iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
@@ -175,12 +160,10 @@
                 dataType: 'json',
                 data: field,
                 success: function (data) {
-                  console.log(data);
-                  alert(data);
                   layer.msg(data);
                 }
               })
-              location.reload();           //刷新页面
+              location.reload();              //刷新页面
             });
             submit.trigger('click');          //自动触发点击事件
           }
@@ -194,12 +177,12 @@
 
         var array = [];
 
-        $('.layui-form-item input').each(function (index, item) {
-          var val = $(this).val();
+        $('.layui-form-item input[name] , .layui-form-item select[name]').each(function (index, item) {
           var inputName = $(this).attr('name');
-          var where = $(this).data('where');
+          var where     = $(this).data('where');
+          var val       = $(this).val();
 
-          if ('' != val) {
+          if ('' != val && '' != inputName) {
             /*如果是模糊查询*/
             if ('like' == where) {
               val = '%' + val + '%';
@@ -220,11 +203,9 @@
           }
         });
 
-        var field = {'otherWhere': array};
-
         //执行重载
         table.reload('categories-table', {
-          where: field
+          where: {'otherWhere': array}
         });
       });
 
@@ -234,6 +215,9 @@
       table.render({
         elem: "#categories-table",
         url: "{{route('api.admin.v1.categories.index')}}",
+        where :{
+          tree:1
+        },
         request: {
           limitName: 'paginate'
         },
@@ -246,15 +230,15 @@
           }
         },
         cols: [[
-          {width: 50, type: "numbers", fixed: "left"},
-          {width: 50, field: "id", title: "ID"},
-          {width: 120, field: "name", title: "名称"},
-          {     field: "description", title: "描述"},
-          {width: 80, field: "parent_id", title: "父类"},
-          {width: 80, field: "level", title: "级别"},
-          {width: 200, field: "path", title: "路径"},
-          {width: 170, field: "created_at", title: "创建时间"},
-          {width: 170, field: "updated_at", title: "更新时间"},
+          {width: 50,  type: "numbers", fixed: "left"},
+          {width: 50,  field: "id",          title: "ID"},
+          {width: 120,                       title: "名称" , templet: function (d) {var str = '-----'; return str.repeat(d.level) + d.name }},
+          {            field: "description", title: "描述"},
+          {width: 80,  field: "parent_id",   title: "父类"},
+          {width: 80,  field: "level",       title: "级别"},
+          {width: 200, field: "path",        title: "路径"},
+          {width: 170, field: "created_at",  title: "创建时间"},
+          {width: 170, field: "updated_at",  title: "更新时间"},
           {width: 160, title: "操作", align: "center", fixed: "right", toolbar: "#categories-operation"}
         ]],
         page: !0,
@@ -279,7 +263,7 @@
             type: 2,
             title: '修改categories',
             content: "/admin/categories/" + dataId + "/edit",
-            area: ['720px', '800px'],
+            area: ['500px', '470px'],
             btn: ['确定', '取消'],
             yes: function (index, layero) {
 
@@ -290,8 +274,6 @@
               //监听提交
               iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
                 var field = data.field; //获取提交的字段
-
-                console.log(field);
 
                 //提交 Ajax 成功后，静态更新表格中的数据
                 $.ajax({

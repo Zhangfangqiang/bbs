@@ -81,7 +81,7 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
 
         Route::get    ('/categories/index'                        , 'CategoryController@index')                                ->name('categories.index');           #数据展示页
         Route::get    ('/categories/create'                       , 'CategoryController@create')                               ->name('categories.create');          #创建页
-        Route::get    ('/categories/{permission}/edit'            , 'CategoryController@edit')                                 ->name('categories.edit');            #编辑页
+        Route::get    ('/categories/{category}/edit'              , 'CategoryController@edit')                                 ->name('categories.edit');            #编辑页
 
         Route::get    ('/upload_records/index'                    , 'UploadRecordController@index')                            ->name('upload_records.index');       #数据展示页
         Route::get    ('/upload_records/create'                   , 'UploadRecordController@create')                           ->name('upload_records.create');      #创建页

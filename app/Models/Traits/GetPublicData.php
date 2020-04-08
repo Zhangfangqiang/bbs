@@ -14,6 +14,9 @@ trait GetPublicData
     {
         $data = $this;
 
+        #根据开关修改配置树状
+        $configArray = $this->treeSortChangeConfig($configArray);
+
         #预加载
         if (isset($configArray['with']) && !empty($configArray['with'])) {
             $data = $data->with($configArray['with']);
@@ -74,5 +77,18 @@ trait GetPublicData
         }
 
         return $data;
+    }
+
+    /**
+     * 根据开关修改配置树状
+     */
+    private function treeSortChangeConfig($configArray)
+    {
+        if (isset($configArray['tree']) && !empty($configArray['tree'])) {
+            $configArray['select'] = \DB::raw(" * , concat(path,',',id) AS paths");
+            $configArray['order']  = ['paths', 'asc'];
+        }
+
+        return $configArray;
     }
 }
