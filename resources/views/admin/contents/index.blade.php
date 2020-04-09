@@ -23,9 +23,7 @@
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>用户</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='user_id' placeholder='请输入' autocomplete='off' class='layui-input'>
-            </div>
+            <div class='layui-input-inline' id="user_id_form"></div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>父类</label>
@@ -36,79 +34,111 @@
           <div class='layui-inline'>
             <label class='layui-form-label'>是否评论</label>
             <div class='layui-input-inline'>
-              <input type='text' name='is_comment' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <select name="is_comment" lay-verify="">
+                <option value="">全部</option>
+                <option value="1">是</option>
+                <option value="0">否</option>
+              </select>
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>是否置顶</label>
             <div class='layui-input-inline'>
-              <input type='text' name='is_top' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <select name="is_top" lay-verify="">
+                <option value="">全部</option>
+                <option value="1">是</option>
+                <option value="0">否</option>
+              </select>
             </div>
           </div>
           <div class='layui-inline'>
-            <label class='layui-form-label'>是否评论</label>
+            <label class='layui-form-label'>是否推荐</label>
             <div class='layui-input-inline'>
-              <input type='text' name='is_recommended' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <select name="is_recommended" lay-verify="">
+                <option value="">全部</option>
+                <option value="1">是</option>
+                <option value="0">否</option>
+              </select>
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>类型</label>
             <div class='layui-input-inline'>
-              <input type='text' name='type' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <select name="type" lay-verify="">
+                <option value="">全部</option>
+                <option value="1">文章</option>
+                <option value="2">图片</option>
+              </select>
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>查看数</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='watch_count' placeholder='请输入' autocomplete='off' class='layui-input'>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="watch_count" placeholder="0" autocomplete="off" class="layui-input" data-where=">=">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="watch_count" placeholder="0" autocomplete="off" class="layui-input" data-where="<=">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>收藏数</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='favorite_count' placeholder='请输入' autocomplete='off' class='layui-input'>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="favorite_count" placeholder="0" autocomplete="off" class="layui-input" data-where=">=">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="favorite_count" placeholder="0" autocomplete="off" class="layui-input" data-where="<=">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>点赞数</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='awesome_count' placeholder='请输入' autocomplete='off' class='layui-input'>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="awesome_count" placeholder="0" autocomplete="off" class="layui-input" data-where=">=">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="awesome_count" placeholder="0" autocomplete="off" class="layui-input" data-where="<=">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>评论数</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='comment_count' placeholder='请输入' autocomplete='off' class='layui-input'>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="comment_count" placeholder="0" autocomplete="off" class="layui-input" data-where=">=">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 100px;">
+              <input type="text" name="comment_count" placeholder="0" autocomplete="off" class="layui-input" data-where="<=">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>标题</label>
             <div class='layui-input-inline'>
-              <input type='text' name='title' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <input type='text' name='title' placeholder='请输入' autocomplete='off' class='layui-input' data-where="like">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>英文标题</label>
             <div class='layui-input-inline'>
-              <input type='text' name='english_title' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <input type='text' name='english_title' placeholder='请输入' autocomplete='off' class='layui-input' data-where="like">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>seo关键词</label>
             <div class='layui-input-inline'>
-              <input type='text' name='seo_key' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <input type='text' name='seo_key' placeholder='请输入' autocomplete='off' class='layui-input' data-where="like">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>摘要</label>
             <div class='layui-input-inline'>
-              <input type='text' name='excerpt' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <input type='text' name='excerpt' placeholder='请输入' autocomplete='off' class='layui-input' data-where="like">
             </div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>文章来源</label>
             <div class='layui-input-inline'>
-              <input type='text' name='source' placeholder='请输入' autocomplete='off' class='layui-input'>
+              <input type='text' name='source' placeholder='请输入' autocomplete='off' class='layui-input' data-where="like">
             </div>
           </div>
           <div class='layui-inline'>
@@ -121,18 +151,6 @@
             <label class='layui-form-label'>视频内容</label>
             <div class='layui-input-inline'>
               <input type='text' name='video' placeholder='请输入' autocomplete='off' class='layui-input'>
-            </div>
-          </div>
-          <div class='layui-inline'>
-            <label class='layui-form-label'>图片</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='img' placeholder='请输入' autocomplete='off' class='layui-input'>
-            </div>
-          </div>
-          <div class='layui-inline'>
-            <label class='layui-form-label'>更多数据</label>
-            <div class='layui-input-inline'>
-              <input type='text' name='more' placeholder='请输入' autocomplete='off' class='layui-input'>
             </div>
           </div>
           {{--表单搜索字段开始--}}
@@ -188,6 +206,9 @@
   </div>
 @endsection
 {{--中间内容结束--}}
+
+
+
 
 
 {{--后置js开始--}}
@@ -274,12 +295,12 @@
 
         var array = [];
 
-        $('.layui-form-item input').each(function (index, item) {
+        $('.layui-form-item input[name] , .layui-form-item select[name]').each(function (index, item) {
           var val = $(this).val();
           var inputName = $(this).attr('name');
           var where = $(this).data('where');
 
-          if ('' != val) {
+          if ('' != val && '' != inputName) {
             /*如果是模糊查询*/
             if ('like' == where) {
               val = '%' + val + '%';
@@ -300,11 +321,9 @@
           }
         });
 
-        var field = {'otherWhere': array};
-
         //执行重载
         table.reload('contents-table', {
-          where: field
+          where: {'otherWhere': array},
         });
       });
 
@@ -314,6 +333,9 @@
       table.render({
         elem: "#contents-table",
         url: "{{route('api.admin.v1.contents.index')}}",
+        where: {
+          with: ['user']
+        },
         request: {
           limitName: 'paginate'
         },
@@ -327,15 +349,15 @@
         },
         cols: [[
           {width: 50 , type: "numbers", fixed: "left"},
-          {width: 50 , field: "id", title: "id"},
-          {width: 120 , field: "user_id", title: "用户"},
-          {width: 100 , field: "parent_id", title: "parent_id"},
-          {width: 80 , field: "is_comment", title: "评论"},
-          {width: 80 , field: "is_top", title: "置顶"},
-          {width: 80 , field: "is_recommended", title: "回复"},
-          {width: 80 , field: "type", title: "类型"},
+          {width: 80 , field: "id", title: "id"},
+          {width: 120 ,                         title: "用户", templet: '<div>@{{d.user.name}}</div>'},
+          {width: 100 ,field: "parent_id",      title: "父类"},
+          {width: 80 ,                          title: "评论" , templet:'<div> @{{# if(d.is_comment     == 1){ }} 是 @{{#  } else { }} 否 @{{#  } }} </div>'},
+          {width: 80 ,                          title: "置顶" , templet:'<div> @{{# if(d.is_top         == 1){ }} 是 @{{#  } else { }} 否 @{{#  } }} </div>'},
+          {width: 80 ,                          title: "推荐" , templet:'<div> @{{# if(d.is_recommended == 1){ }} 是 @{{#  } else { }} 否 @{{#  } }} </div>'},
+          {width: 80 , field: "type", title: "类型"           , templet:'<div> @{{# if(d.type == 1){ }} 文章 @{{#  } else if(d.type == 2) { }} 图画 @{{#  } }}  </div>'},
 
-          {width: 110 , field: "watch_count", title: "观看数"},
+          {width: 110 , field: "watch_count", title: "查看数"},
           {width: 110 , field: "favorite_count", title: "收藏数"},
           {width: 110 , field: "awesome_count", title: "点赞数"},
           {width: 110 , field: "comment_count", title: "评论数"},

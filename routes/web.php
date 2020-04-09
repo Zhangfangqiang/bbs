@@ -84,16 +84,14 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
         Route::get    ('/categories/{category}/edit'              , 'CategoryController@edit')                                 ->name('categories.edit');            #编辑页
 
         Route::get    ('/upload_records/index'                    , 'UploadRecordController@index')                            ->name('upload_records.index');       #数据展示页
-        Route::get    ('/upload_records/create'                   , 'UploadRecordController@create')                           ->name('upload_records.create');      #创建页
-        Route::get    ('/upload_records/{permission}/edit'        , 'UploadRecordController@edit')                             ->name('upload_records.edit');        #编辑页
 
         Route::get    ('/links/index'                             , 'LinkController@index')                                    ->name('links.index');                #数据展示页
         Route::get    ('/links/create'                            , 'LinkController@create')                                   ->name('links.create');               #创建页
-        Route::get    ('/links/{permission}/edit'                 , 'LinkController@edit')                                     ->name('links.edit');                 #编辑页
+        Route::get    ('/links/{link}/edit'                       , 'LinkController@edit')                                     ->name('links.edit');                 #编辑页
 
         Route::get    ('/contents/index'                          , 'ContentController@index')                                 ->name('contents.index');             #数据展示页
         Route::get    ('/contents/create'                         , 'ContentController@create')                                ->name('contents.create');            #创建页
-        Route::get    ('/contents/{permission}/edit'              , 'ContentController@edit')                                  ->name('contents.edit');              #编辑页
+        Route::get    ('/contents/{content}/edit'                 , 'ContentController@edit')                                  ->name('contents.edit');              #编辑页
 
     });
 });

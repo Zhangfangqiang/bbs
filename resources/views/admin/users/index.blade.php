@@ -229,7 +229,7 @@
         cols: [[
           {width:50, type: "numbers", fixed: "left"},
           {width:50, field: "id", title: "id"},
-          {width:70, field: "avatar", title: "avatar" , templet:'<div><img src="@{{d.avatar}}" width="30" height="30" alt=""></div>'},
+          {width:70,  title: "avatar" , templet:'<div><img src="@{{d.avatar}}" width="30" height="30" alt=""></div>'},
           {width:120, field: "name", title: "名称"},
           {minWidth:120,field: "email", title: "邮箱"},
           {width:100, field: "be_follow_count", title: "我的粉丝数"},

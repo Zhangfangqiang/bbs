@@ -76,8 +76,7 @@
         {{--对这条数据进行操作的操作栏开始--}}
         <script type="text/html" id="links-operation">
           <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
-          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete"><i
-              class="layui-icon layui-icon-delete"></i>删除</a>
+          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete"><i class="layui-icon layui-icon-delete"></i>删除</a>
         </script>
         {{--对这条数据进行操作的操作栏结束--}}
 
@@ -135,7 +134,7 @@
           type: 2,
           title: '添加links',
           content: "/admin/links/create",
-          area: ['720px', '800px'],
+          area: ['500px', '300px'],
           btn: ['确定', '取消'],
           yes: function (index, layero) {
 
@@ -173,12 +172,12 @@
 
         var array = [];
 
-        $('.layui-form-item input').each(function (index, item) {
+        $('.layui-form-item input[name] , .layui-form-item select[name]').each(function (index, item) {
           var val = $(this).val();
           var inputName = $(this).attr('name');
           var where = $(this).data('where');
 
-          if ('' != val) {
+          if ('' != val && '' != inputName) {
             /*如果是模糊查询*/
             if ('like' == where) {
               val = '%' + val + '%';
@@ -199,11 +198,9 @@
           }
         });
 
-        var field = {'otherWhere': array};
-
         //执行重载
         table.reload('links-table', {
-          where: field
+          where: {'otherWhere': array},
         });
       });
 
@@ -256,7 +253,7 @@
             type: 2,
             title: '修改links',
             content: "/admin/links/" + dataId + "/edit",
-            area: ['720px', '800px'],
+            area: ['500px', '300px'],
             btn: ['确定', '取消'],
             yes: function (index, layero) {
 
