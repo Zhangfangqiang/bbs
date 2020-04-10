@@ -241,7 +241,7 @@
           {width:170, field: "last_login_at", title: "最后登录时间"},
           {width:170, field: "created_at", title: "创建时间"},
           {width:170, field: "updated_at", title: "更新时间"},
-          {width:160, title: "操作", align: "center", fixed: "right", toolbar: "#users-operation"}
+          {width:220, title: "操作", align: "center", fixed: "right", toolbar: "#users-operation"}
         ]],
         page: !0,
         limit: 15,
@@ -256,6 +256,7 @@
         var data = obj.data;                       //获得当前行数据
         var layEvent = obj.event;                      //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
         var dataId = data.id;                        //获取文章id
+
 
         /**
          * 设置权限的方法
@@ -302,7 +303,7 @@
               type: 'DELETE',
               dataType: 'json',
               success: function (data) {
-                layer.msg('删除成功');
+                layer.msg(data.message);
               }
             })
 
@@ -310,6 +311,8 @@
             obj.del();                  //删除对应行（tr）的DOM结构，并更新缓存
           });
         }
+
+
       });
     })
   </script>

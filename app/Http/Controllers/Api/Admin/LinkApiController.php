@@ -28,9 +28,9 @@ class LinkApiController extends Controller
      */
     public function store(LinkAPIRequest $request)
     {
-        $input              = $request->all();
-        $link = Link::create($input);
-        return response('创建成功', 200);
+        $input = $request->all();
+        $link  = Link::create($input);
+        return response(['message' => '创建成功', 'status' => '200'], 200);
     }
 
     /**
@@ -41,7 +41,7 @@ class LinkApiController extends Controller
     {
         $input = $request->all();
         $link->update($input);
-        return response('修改成功', 200);
+        return response(['message' => '修改成功', 'status' => '200'], 200);
     }
 
     /**
@@ -51,6 +51,6 @@ class LinkApiController extends Controller
     public function destroy(Link $link)
     {
         $link->delete();
-        return response( 204);
+        return response( ['message' => '删除成功', 'status' => '200'],204);
     }
 }

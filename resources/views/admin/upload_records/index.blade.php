@@ -227,7 +227,7 @@
               type: 'DELETE',
               dataType: 'json',
               success: function (data) {
-                layer.msg('删除成功');
+                layer.msg(data.message);
               }
             })
 

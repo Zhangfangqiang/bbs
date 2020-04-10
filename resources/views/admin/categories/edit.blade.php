@@ -69,7 +69,6 @@
 
                 data.data.forEach(function (item, index) {
                   var str = '----'
-                  console.log(item.id)
 
                   if (item.id == {{$category->parent_id ?? 'null'}} ) {
                     AfteData.push({name: str.repeat(item.level) + item.name, value: item.id, selected: true})

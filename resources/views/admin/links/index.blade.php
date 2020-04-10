@@ -153,9 +153,9 @@
                 dataType: 'json',
                 data: field,
                 success: function (data) {
-                  console.log(data);
+
                   alert(data);
-                  layer.msg(data);
+                  layer.msg(data.message);
                 }
               })
               location.reload();           //刷新页面
@@ -265,8 +265,6 @@
               iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
                 var field = data.field; //获取提交的字段
 
-                console.log(field);
-
                 //提交 Ajax 成功后，静态更新表格中的数据
                 $.ajax({
                   url: "/api/admin/v1/links/" + dataId,
@@ -274,7 +272,7 @@
                   dataType: 'json',
                   data: field,
                   success: function (data) {
-                    layer.msg(data);
+                    layer.msg(data.message);
                   }
                 })
 
@@ -297,7 +295,7 @@
               type: 'DELETE',
               dataType: 'json',
               success: function (data) {
-                layer.msg('删除成功');
+                layer.msg(data.message);
               }
             })
 

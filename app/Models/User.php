@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Tymon\JWTAuth\Contracts\JWTSubject;                                     #认证令牌颁布
 use Illuminate\Notifications\Notifiable;                                    #通知方法
 use App\Models\Traits\ActiveUserHelper;                                     #活跃用户计算计算方法接口
 use App\Models\Traits\GetPublicData;
@@ -9,7 +10,7 @@ use Illuminate\Foundation\Auth\User           as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;   #定义MustVerifyEmail接口
 use Illuminate\Auth\MustVerifyEmail           as MustVerifyEmailTrait;      #实现MustVerifyEmail接口
 
-class User extends Authenticatable implements MustVerifyEmailContract
+class User extends Authenticatable implements MustVerifyEmailContract ,JWTSubject
 {
     use MustVerifyEmailTrait, ActiveUserHelper ,Notifiable ,GetPublicData;
 
@@ -183,5 +184,25 @@ class User extends Authenticatable implements MustVerifyEmailContract
         return $this->whereIn('id',
             $this->awesomeContent->pluck('user_id')->unique()
         );
+    }
+
+    /**
+     * 获取将存储在JWT的主题声明中的标识符
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * 返回一个键值数组，其中包含要添加到JWT的任何自定义声明
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

@@ -67,9 +67,10 @@ Route::redirect('/zfadmin', '/admin/layouts/index');
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
     #登录 && 邮件认证 后可以访问的地址
     Route::group(['middleware' => ['auth', 'verified', 'wol']], function () {
+        Route::any    ('/ueditor/upload'                          , 'UeditorController@upload')                                ->name('ueditor.upload');             #百度编辑器主控文件
 
         #框架外部需要嵌套的页面
-        Route::get    ('/layouts/index'                           , function () {return view('admin.layouts.index');})  ->name('layouts.index');
+        Route::get    ('/layouts/index'                           , function () {return view('admin.layouts.index');})   ->name('layouts.index');
 
         Route::get    ('/operationg_logs/index'                   , 'OperationgLogController@index')                           ->name('operationg_logs.index');      #数据展示页
         Route::get    ('/operationg_logs/create'                  , 'OperationgLogController@create')                          ->name('operationg_logs.create');     #创建页

@@ -28,9 +28,9 @@ class UserApiController extends Controller
      */
     public function store(UserAPIRequest $request)
     {
-        $input              = $request->all();
-        $user = User::create($input);
-        return response('创建成功', 200);
+        $input = $request->all();
+        $user  = User::create($input);
+        return response(['message' => '创建成功', 'status' => '200'], 200);
     }
 
     /**
@@ -41,7 +41,7 @@ class UserApiController extends Controller
     {
         $input = $request->all();
         $user->update($input);
-        return response('修改成功', 200);
+        return response(['message' => '修改成功', 'status' => '200'], 200);
     }
 
     /**
@@ -51,6 +51,6 @@ class UserApiController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return response( 204);
+        return response( ['message' => '删除成功', 'status' => '200'],204);
     }
 }

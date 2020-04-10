@@ -191,3 +191,17 @@ if (!function_exists("layuiRoute")) {
         return preg_replace("/(^http(s*):)|(\?[\s\S]*$)/", "", route($string));
     }
 }
+
+/**
+ * 获取用户getUserBToken
+ */
+if (!function_exists("getUserBToken")) {
+    function getUserBToken()
+    {
+        $user_id = \auth()->user()->id;
+
+        return cache()->remember('UserBToken_' . $user_id, 60 * 30, function () use ($user_id) {
+            return auth()->guard('api')->login(auth()->user());         #从认证守卫api那里获取令牌
+        });
+    }
+}

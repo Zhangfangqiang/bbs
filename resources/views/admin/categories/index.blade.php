@@ -160,7 +160,7 @@
                 dataType: 'json',
                 data: field,
                 success: function (data) {
-                  layer.msg(data);
+                  layer.msg(data.message);
                 }
               })
               location.reload();              //刷新页面
@@ -282,7 +282,7 @@
                   dataType: 'json',
                   data: field,
                   success: function (data) {
-                    layer.msg(data);
+                    layer.msg(data.message);
                   }
                 })
 
@@ -305,7 +305,7 @@
               type: 'DELETE',
               dataType: 'json',
               success: function (data) {
-                layer.msg('删除成功');
+                layer.msg(data.message);
               }
             })
 

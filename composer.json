@@ -24,6 +24,7 @@
         "predis/predis": "^1.1",
         "summerblue/laravel-active": "6.*",
         "teamtnt/laravel-scout-tntsearch-driver": "^8.1",
+        "tymon/jwt-auth": "^1.0",
         "typicms/nestablecollection": "^1.1",
         "zhang-fang/laravel-generator": "dev-master"
     },

@@ -28,9 +28,9 @@ class OperationgLogApiController extends Controller
      */
     public function store(OperationgLogAPIRequest $request)
     {
-        $input              = $request->all();
+        $input         = $request->all();
         $operationgLog = OperationgLog::create($input);
-        return response('创建成功', 200);
+        return response(['message' => '创建成功', 'status' => '200'], 200);
     }
 
     /**
@@ -41,7 +41,7 @@ class OperationgLogApiController extends Controller
     {
         $input = $request->all();
         $operationgLog->update($input);
-        return response('修改成功', 200);
+        return response(['message' => '修改成功', 'status' => '200'], 200);
     }
 
     /**
@@ -51,6 +51,6 @@ class OperationgLogApiController extends Controller
     public function destroy(OperationgLog $operationgLog)
     {
         $operationgLog->delete();
-        return response( 204);
+        return response( ['message' => '删除成功', 'status' => '200'],204);
     }
 }

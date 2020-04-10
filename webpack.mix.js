@@ -17,10 +17,12 @@ mix.js          ( 'resources/assets/web/js/app.js'         , 'public/web/js/app.
   .sass         ( 'resources/assets/web/sass/app.scss'     , 'public/web/css')
   .js           ( 'resources/assets/admin/js/app.js'       , 'public/admin/js/app.js')
   .scripts      (['resources/assets/admin/js/admin.js']    , 'public/admin/js/admin.js')
-  .sass         ( 'resources/assets/admin/sass/app.scss' , 'public/admin/css')
+  .sass         ( 'resources/assets/admin/sass/app.scss'   , 'public/admin/css')
   .version      ()
   .copyDirectory( 'resources/assets/web/img'               , 'public/web/img')
   .copyDirectory( 'resources/assets/web/layer'             , 'public/web/layer')
   .copyDirectory( 'resources/assets/web/ueditor'           , 'public/web/ueditor')
-  .copyDirectory( 'resources/assets/admin/layuiadmin'      , 'public/admin/layuiadmin');
+  .copyDirectory( 'resources/assets/admin/layuiadmin'      , 'public/admin/layuiadmin')
+  .copyDirectory( 'resources/assets/admin/ueditor'         , 'public/admin/ueditor');
+
 

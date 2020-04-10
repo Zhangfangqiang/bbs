@@ -28,9 +28,9 @@ class ContentApiController extends Controller
      */
     public function store(ContentAPIRequest $request)
     {
-        $input              = $request->all();
+        $input   = $request->all();
         $content = Content::create($input);
-        return response('创建成功', 200);
+        return response(['message' => '创建成功', 'status' => '200'], 200);
     }
 
     /**
@@ -41,7 +41,7 @@ class ContentApiController extends Controller
     {
         $input = $request->all();
         $content->update($input);
-        return response('修改成功', 200);
+        return response(['message' => '修改成功', 'status' => '200'], 200);
     }
 
     /**
@@ -51,6 +51,6 @@ class ContentApiController extends Controller
     public function destroy(Content $content)
     {
         $content->delete();
-        return response( 204);
+        return response( ['message' => '删除成功', 'status' => '200'],204);
     }
 }

@@ -30,7 +30,7 @@ class UploadRecordApiController extends Controller
     {
         $input              = $request->all();
         $uploadRecord = UploadRecord::create($input);
-        return response('创建成功', 200);
+        return response(['message' => '创建成功', 'status' => '200'], 200);
     }
 
     /**
@@ -41,7 +41,7 @@ class UploadRecordApiController extends Controller
     {
         $input = $request->all();
         $uploadRecord->update($input);
-        return response('修改成功', 200);
+        return response(['message' => '修改成功', 'status' => '200'], 200);
     }
 
     /**
@@ -51,6 +51,6 @@ class UploadRecordApiController extends Controller
     public function destroy(UploadRecord $uploadRecord)
     {
         $uploadRecord->delete();
-        return response( 204);
+        return response( ['message' => '删除成功', 'status' => '200'],204);
     }
 }

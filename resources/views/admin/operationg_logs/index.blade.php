@@ -97,7 +97,6 @@
 @endsection
 {{--中间内容结束--}}
 
-
 {{--后置js开始--}}
 @section('after_js')
 <script>
@@ -121,7 +120,7 @@
       elem : '#created_at',
       range: true
     });
-    
+
     /**
      * 刷新
      */
@@ -242,7 +241,7 @@
                 dataType : 'json',
                 data     : field,
                 success: function (data) {
-                  layer.msg(data);
+                  layer.msg(data.message);
                 }
               })
 
@@ -264,7 +263,7 @@
             type    : 'DELETE',
             dataType: 'json',
             success: function (data) {
-              layer.msg('删除成功');
+              layer.msg(data.message);
             }
           })
           layer.close(index);         //关闭弹框

@@ -28,9 +28,9 @@ class CategoryApiController extends Controller
      */
     public function store(CategoryAPIRequest $request)
     {
-        $input              = $request->all();
+        $input    = $request->all();
         $category = Category::create($input);
-        return response('创建成功', 200);
+        return response(['message' => '创建成功', 'status' => '200'], 200);
     }
 
     /**
@@ -41,7 +41,7 @@ class CategoryApiController extends Controller
     {
         $input = $request->all();
         $category->update($input);
-        return response('修改成功', 200);
+        return response(['message' => '修改成功', 'status' => '200'], 200);
     }
 
     /**
@@ -51,6 +51,6 @@ class CategoryApiController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return response( 204);
+        return response( ['message' => '删除成功', 'status' => '200'],204);
     }
 }

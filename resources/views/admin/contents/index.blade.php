@@ -184,8 +184,7 @@
       {{--数据展现开始--}}
       <div class="layui-card-body">
         <div style="overflow: hidden;padding-bottom: 10px;">
-          <button id="contents-create" class="layui-btn layuiadmin-btn-list" data-type="add" style="float: right;">添加
-          </button>
+          <a lay-href="{{layuiRoute('admin.contents.create')}}" title="添加内容" class="layui-btn layuiadmin-btn-list" style="float: right;">添加内容</a>
         </div>
 
         {{--表格数据内容开始--}}
@@ -247,45 +246,6 @@
        */
       $('#contents-refresh').click(function () {
         location.reload();
-      })
-
-      /**
-       * 创建
-       */
-      $('#contents-create').click(function () {
-        layer.open({
-          type: 2,
-          title: '添加contents',
-          content: "/admin/contents/create",
-          area: ['720px', '800px'],
-          btn: ['确定', '取消'],
-          yes: function (index, layero) {
-
-            var iframeWindow = window['layui-layer-iframe' + index];                         //获取弹出的iframe 标签内容 ,和 layero 的区别,layero 带一个外边框
-            var submitID = 'contents-back-submit';                     //设置弹出框里面的提交按钮id
-            var submit = layero.find('iframe').contents().find('#' + submitID);        //获取弹出框表单中,定义的提交按钮
-
-            //监听提交
-            iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
-              var field = data.field; //获取提交的字段
-
-              //提交 Ajax 成功后，静态更新表格中的数据
-              $.ajax({
-                url: "{{route('api.admin.v1.contents.index')}}",
-                type: 'POST',
-                dataType: 'json',
-                data: field,
-                success: function (data) {
-                  console.log(data);
-                  alert(data);
-                  layer.msg(data);
-                }
-              })
-              location.reload();           //刷新页面
-            });
-            submit.trigger('click');          //自动触发点击事件
-          }
-        })
       })
 
       /**
@@ -411,7 +371,6 @@
               iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
                 var field = data.field; //获取提交的字段
 
-                console.log(field);
 
                 //提交 Ajax 成功后，静态更新表格中的数据
                 $.ajax({
@@ -420,7 +379,7 @@
                   dataType: 'json',
                   data: field,
                   success: function (data) {
-                    layer.msg(data);
+                    layer.msg(data.message);
                   }
                 })
 
@@ -443,7 +402,7 @@
               type: 'DELETE',
               dataType: 'json',
               success: function (data) {
-                layer.msg('删除成功');
+                layer.msg(data.message);
               }
             })
 
