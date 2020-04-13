@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers\Web;
+namespace App\Observers;
 
 use App\Models\Comment;
 use App\Models\Content;

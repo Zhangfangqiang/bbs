@@ -205,3 +205,13 @@ if (!function_exists("getUserBToken")) {
         });
     }
 }
+
+/*
+ * 根据大文件上传,提交的文件信息,获取文件路径
+ */
+if (!function_exists("aetherUploadPath")) {
+    function aetherUploadPath($string)
+    {
+        return '/' . config('aetherupload.root_dir') . '/' . str_replace('_', '/', $string);
+    }
+}

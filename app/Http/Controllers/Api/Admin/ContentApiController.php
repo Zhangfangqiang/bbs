@@ -28,8 +28,15 @@ class ContentApiController extends Controller
      */
     public function store(ContentAPIRequest $request)
     {
-        $input   = $request->all();
-        $content = Content::create($input);
+        $data = $request->only('title', 'c_id', 'content', 'type', 'video', 'excerpt', 'source', 'seo_key');
+
+        if ($data['type']  = 2){
+            $data['video'] = aetherUploadPath($data['video']);
+        }
+
+        $content         = Content::create($data);
+        $content->category()->attach(explode(',',$data['c_id']));                                              #进行关系关联
+
         return response(['message' => '创建成功', 'status' => '200'], 200);
     }
 

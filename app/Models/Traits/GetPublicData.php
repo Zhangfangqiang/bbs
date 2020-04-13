@@ -48,7 +48,7 @@ trait GetPublicData
         #whereIn条件
         if (isset($configArray['otherWhereIn']) && !empty($configArray['otherWhereIn'])) {
             foreach ($configArray['otherWhereIn'] as $snap) {
-                $data = $data->whereIn($snap[0], explode(',', $snap[1]));
+                $data = $data->whereIn($snap[0], explode(',', trim(trim($snap[1],']'),'[')));
             }
         }
 
@@ -75,7 +75,6 @@ trait GetPublicData
         } else {
             $data = $data->get();
         }
-
         return $data;
     }
 

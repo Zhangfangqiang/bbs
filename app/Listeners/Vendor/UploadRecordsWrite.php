@@ -20,6 +20,9 @@ class UploadRecordsWrite
         $size         = filesize($absolutePath);                   #获取文件大小
         $md5          = md5_file($absolutePath);                   #获取文件md5
 
-        UploadRecord::create(['path' => $urlPath, 'size' => $size, 'md5' => $md5]);
+
+        if (empty(UploadRecord::where(['md5' => $md5])->first()) ) {
+            UploadRecord::create(['path' => $urlPath, 'size' => $size, 'md5' => $md5]);
+        }
     }
 }

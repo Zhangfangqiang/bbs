@@ -193,9 +193,8 @@
 
         {{--对这条数据进行操作的操作栏开始--}}
         <script type="text/html" id="contents-operation">
-          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
-          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete"><i
-              class="layui-icon layui-icon-delete"></i>删除</a>
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-href="/admin/contents/@{{d.id}}/edit"  lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete"><i class="layui-icon layui-icon-delete"></i>删除</a>
         </script>
         {{--对这条数据进行操作的操作栏结束--}}
 
@@ -205,10 +204,6 @@
   </div>
 @endsection
 {{--中间内容结束--}}
-
-
-
-
 
 {{--后置js开始--}}
 @section('after_js')
@@ -315,7 +310,7 @@
           {width: 80 ,                          title: "评论" , templet:'<div> @{{# if(d.is_comment     == 1){ }} 是 @{{#  } else { }} 否 @{{#  } }} </div>'},
           {width: 80 ,                          title: "置顶" , templet:'<div> @{{# if(d.is_top         == 1){ }} 是 @{{#  } else { }} 否 @{{#  } }} </div>'},
           {width: 80 ,                          title: "推荐" , templet:'<div> @{{# if(d.is_recommended == 1){ }} 是 @{{#  } else { }} 否 @{{#  } }} </div>'},
-          {width: 80 , field: "type", title: "类型"           , templet:'<div> @{{# if(d.type == 1){ }} 文章 @{{#  } else if(d.type == 2) { }} 图画 @{{#  } }}  </div>'},
+          {width: 80 , field: "type", title: "类型"           , templet:'<div> @{{# if(d.type == 1){ }} 文章 @{{#  } else if(d.type == 2) { }} 视频 @{{#  } }}  </div>'},
 
           {width: 110 , field: "watch_count", title: "查看数"},
           {width: 110 , field: "favorite_count", title: "收藏数"},
@@ -350,46 +345,6 @@
         var data = obj.data;                       //获得当前行数据
         var layEvent = obj.event;                      //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
         var dataId = data.id;                        //获取文章id
-
-        /**
-         * 编辑方法开始
-         */
-        if (layEvent === 'edit') { //编辑
-          layer.open({
-            type: 2,
-            title: '修改contents',
-            content: "/admin/contents/" + dataId + "/edit",
-            area: ['720px', '800px'],
-            btn: ['确定', '取消'],
-            yes: function (index, layero) {
-
-              var iframeWindow = window['layui-layer-iframe' + index];                         //获取弹出的iframe 标签内容 ,和 layero 的区别,layero 带一个外边框
-              var submitID = 'contents-back-submit';                     //设置弹出框里面的提交按钮id
-              var submit = layero.find('iframe').contents().find('#' + submitID);        //获取弹出框表单中,定义的提交按钮
-
-              //监听提交
-              iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
-                var field = data.field; //获取提交的字段
-
-
-                //提交 Ajax 成功后，静态更新表格中的数据
-                $.ajax({
-                  url: "/api/admin/v1/contents/" + dataId,
-                  type: 'PUT',
-                  dataType: 'json',
-                  data: field,
-                  success: function (data) {
-                    layer.msg(data.message);
-                  }
-                })
-
-                table.reload('contents-table');           //重载数据
-                layer.close(index);                                        //关闭弹框
-              });
-              submit.trigger('click');                                       //自动触发点击事件
-            }
-          })
-        }
 
         /**
          * 删除方法开始

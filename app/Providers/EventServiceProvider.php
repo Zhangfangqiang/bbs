@@ -26,7 +26,10 @@ class EventServiceProvider extends ServiceProvider
         \Illuminate\Auth\Events\Login::class =>[
             \App\Listeners\Web\RecordLoginTime::class,
         ],
+        #大型文件上传完成前的事件
+        \App\Events\Vendor\AetherUploadBefore::class => [
 
+        ],
         #大型文件上传完成后事件
         \App\Events\Vendor\AetherUploadAfter::class => [
             /*写入到文件上传数据库*/

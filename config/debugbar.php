@@ -16,7 +16,8 @@ return [
 
     'enabled' => env('APP_DEBUG', false),
     'except' => [
-        'telescope*'
+        '/web/ueditor/upload*',
+        '/admin/ueditor/upload*',
     ],
 
     /*

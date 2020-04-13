@@ -5,7 +5,7 @@
     base: '/admin/layuiadmin/'  //静态资源所在路径
   }).extend({
     index: 'lib/index',                    //主入口模块
-    xmSelect: 'xm-select',          //扩展select
+    xmSelect: 'xm-select',                 //扩展select
 
   }).use(['index','xmSelect'],function(){
 
@@ -58,7 +58,7 @@
     }
 
     /**
-     * 全局渲染分类选择父类
+     * 全局渲染分类这张表的父类
      */
     if ( $("#parent_id_form").length > 0 ) {
       xmSelect.render({
@@ -98,42 +98,44 @@
 
 
     /**
-     * 全局渲染分类选择父类
+     * 全局渲染内容的分类
      */
-    if ( $("#category_id_form").length > 0 ) {
-      xmSelect.render({
-        el          : '#category_id_form',
-        name        : 'c_id',
-        radio       : false,
-        filterable  : true,
-        remoteSearch: true,
-        remoteMethod: function (val, cb, show) {
-          $.ajax({
-            url: '{{route('api.admin.v1.categories.index')}}',
-            data: {
-              otherWhere: [
-                ['name', 'like', '%' + val + '%']
-              ],
-              tree:1,
-              offset: 0,
-              limit: 100,
-            },
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
+    if ( $(".category-id-form").length > 0 ) {
+        $(".category-id-form").each(function(index,item){
+            xmSelect.render({
+                el          : item,
+                name        : 'c_id',
+                radio       : false,
+                filterable  : true,
+                remoteSearch: true,
+                remoteMethod: function (val, cb, show) {
+                    $.ajax({
+                        url: '{{route('api.admin.v1.categories.index')}}',
+                        data: {
+                            otherWhere: [
+                                ['name', 'like', '%' + val + '%']
+                            ],
+                            tree:1,
+                            offset: 0,
+                            limit: 100,
+                        },
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
 
-              var AfteData = [];
+                            var AfteData = [];
 
-              data.data.forEach(function (item, index) {
-                var str = '----'
-                AfteData.push({name: str.repeat(item.level)+item.name, value: item.id})
-              })
+                            data.data.forEach(function (item, index) {
+                                var str = '----'
+                                AfteData.push({name: str.repeat(item.level)+item.name, value: item.id})
+                            })
 
-              cb(AfteData);
-            }
-          })
-        }
-      })
+                            cb(AfteData);
+                        }
+                    })
+                }
+            })
+        })
     }
 
   });
