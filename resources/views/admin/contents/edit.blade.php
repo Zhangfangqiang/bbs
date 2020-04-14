@@ -42,7 +42,7 @@
               分类:
               <span style="color: red">*</span>
             </label>
-            <div class="layui-input-block category-id-form"></div>
+            <div class="layui-input-block category-id-form-re"></div>
           </div>
 
           <div class="layui-form-item">
@@ -79,14 +79,14 @@
           <div class="layui-form-item" id="aetherupload-wrapper">
             <label class="layui-form-label">图片</label>
             <div class="layui-input-block">
-              <img src="{{$content->img}}" style="max-height: 100px;" alt="">
+              <img src="{{$content->img}}" style="max-height: 100px;margin: 5px;border: 1px solid #3d3d3d;border-radius: 5px;" alt="">
 
               <input type="file" class="layui-input" id="aetherupload-resource" onchange="aetherupload(this).upload()"/>
               <div class="progress " style="height: 6px;margin-bottom: 2px;margin-top: 10px;width: 200px;">
                 <div id="aetherupload-progressbar" style="background:blue;height:6px;width:0;"></div>
               </div>
               <span style="font-size:12px;color:#aaa;" id="aetherupload-output"></span>
-              <input type="hidden" name="img" id="aetherupload-savedpath">
+              <input type="hidden" name="img" value="{{$content->img}}" id="aetherupload-savedpath">
             </div>
           </div>
 
@@ -160,6 +160,71 @@
       var upload = layui.upload;
 
       /**
+       * 全局渲染内容的分类 重写
+       */
+      if ($(".category-id-form-re").length > 0) {
+        $(".category-id-form-re").each(function (index, item) {
+          xmSelect.render({
+            el: item,
+            name: 'c_id',
+            radio: false,
+            filterable: true,
+            remoteSearch: true,
+            remoteMethod: function (val, cb, show) {
+              c_id   = [];
+              c_data = [];
+
+              $.ajax({
+                url: '{{route('api.admin.v1.categories.index')}}',
+                data: {
+                  otherWhere: [
+                    ['name', 'like', '%' + val + '%']
+                  ],
+                  tree: 1,
+                  offset: 0,
+                  limit: 100,
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                  $.ajax({
+                    url: '{{route('api.admin.v1.category_has_contents.index')}}',
+                    data: {
+                      otherWhere: [
+                        ['content_id', '=', {{$content->id}}]
+                      ],
+                      offset: 0,
+                      limit: 100,
+                    },
+                    type: 'GET',
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+                      data.data.forEach(function (item, index) {
+                        c_id.push(item.category_id)
+                      })
+                    }
+                  })
+
+                  data.data.forEach(function (item, index) {
+                    var str = '----'
+                    if(c_id.indexOf(item.id) != -1){
+                      c_data.push({name: str.repeat(item.level) + item.name, value: item.id ,selected: true})
+                    }else{
+                      c_data.push({name: str.repeat(item.level) + item.name, value: item.id})
+                    }
+                  })
+
+                  cb(c_data);
+                }
+              })
+            }
+          })
+        })
+      }
+
+      /**
        * 提交内容的方法
        */
       form.on('submit(content-submit-form)', function(data){
@@ -167,14 +232,13 @@
         data.field.content = ue.getContent();
 
         $.ajax({
-          url: "{{route('api.admin.v1.contents.store')}}",
-          type: 'POST',
+          url: "{{route('api.admin.v1.contents.update',$content->id)}}",
+          type: 'PUT',
           dataType: 'json',
           data: data.field,
           async: false, //异步
           success: function (data) {
             layer.msg(data.message);
-            setInterval(location.reload(),3000)
           }
         })
         return false;

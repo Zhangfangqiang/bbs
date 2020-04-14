@@ -35,7 +35,7 @@
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>父类</label>
-            <div class='layui-input-inline' id="parent_id_form">
+            <div class='layui-input-inline parent-id-form'>
             </div>
           </div>
           <div class='layui-inline'>
@@ -125,7 +125,7 @@
         elem: '#categories-created_at',
         range: true
       });
-      
+
       /**
        * 刷新
        */

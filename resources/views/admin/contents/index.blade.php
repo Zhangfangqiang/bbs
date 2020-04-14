@@ -23,7 +23,7 @@
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>用户</label>
-            <div class='layui-input-inline' id="user_id_form"></div>
+            <div class='layui-input-inline user-id-form'></div>
           </div>
           <div class='layui-inline'>
             <label class='layui-form-label'>父类</label>

@@ -24,7 +24,7 @@
 
     <div class="layui-form-item" style="margin-bottom: 0px;">
       <label class="layui-form-label">父类:</label>
-      <div class="layui-input-block" id="parent_id_form">
+      <div class="layui-input-block parent-id-form">
       </div>
     </div>
 

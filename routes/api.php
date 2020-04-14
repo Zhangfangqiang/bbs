@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::prefix('/admin/v1')->name('api.admin.v1.')->namespace('Api\Admin')->group(function() {
-    
+
     #必须登录才能获取的接口
     Route::group(['middleware' => ['api', 'auth:api']], function () {
         Route::get    ('/operationg_logs'                                       , 'OperationgLogApiController@index')                       ->name('operationg_logs.index');          #获取数据
@@ -26,6 +26,8 @@ Route::prefix('/admin/v1')->name('api.admin.v1.')->namespace('Api\Admin')->group
         Route::post   ('/users'                                                 , 'UserApiController@store')                                ->name('users.store');                    #创建
         Route::put    ('/users/{user}'                                          , 'UserApiController@update')                               ->name('users.update');                   #更新
         Route::delete ('/users/{user}'                                          , 'UserApiController@destroy')                              ->name('users.destroy');                  #删除
+
+        Route::get    ('/category_has_contents'                                 , 'CategoryHasContentApiController@index')                  ->name('category_has_contents.index');    #获取数据
 
         Route::get    ('/categories'                                            , 'CategoryApiController@index')                            ->name('categories.index');               #获取数据
         Route::post   ('/categories'                                            , 'CategoryApiController@store')                            ->name('categories.store');               #创建

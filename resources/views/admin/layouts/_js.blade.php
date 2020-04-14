@@ -1,4 +1,3 @@
-
 <script src="{{asset('admin/layuiadmin/layui/layui.js')}}"></script>
 <script>
   $layui = layui.config({
@@ -7,135 +6,139 @@
     index: 'lib/index',                    //主入口模块
     xmSelect: 'xm-select',                 //扩展select
 
-  }).use(['index','xmSelect'],function(){
+  }).use(['index', 'xmSelect'], function () {
 
-    var $       = layui.$;
+    var $ = layui.$;
 
     /**
      * 设置ajax csrf_token
      */
     $.ajaxSetup({
-        beforeSend: function (request) {
-            request.setRequestHeader("Authorization", document.getElementsByTagName('meta')['authorization'].content);
-        }
+      beforeSend: function (request) {
+        request.setRequestHeader("Authorization", document.getElementsByTagName('meta')['authorization'].content);
+      }
     });
 
     /**
      * 全局user_id渲染
      */
-    if ( $("#user_id_form").length > 0 ) {
-      xmSelect.render({
-        el          : '#user_id_form',
-        name        : 'user_id',
-        radio       : true,
-        filterable  : true,
-        remoteSearch: true,
-        remoteMethod: function (val, cb, show) {
-          $.ajax({
-            url: '{{route('api.admin.v1.users.index')}}',
-            data: {
-              otherWhere: [
-                ['name', 'like', '%' + val + '%']
-              ],
-              offset: 0,
-              limit: 100,
-            },
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
+    if ($(".user-id-form").length > 0) {
+      $(".user-id-form").each(function (index, item) {
+        xmSelect.render({
+          el: item,
+          name: 'user_id',
+          radio: true,
+          filterable: true,
+          remoteSearch: true,
+          remoteMethod: function (val, cb, show) {
+            $.ajax({
+              url: '{{route('api.admin.v1.users.index')}}',
+              data: {
+                otherWhere: [
+                  ['name', 'like', '%' + val + '%']
+                ],
+                offset: 0,
+                limit: 100,
+              },
+              type: 'GET',
+              dataType: 'json',
+              success: function (data) {
 
-              var AfteData = [];
+                var AfteData = [];
 
-              data.data.forEach(function (item, index) {
-                AfteData.push({name: item.name, value: item.id})
-              })
+                data.data.forEach(function (item, index) {
+                  AfteData.push({name: item.name, value: item.id})
+                })
 
-              cb(AfteData);
-            }
-          })
-        }
+                cb(AfteData);
+              }
+            })
+          }
+        })
       })
+
     }
 
     /**
      * 全局渲染分类这张表的父类
      */
-    if ( $("#parent_id_form").length > 0 ) {
-      xmSelect.render({
-        el          : '#parent_id_form',
-        name        : 'parent_id',
-        radio       : true,
-        filterable  : true,
-        remoteSearch: true,
-        remoteMethod: function (val, cb, show) {
-          $.ajax({
-            url: '{{route('api.admin.v1.categories.index')}}',
-            data: {
-              otherWhere: [
-                ['name', 'like', '%' + val + '%']
-              ],
-              tree:1,
-              offset: 0,
-              limit: 100,
-            },
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
+    if ($(".parent-id-form").length > 0) {
+      $(".parent-id-form").each(function (index, item) {
+        xmSelect.render({
+          el: item,
+          name: 'parent_id',
+          radio: true,
+          filterable: true,
+          remoteSearch: true,
+          remoteMethod: function (val, cb, show) {
+            $.ajax({
+              url: '{{route('api.admin.v1.categories.index')}}',
+              data: {
+                otherWhere: [
+                  ['name', 'like', '%' + val + '%']
+                ],
+                tree: 1,
+                offset: 0,
+                limit: 100,
+              },
+              type: 'GET',
+              dataType: 'json',
+              success: function (data) {
 
-              var AfteData = [];
+                var AfteData = [];
 
-              data.data.forEach(function (item, index) {
-                var str = '----'
-                AfteData.push({name: str.repeat(item.level)+item.name, value: item.id})
-              })
+                data.data.forEach(function (item, index) {
+                  var str = '----'
+                  AfteData.push({name: str.repeat(item.level) + item.name, value: item.id})
+                })
 
-              cb(AfteData);
-            }
-          })
-        }
+                cb(AfteData);
+              }
+            })
+          }
+        })
       })
     }
-
 
     /**
      * 全局渲染内容的分类
      */
-    if ( $(".category-id-form").length > 0 ) {
-        $(".category-id-form").each(function(index,item){
-            xmSelect.render({
-                el          : item,
-                name        : 'c_id',
-                radio       : false,
-                filterable  : true,
-                remoteSearch: true,
-                remoteMethod: function (val, cb, show) {
-                    $.ajax({
-                        url: '{{route('api.admin.v1.categories.index')}}',
-                        data: {
-                            otherWhere: [
-                                ['name', 'like', '%' + val + '%']
-                            ],
-                            tree:1,
-                            offset: 0,
-                            limit: 100,
-                        },
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (data) {
+    if ($(".category-id-form").length > 0) {
+      $(".category-id-form").each(function (index, item) {
+        xmSelect.render({
+          el: item,
+          name: 'c_id',
+          radio: false,
+          filterable: true,
+          remoteSearch: true,
+          remoteMethod: function (val, cb, show) {
+            $.ajax({
+              url: '{{route('api.admin.v1.categories.index')}}',
+              data: {
+                otherWhere: [
+                  ['name', 'like', '%' + val + '%']
+                ],
+                tree: 1,
+                offset: 0,
+                limit: 100,
+              },
+              type: 'GET',
+              dataType: 'json',
+              success: function (data) {
 
-                            var AfteData = [];
+                var AfteData = [];
 
-                            data.data.forEach(function (item, index) {
-                                var str = '----'
-                                AfteData.push({name: str.repeat(item.level)+item.name, value: item.id})
-                            })
+                data.data.forEach(function (item, index) {
+                  var str = '----'
+                  AfteData.push({name: str.repeat(item.level) + item.name, value: item.id})
+                })
 
-                            cb(AfteData);
-                        }
-                    })
-                }
+                cb(AfteData);
+              }
             })
+          }
         })
+      })
     }
 
   });

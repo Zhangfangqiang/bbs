@@ -46,8 +46,11 @@ class ContentApiController extends Controller
      */
     public function update(Content $content , ContentAPIRequest $request)
     {
-        $input = $request->all();
-        $content->update($input);
+        $data = $request->only('title', 'c_id', 'content', 'type', 'video', 'excerpt', 'source', 'seo_key');
+        $content->category()->detach();                                                                                 #先删除关系
+        $content->category()->attach(explode(',',$data['c_id']));                                               #进行关系关联
+        $content->update($data);                                                                                        #更新数据
+
         return response(['message' => '修改成功', 'status' => '200'], 200);
     }
 

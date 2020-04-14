@@ -24,7 +24,7 @@
 
           <div class='layui-inline'>
             <label class='layui-form-label'>用户名</label>
-            <div class='layui-input-inline xm-select-demo' id="user_id_form">
+            <div class='layui-input-inline xm-select-demo user-id-form'>
 
             </div>
           </div>

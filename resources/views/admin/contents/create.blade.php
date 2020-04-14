@@ -174,10 +174,8 @@
           async: false, //异步
           success: function (data) {
             layer.msg(data.message);
-            setInterval(location.reload(),3000)
           }
         })
-
         return false;
       })
 

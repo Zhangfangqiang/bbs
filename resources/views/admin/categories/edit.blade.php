@@ -24,7 +24,7 @@
 
     <div class="layui-form-item" style="margin-bottom: 0px;">
       <label class="layui-form-label">父类:</label>
-      <div class="layui-input-block" id="parent_id_form_re">
+      <div class="layui-input-block parent-id-form-re">
       </div>
     </div>
 
@@ -43,45 +43,47 @@
       /**
        * 重写
        */
-      if ( $("#parent_id_form_re").length > 0 ) {
-        xmSelect.render({
-          el          : '#parent_id_form_re',
-          name        : 'parent_id',
-          radio       : true,
-          filterable  : true,
-          remoteSearch: true,
-          remoteMethod: function (val, cb, show) {
-            $.ajax({
-              url: '{{route('api.admin.v1.categories.index')}}',
-              data: {
-                otherWhere: [
-                  ['name', 'like'    , '%' + val + '%'],
-                ],
-                tree:1,
-                offset: 0,
-                limit: 100,
-              },
-              type: 'GET',
-              dataType: 'json',
-              success: function (data) {
+      if ($(".parent-id-form-re").length > 0) {
+        $(".parent-id-form-re").each(function (index, item) {
+          xmSelect.render({
+            el: item,
+            name: 'parent_id',
+            radio: true,
+            filterable: true,
+            remoteSearch: true,
+            remoteMethod: function (val, cb, show) {
+              $.ajax({
+                url: '{{route('api.admin.v1.categories.index')}}',
+                data: {
+                  otherWhere: [
+                    ['name', 'like', '%' + val + '%'],
+                  ],
+                  tree: 1,
+                  offset: 0,
+                  limit: 100,
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
 
-                var AfteData = [];
+                  var AfteData = [];
 
-                data.data.forEach(function (item, index) {
-                  var str = '----'
+                  data.data.forEach(function (item, index) {
+                    var str = '----'
 
-                  if (item.id == {{$category->parent_id ?? 'null'}} ) {
-                    AfteData.push({name: str.repeat(item.level) + item.name, value: item.id, selected: true})
-                  } else {
-                    AfteData.push({name: str.repeat(item.level) + item.name, value: item.id})
-                  }
+                    if (item.id == {{$category->parent_id ?? 'null'}} ) {
+                      AfteData.push({name: str.repeat(item.level) + item.name, value: item.id, selected: true})
+                    } else {
+                      AfteData.push({name: str.repeat(item.level) + item.name, value: item.id})
+                    }
 
-                })
+                  })
 
-                cb(AfteData);
-              }
-            })
-          }
+                  cb(AfteData);
+                }
+              })
+            }
+          })
         })
       }
 
