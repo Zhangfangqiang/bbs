@@ -248,6 +248,18 @@
       });
 
       /**
+       * 监听表格排序按钮
+       */
+      table.on('sort(categories-table)', function (obj) {
+        table.reload('categories-table', {
+          initSort: obj,
+          where: {
+            order: [obj.field, obj.type]
+          }
+        });
+      });
+
+      /**
        * 监听表格操作按钮
        */
       table.on('tool(categories-table)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"

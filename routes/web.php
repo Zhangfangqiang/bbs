@@ -73,8 +73,6 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
         Route::get    ('/layouts/index'                           , function () {return view('admin.layouts.index');})   ->name('layouts.index');
 
         Route::get    ('/operationg_logs/index'                   , 'OperationgLogController@index')                           ->name('operationg_logs.index');      #数据展示页
-        Route::get    ('/operationg_logs/create'                  , 'OperationgLogController@create')                          ->name('operationg_logs.create');     #创建页
-        Route::get    ('/operationg_logs/{permission}/edit'       , 'OperationgLogController@edit')                            ->name('operationg_logs.edit');       #编辑页
 
         Route::get    ('/users/index'                             , 'UserController@index')                                    ->name('users.index');                #数据展示页
         Route::get    ('/users/create'                            , 'UserController@create')                                   ->name('users.create');               #创建页

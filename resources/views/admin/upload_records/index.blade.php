@@ -209,6 +209,18 @@
       });
 
       /**
+       * 监听表格排序按钮
+       */
+      table.on('sort(upload_records-table)', function (obj) {
+        table.reload('upload_records-table', {
+          initSort: obj,
+          where: {
+            order: [obj.field, obj.type]
+          }
+        });
+      });
+
+      /**
        * 监听表格操作按钮
        */
       table.on('tool(upload_records-table)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"

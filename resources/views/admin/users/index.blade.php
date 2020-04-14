@@ -239,14 +239,26 @@
           {width:100, field: "be_favorite_count", title: "被收藏数"},
           {width:100, field: "favorite_count", title: "收藏数"},
           {width:170, field: "last_login_at", title: "最后登录时间"},
-          {width:170, field: "created_at", title: "创建时间"},
-          {width:170, field: "updated_at", title: "更新时间"},
+          {width:170, field: "created_at", title: "创建时间" , sort:true},
+          {width:170, field: "updated_at", title: "更新时间" , sort:true},
           {width:220, title: "操作", align: "center", fixed: "right", toolbar: "#users-operation"}
         ]],
         page: !0,
         limit: 15,
         limits: [10, 15, 20, 25, 30],
         text: "对不起，加载出现异常！",
+      });
+
+      /**
+       * 监听表格排序按钮
+       */
+      table.on('sort(users-table)', function (obj) {
+        table.reload('users-table', {
+          initSort: obj,
+          where: {
+            order: [obj.field, obj.type]
+          }
+        });
       });
 
       /**

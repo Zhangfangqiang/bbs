@@ -197,13 +197,25 @@
         {width: 220 ,field: "uri"        , title: "URI"},
         {width: 60 ,field: "methods"    , title: "类型"},
         {           field: "data"       , title: "提交数据"},
-        {width: 170 ,field: "created_at" , title: "创建时间"},
-        {width: 170 ,field: "updated_at" , title: "更新时间"},
+        {width: 170 ,field: "created_at" , title: "创建时间" , sort: true},
+        {width: 170 ,field: "updated_at" , title: "更新时间" , sort: true},
       ]],
       page  : !0,
       limit : 15,
       limits: [10, 15, 20, 25, 30],
       text  : "对不起，加载出现异常！",
+    });
+
+    /**
+     * 监听表格排序按钮
+     */
+    table.on('sort(operationg_logs-table)', function (obj) {
+      table.reload('operationg_logs-table', {
+        initSort: obj,
+        where: {
+          order: [obj.field, obj.type]
+        }
+      });
     });
 
     /**

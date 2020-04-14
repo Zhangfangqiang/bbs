@@ -18,9 +18,6 @@ Route::prefix('/admin/v1')->name('api.admin.v1.')->namespace('Api\Admin')->group
     #必须登录才能获取的接口
     Route::group(['middleware' => ['api', 'auth:api']], function () {
         Route::get    ('/operationg_logs'                                       , 'OperationgLogApiController@index')                       ->name('operationg_logs.index');          #获取数据
-        Route::post   ('/operationg_logs'                                       , 'OperationgLogApiController@store')                       ->name('operationg_logs.store');          #创建
-        Route::put    ('/operationg_logs/{operationg_log}'                      , 'OperationgLogApiController@update')                      ->name('operationg_logs.update');         #更新
-        Route::delete ('/operationg_logs/{operationg_log}'                      , 'OperationgLogApiController@destroy')                     ->name('operationg_logs.destroy');        #删除
 
         Route::get    ('/users'                                                 , 'UserApiController@index')                                ->name('users.index');                    #获取数据
         Route::post   ('/users'                                                 , 'UserApiController@store')                                ->name('users.store');                    #创建
