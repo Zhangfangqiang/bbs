@@ -29,7 +29,7 @@ class UploadRecordApiController extends Controller
     public function destroy(UploadRecord $uploadRecord)
     {
         globDeleteFile($uploadRecord->path);
-        #$uploadRecord->delete();
+        $uploadRecord->delete();
         return response( ['message' => '删除成功', 'status' => '200'],200);
     }
 }

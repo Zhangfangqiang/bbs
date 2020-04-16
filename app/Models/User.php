@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Spatie\Permission\Traits\HasRoles;                                      #权限管理工具
 use Tymon\JWTAuth\Contracts\JWTSubject;                                     #认证令牌颁布
 use Illuminate\Notifications\Notifiable;                                    #通知方法
 use App\Models\Traits\ActiveUserHelper;                                     #活跃用户计算计算方法接口
@@ -12,7 +13,7 @@ use Illuminate\Auth\MustVerifyEmail           as MustVerifyEmailTrait;      #实
 
 class User extends Authenticatable implements MustVerifyEmailContract ,JWTSubject
 {
-    use MustVerifyEmailTrait, ActiveUserHelper ,Notifiable ,GetPublicData;
+    use MustVerifyEmailTrait, ActiveUserHelper, Notifiable, GetPublicData, HasRoles;
 
     /**
      * The attributes that are mass assignable.
