@@ -16,10 +16,24 @@ class CategoryApiRequest extends BaseRequest
             case 'GET':
                 return [];
             case 'POST':
-                return [];
+                return [
+                    'name'         => ['string' , 'required' , 'max:255'],
+                    'description'  => ['string' , 'required' , 'max:255'],
+                    'parent_id'    => ['numeric', 'nullable' , 'exists:categories,id'],
+                ];
             case'PUT':
             case'PATCH':
-                return [];
+                return [
+                    'name'         => ['string' , 'required' , 'max:255'],
+                    'description'  => ['string' , 'required' , 'max:255'],
+                    'parent_id'    => ['numeric', 'nullable', 'exists:categories,id',
+                        function ($attribute, $value, $fail) {
+                            if ($this->route('category')->id == $value) {
+                                $fail('自身不能做自身的父类');
+                            }
+                        }
+                    ],
+                ];
         }
     }
 }

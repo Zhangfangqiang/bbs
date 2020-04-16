@@ -55,7 +55,7 @@ return [
             'visibility' => 'public',
         ],
 
-        'web_user_upload' => [
+        'uploads' => [
             'driver' => 'local',
             'url'    => '/uploads',
             'root'   => public_path('uploads'),

@@ -40,6 +40,11 @@ class CategoryApiController extends Controller
     public function update(Category $category , CategoryAPIRequest $request)
     {
         $input = $request->all();
+
+        if ($input['parent_id'] != $category->parent_id && $category->children->isNotEmpty()) {
+            return response(['message' => '该分类下有子分类，请先删除子分类', 'status' => '200'], 200);
+        }
+
         $category->update($input);
         return response(['message' => '修改成功', 'status' => '200'], 200);
     }

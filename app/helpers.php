@@ -16,7 +16,7 @@ if (!function_exists('route_class')) {
  * @param string $disk
  */
 if (!function_exists('globDeleteFile')) {
-    function globDeleteFile($path, $disk = 'uploads')
+    function globDeleteFile($path)
     {
         if (empty($path)) {                                                 #如果路径为空直接返回
             return;
@@ -33,11 +33,10 @@ if (!function_exists('globDeleteFile')) {
         $absPath  = public_path($path);          #获取绝对路径
         $pathInfo = pathinfo($absPath);          #获取路径信息
         $fileGlob = $pathInfo['dirname'] . '/' . $pathInfo['filename'] . '*.' . $pathInfo['extension'];
-        $disk = Storage::disk($disk);
 
         foreach (glob($fileGlob) as $item) {
             if (file_exists($item)) {
-                $disk->delete(pathinfo($item)['basename']);
+                unlink($item);
             }
         }
     }

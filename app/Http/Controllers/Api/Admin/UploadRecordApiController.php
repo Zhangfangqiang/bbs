@@ -23,34 +23,13 @@ class UploadRecordApiController extends Controller
     }
 
     /**
-     * 创建
-     * @param $MODEL_NAME
-     */
-    public function store(UploadRecordAPIRequest $request)
-    {
-        $input              = $request->all();
-        $uploadRecord = UploadRecord::create($input);
-        return response(['message' => '创建成功', 'status' => '200'], 200);
-    }
-
-    /**
-     * 更新
-     * @param $MODEL_NAME
-     */
-    public function update(UploadRecord $uploadRecord , UploadRecordAPIRequest $request)
-    {
-        $input = $request->all();
-        $uploadRecord->update($input);
-        return response(['message' => '修改成功', 'status' => '200'], 200);
-    }
-
-    /**
      * 删除
      * @param $MODEL_NAME
      */
     public function destroy(UploadRecord $uploadRecord)
     {
-        $uploadRecord->delete();
-        return response( ['message' => '删除成功', 'status' => '200'],204);
+        globDeleteFile($uploadRecord->path);
+        #$uploadRecord->delete();
+        return response( ['message' => '删除成功', 'status' => '200'],200);
     }
 }

@@ -16,10 +16,18 @@ class LinkRequest extends BaseRequest
             case 'GET':
                 return [];
             case 'POST':
-                return [];
+                return [
+                    'title'       => ['required', 'string'],
+                    'description' => ['required', 'string'],
+                    'link'        => ['required', 'string']
+                ];
             case'PUT':
             case'PATCH':
-                return [];
+                return [
+                    'title'       => ['required', 'string'],
+                    'description' => ['required', 'string'],
+                    'link'        => ['required', 'string']
+                ];
         }
     }
 }
