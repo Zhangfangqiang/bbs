@@ -17,10 +17,10 @@
             <a lay-href="{{layuiRoute('admin.operationg_logs.index')}}">操作日志</a>
           </dd>
           <dd data-name="auth">
-            <a lay-href="">权限管理</a>
+            <a lay-href="{{layuiRoute('admin.permissions.index')}}">权限管理</a>
           </dd>
           <dd data-name="role">
-            <a lay-href="">角色管理</a>
+            <a lay-href="{{layuiRoute('admin.roles.index')}}">角色管理</a>
           </dd>
         </dl>
       </li>

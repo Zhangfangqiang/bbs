@@ -92,8 +92,16 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
         Route::get    ('/contents/create'                         , 'ContentController@create')                                ->name('contents.create');            #创建页
         Route::get    ('/contents/{content}/edit'                 , 'ContentController@edit')                                  ->name('contents.edit');              #编辑页
 
+        Route::get    ('/permissions/index'                       , 'PermissionController@index')                              ->name('permissions.index');          #数据展示页
+        Route::get    ('/permissions/create'                      , 'PermissionController@create')                             ->name('permissions.create');         #创建页
+        Route::get    ('/permissions/{content}/edit'              , 'PermissionController@edit')                               ->name('permissions.edit');           #编辑页
+
+        Route::get    ('/roles/index'                             , 'RoleController@index')                                    ->name('roles.index');                #数据展示页
+        Route::get    ('/roles/create'                            , 'RoleController@create')                                   ->name('roles.create');               #创建页
+        Route::get    ('/roles/{content}/edit'                    , 'RoleController@edit')                                     ->name('roles.edit');                 #编辑页
+
     });
 });
 
 
-
+Route::resource('roles', 'RoleController');

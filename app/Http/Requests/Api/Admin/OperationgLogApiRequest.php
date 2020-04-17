@@ -14,7 +14,7 @@ class OperationgLogApiRequest extends BaseRequest
     {
         switch ($this->method()) {
             case 'GET':
-                return [];
+                return $this->METHODGET;
             case 'POST':
                 return [];
             case'PUT':

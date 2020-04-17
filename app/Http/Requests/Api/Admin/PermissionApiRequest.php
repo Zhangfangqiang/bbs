@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\Admin;
 
-class CategoryHasContentApiRequest extends BaseRequest
+class PermissionApiRequest extends BaseRequest
 {
 
     /**

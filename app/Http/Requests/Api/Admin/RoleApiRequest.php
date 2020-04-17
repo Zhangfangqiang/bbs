@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\Admin;
 
-class CategoryHasContentApiRequest extends BaseRequest
+class RoleApiRequest extends BaseRequest
 {
 
     /**
@@ -14,7 +14,7 @@ class CategoryHasContentApiRequest extends BaseRequest
     {
         switch ($this->method()) {
             case 'GET':
-                return $this->METHODGET;
+                return [];
             case 'POST':
                 return [];
             case'PUT':

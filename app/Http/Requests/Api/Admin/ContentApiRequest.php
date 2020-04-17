@@ -16,7 +16,7 @@ class ContentApiRequest extends BaseRequest
     {
         switch ($this->method()) {
             case 'GET':
-                return [];
+                return $this->METHODGET;
             case 'POST':
                 return [
                     'title'     =>['required' , 'string' , 'max:255'],

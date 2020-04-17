@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Api\Admin;
+namespace App\Http\Requests\Admin;
 
-class CategoryHasContentApiRequest extends BaseRequest
+class PermissionRequest extends BaseRequest
 {
 
     /**
@@ -14,7 +14,7 @@ class CategoryHasContentApiRequest extends BaseRequest
     {
         switch ($this->method()) {
             case 'GET':
-                return $this->METHODGET;
+                return [];
             case 'POST':
                 return [];
             case'PUT':

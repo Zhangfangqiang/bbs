@@ -2,8 +2,6 @@
 
 namespace App\Models\Traits;
 
-use Illuminate\Support\Facades\Validator;
-
 trait GetPublicData
 {
 
@@ -14,22 +12,6 @@ trait GetPublicData
      */
     public function getData($configArray = null)
     {
-        Validator::make($configArray,
-            [
-                'page'         => ['nullable', 'numeric'],
-                'paginate'     => ['nullable', 'numeric'],
-                'limit'        => ['nullable', 'numeric'],
-                'offset'       => ['nullable', 'numeric'],
-                'search'       => ['nullable', 'string'],
-                'with'         => ['nullable', 'array'],
-                'order'        => ['nullable', 'array'],
-                'otherWhere'   => ['nullable', 'array'],
-                'whereNotNull' => ['nullable', 'array'],
-                'otherWhereIn' => ['nullable', 'array'],
-                'tree'         => ['nullable', 'boolean'],
-            ])->validate();
-
-
         $data = $this;
 
         #根据开关修改配置树状
@@ -93,6 +75,7 @@ trait GetPublicData
         } else {
             $data = $data->get();
         }
+
         return $data;
     }
 

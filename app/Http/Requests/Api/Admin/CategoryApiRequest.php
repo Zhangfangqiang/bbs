@@ -14,7 +14,7 @@ class CategoryApiRequest extends BaseRequest
     {
         switch ($this->method()) {
             case 'GET':
-                return [];
+                return $this->METHODGET;
             case 'POST':
                 return [
                     'name'         => ['string' , 'required' , 'max:255'],
