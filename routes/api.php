@@ -53,13 +53,13 @@ Route::prefix('/admin/v1')->name('api.admin.v1.')->namespace('Api\Admin')->group
 
         Route::get    ('/permissions'                                           , 'PermissionApiController@index')                          ->name('permissions.index');              #获取数据
         Route::post   ('/permissions'                                           , 'PermissionApiController@store')                          ->name('permissions.store');              #创建
-        Route::put    ('/permissions/{content}'                                 , 'PermissionApiController@update')                         ->name('permissions.update');             #更新
-        Route::delete ('/permissions/{content}'                                 , 'PermissionApiController@destroy')                        ->name('permissions.destroy');            #删除
+        Route::put    ('/permissions/{permission}'                              , 'PermissionApiController@update')                         ->name('permissions.update');             #更新
+        Route::delete ('/permissions/{permission}'                              , 'PermissionApiController@destroy')                        ->name('permissions.destroy');            #删除
 
         Route::get    ('/roles'                                                 , 'RoleApiController@index')                                ->name('roles.index');                    #获取数据
         Route::post   ('/roles'                                                 , 'RoleApiController@store')                                ->name('roles.store');                    #创建
-        Route::put    ('/roles/{content}'                                       , 'RoleApiController@update')                               ->name('roles.update');                   #更新
-        Route::delete ('/roles/{content}'                                       , 'RoleApiController@destroy')                              ->name('roles.destroy');                  #删除
+        Route::put    ('/roles/{role}'                                          , 'RoleApiController@update')                               ->name('roles.update');                   #更新
+        Route::delete ('/roles/{role}'                                          , 'RoleApiController@destroy')                              ->name('roles.destroy');                  #删除
 
 
 

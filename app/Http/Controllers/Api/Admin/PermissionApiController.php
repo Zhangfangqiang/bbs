@@ -28,9 +28,9 @@ class PermissionApiController extends Controller
      */
     public function store(PermissionAPIRequest $request)
     {
-        $input              = $request->all();
+        $input               = $request->all();
         $permission = Permission::create($input);
-        return response('创建成功', 200);
+        return response(['message' => '创建成功', 'status' => '200'], 200);
     }
 
     /**
@@ -39,9 +39,9 @@ class PermissionApiController extends Controller
      */
     public function update(Permission $permission , PermissionAPIRequest $request)
     {
-        $input = $request->all();
+        $input               = $request->all();
         $permission->update($input);
-        return response('修改成功', 200);
+        return response(['message' => '修改成功', 'status' => '200'], 200);
     }
 
     /**
@@ -51,6 +51,6 @@ class PermissionApiController extends Controller
     public function destroy(Permission $permission)
     {
         $permission->delete();
-        return response( 204);
+        return response(['message' => '删除成功', 'status' => '200'], 200);
     }
 }

@@ -3,24 +3,29 @@
 namespace App\Models;
 
 use App\Models\Traits\GetPublicData;
-use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Models\Permission as SpatiePermission;
 
-class Permission extends Model
+
+class Permission extends SpatiePermission
 {
 
     use GetPublicData;
+
+    /**
+     * 时间戳自动填充
+     * @var bool
+     */
+    public $timestamps = true;
 
     /**
      * 表格
      */
     public $table = 'permissions';
 
-
     /**
-     * 可填充字段
+     * 设计可填充的字段
+     * @var array
      */
-    public $fillable = [
-        'name',
-        'guard_name'
-    ];
+    protected $fillable = ['name', 'guard_name'];
+
 }
