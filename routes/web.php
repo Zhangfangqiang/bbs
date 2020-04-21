@@ -63,6 +63,9 @@ Route::prefix('web')->name('web.')->namespace('Web')->group(function () {
 #路由跳转
 Route::redirect('/zfadmin', '/admin/layouts/index');
 
+
+
+
 #后台路由
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
     #登录 && 邮件认证 后可以访问的地址
@@ -76,7 +79,8 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
 
         Route::get    ('/users/index'                             , 'UserController@index')                                    ->name('users.index');                #数据展示页
         Route::get    ('/users/create'                            , 'UserController@create')                                   ->name('users.create');               #创建页
-        Route::get    ('/users/{permission}/edit'                 , 'UserController@edit')                                     ->name('users.edit');                 #编辑页
+        Route::get    ('/users/{user}/bind_permissions'           , 'UserController@bindPermissions')                          ->name('users.bind_permissions');     #绑定权限页
+        Route::get    ('/users/{user}/bind_roles'                 , 'UserController@bindRoles')                                ->name('users.bind_roles');           #绑定权限页
 
         Route::get    ('/categories/index'                        , 'CategoryController@index')                                ->name('categories.index');           #数据展示页
         Route::get    ('/categories/create'                       , 'CategoryController@create')                               ->name('categories.create');          #创建页
@@ -99,6 +103,7 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
         Route::get    ('/roles/index'                             , 'RoleController@index')                                    ->name('roles.index');                #数据展示页
         Route::get    ('/roles/create'                            , 'RoleController@create')                                   ->name('roles.create');               #创建页
         Route::get    ('/roles/{role}/edit'                       , 'RoleController@edit')                                     ->name('roles.edit');                 #编辑页
+        Route::get    ('/roles/{role}/bind_permissions'           , 'RoleController@bindPermissions')                          ->name('roles.bind_permissions');     #绑定权限页
 
     });
 });

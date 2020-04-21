@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Role;
+use App\Models\Permission;
 use App\Http\Requests\Admin\RoleRequest;
 use App\Http\Controllers\Controller;
 
@@ -29,7 +30,6 @@ class RoleController extends Controller
         return view('admin.roles.create');
     }
 
-
     /**
      * 展示编辑页
      * @param $id
@@ -40,4 +40,17 @@ class RoleController extends Controller
         return view('admin.roles.edit', compact('role'));
     }
 
+    /**
+     * 权限绑定页
+     * @param RoleRequest $request
+     * @param Role $role
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function bindPermissions(RoleRequest $request, Role $role)
+    {
+        $permission      = Permission::all();           #所有权限
+        $bindPermissions = $role->permissions->pluck('name')->toArray();          #绑定的权限
+
+        return view('admin.roles.bind_permissions', compact('bindPermissions', 'permission'));
+    }
 }

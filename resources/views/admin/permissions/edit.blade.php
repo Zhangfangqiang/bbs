@@ -16,7 +16,14 @@
     </div>
 
     <div class="layui-form-item">
-      <label class="layui-form-label">权限名称:</label>
+      <label class="layui-form-label">权限名:</label>
+      <div class="layui-input-block">
+        <input type="text" name="alias" value="{{$permission->alias}}" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">所属组:</label>
       <div class="layui-input-block">
         <input type="text" name="guard_name" value="{{$permission->guard_name}}" class="layui-input">
       </div>

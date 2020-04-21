@@ -75,9 +75,9 @@
 
         {{--对这条数据进行操作的操作栏开始--}}
         <script type="text/html" id="roles-operation">
+          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="bind_permissions">权限</a>
           <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
-          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete"><i
-              class="layui-icon layui-icon-delete"></i>删除</a>
+          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete"><i class="layui-icon layui-icon-delete"></i>删除</a>
         </script>
         {{--对这条数据进行操作的操作栏结束--}}
 
@@ -246,12 +246,51 @@
         var dataId = data.id;                        //获取文章id
 
         /**
+         * 绑定权限的方法
+         */
+        if (layEvent == 'bind_permissions') {
+          layer.open({
+            type: 2,
+            title: '绑定权限',
+            content: "/admin/roles/" + dataId + "/bind_permissions",
+            area: ['500px', '250px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+
+              var iframeWindow = window['layui-layer-iframe' + index];
+              var submitID = 'roles-back-submit';
+              var submit = layero.find('iframe').contents().find('#' + submitID);
+
+              //监听提交
+              iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
+                var field = data.field; //获取提交的字段
+
+                //提交 Ajax 成功后，静态更新表格中的数据
+                $.ajax({
+                  url: "/api/admin/v1/roles/" + dataId + "/bind_permissions",
+                  type: 'PUT',
+                  dataType: 'json',
+                  data: field,
+                  success: function (data) {
+                    layer.msg(data);
+                  }
+                })
+
+                table.reload('roles-table');
+                layer.close(index);
+              });
+              submit.trigger('click');
+            }
+          })
+        }
+
+        /**
          * 编辑方法开始
          */
         if (layEvent === 'edit') { //编辑
           layer.open({
             type: 2,
-            title: '修改roles',
+            title: '修改角色',
             content: "/admin/roles/" + dataId + "/edit",
             area: ['500px', '250px'],
             btn: ['确定', '取消'],

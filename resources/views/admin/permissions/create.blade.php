@@ -16,6 +16,13 @@
     </div>
 
     <div class="layui-form-item">
+      <label class="layui-form-label">权限名:</label>
+      <div class="layui-input-block">
+        <input type="text" name="alias" value="" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
       <label class="layui-form-label">权限名称:</label>
       <div class="layui-input-block">
         <input type="text" name="guard_name" value="" class="layui-input">

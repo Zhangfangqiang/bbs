@@ -26,6 +26,6 @@ class Permission extends SpatiePermission
      * 设计可填充的字段
      * @var array
      */
-    protected $fillable = ['name', 'guard_name'];
+    protected $fillable = ['name', 'guard_name','alias'];
 
 }

@@ -125,8 +125,8 @@
 
         {{--对这条数据进行操作的操作栏开始--}}
         <script type="text/html" id="users-operation">
-          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="authority">权限</a>
-          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="role">角色</a>
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="bind_permissions">权限</a>
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="bind_roles">角色</a>
           <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete"><i class="layui-icon layui-icon-delete"></i>删除</a>
         </script>
         {{--对这条数据进行操作的操作栏结束--}}
@@ -269,20 +269,40 @@
         var layEvent = obj.event;                      //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
         var dataId = data.id;                        //获取文章id
 
-
         /**
          * 设置权限的方法
          */
-        if (layEvent === 'authority') { //设置权限的方法
+        if (layEvent === 'bind_permissions') { //设置权限的方法
           layer.open({
             type: 2,
             title: '设置权限',
-            content: "/admin/users/" + dataId + "/authority",
-            area: ['720px', '800px'],
+            content: "/admin/users/" + dataId + "/bind_permissions",
+            area: ['500px', '300px'],
             btn: ['确定', '取消'],
             yes: function (index, layero) {
+              var iframeWindow = window['layui-layer-iframe' + index];
+              var submitID     = 'users-back-submit';
+              var submit       = layero.find('iframe').contents().find('#' + submitID);
 
+              //监听提交
+              iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
+                var field = data.field; //获取提交的字段
 
+                //提交 Ajax 成功后，静态更新表格中的数据
+                $.ajax({
+                  url: "/api/admin/v1/users/" + dataId + "/bind_permissions",
+                  type: 'PUT',
+                  dataType: 'json',
+                  data: field,
+                  success: function (data) {
+                    layer.msg(data);
+                  }
+                })
+
+                table.reload('users-table');
+                layer.close(index);
+              });
+              submit.trigger('click');
             }
           })
         }
@@ -290,15 +310,37 @@
         /**
          * 设置角色
          */
-        if (layEvent === 'role') { //设置角色
+        if (layEvent === 'bind_roles') { //设置角色
           layer.open({
             type: 2,
             title: '设置角色',
-            content: "/admin/users/" + dataId + "/role",
-            area: ['720px', '800px'],
+            content: "/admin/users/" + dataId + "/bind_roles",
+            area: ['500px', '300px'],
             btn: ['确定', '取消'],
             yes: function (index, layero) {
+              var iframeWindow = window['layui-layer-iframe' + index];
+              var submitID     = 'users-back-submit';
+              var submit       = layero.find('iframe').contents().find('#' + submitID);
 
+              //监听提交
+              iframeWindow.layui.form.on('submit(' + submitID + ')', function (data) {
+                var field = data.field; //获取提交的字段
+
+                //提交 Ajax 成功后，静态更新表格中的数据
+                $.ajax({
+                  url: "/api/admin/v1/users/" + dataId + "/bind_roles",
+                  type: 'PUT',
+                  dataType: 'json',
+                  data: field,
+                  success: function (data) {
+                    layer.msg(data);
+                  }
+                })
+
+                table.reload('users-table');
+                layer.close(index);
+              });
+              submit.trigger('click');
 
             }
           })

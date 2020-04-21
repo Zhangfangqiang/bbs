@@ -21,12 +21,21 @@
               <input type='text' name='id' placeholder='请输入' autocomplete='off' class='layui-input'>
             </div>
           </div>
+
           <div class='layui-inline'>
             <label class='layui-form-label'>路由别名</label>
             <div class='layui-input-inline'>
               <input type='text' name='name' placeholder='请输入' autocomplete='off' class='layui-input' data-where="like">
             </div>
           </div>
+
+          <div class='layui-inline'>
+            <label class='layui-form-label'>权限名</label>
+            <div class='layui-input-inline'>
+              <input type='text' name='alias' placeholder='请输入' autocomplete='off' class='layui-input' data-where="like">
+            </div>
+          </div>
+
           <div class='layui-inline'>
             <label class='layui-form-label'>所属组</label>
             <div class='layui-input-inline'>
@@ -128,7 +137,7 @@
           type: 2,
           title: '添加权限',
           content: "/admin/permissions/create",
-          area: ['500px', '250px'],
+          area: ['500px', '300px'],
           btn: ['确定', '取消'],
           yes: function (index, layero) {
 
@@ -217,6 +226,7 @@
           {width: 50 , type: "numbers", fixed: "left"},
           {width: 80 , field: "id", title: "id"},
           {minWidth: 170, field: "name", title: "路由别名"},
+          {minWidth: 170, field: "alias", title: "权限名"},
           {minWidth: 170, field: "guard_name", title: "所属组"},
           {width: 170, field: "created_at", title: "创建时间"},
           {width: 170, field: "updated_at", title: "更新时间"},
@@ -258,7 +268,7 @@
             type: 2,
             title: '修改权限',
             content: "/admin/permissions/" + dataId + "/edit",
-            area: ['500px', '250px'],
+            area: ['500px', '300px'],
             btn: ['确定', '取消'],
             yes: function (index, layero) {
 

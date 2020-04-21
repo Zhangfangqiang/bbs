@@ -20,8 +20,8 @@ Route::prefix('/admin/v1')->name('api.admin.v1.')->namespace('Api\Admin')->group
         Route::get    ('/operationg_logs'                                       , 'OperationgLogApiController@index')                       ->name('operationg_logs.index');          #获取数据
 
         Route::get    ('/users'                                                 , 'UserApiController@index')                                ->name('users.index');                    #获取数据
-        Route::post   ('/users'                                                 , 'UserApiController@store')                                ->name('users.store');                    #创建
-        Route::put    ('/users/{user}'                                          , 'UserApiController@update')                               ->name('users.update');                   #更新
+        Route::put    ('/users/{user}/bind_permissions'                         , 'UserApiController@bindPermissions')                      ->name('roles.bind_permissions');         #绑定权限的方法
+        Route::put    ('/users/{user}/bind_roles'                               , 'UserApiController@bindRoles')                            ->name('roles.bind_roles');               #绑定角色的方法
         Route::delete ('/users/{user}'                                          , 'UserApiController@destroy')                              ->name('users.destroy');                  #删除
 
         Route::get    ('/category_has_contents'                                 , 'CategoryHasContentApiController@index')                  ->name('category_has_contents.index');    #获取数据
@@ -59,6 +59,7 @@ Route::prefix('/admin/v1')->name('api.admin.v1.')->namespace('Api\Admin')->group
         Route::get    ('/roles'                                                 , 'RoleApiController@index')                                ->name('roles.index');                    #获取数据
         Route::post   ('/roles'                                                 , 'RoleApiController@store')                                ->name('roles.store');                    #创建
         Route::put    ('/roles/{role}'                                          , 'RoleApiController@update')                               ->name('roles.update');                   #更新
+        Route::put    ('/roles/{role}/bind_permissions'                         , 'RoleApiController@bindPermissions')                      ->name('roles.bind_permissions');         #绑定权限的方法
         Route::delete ('/roles/{role}'                                          , 'RoleApiController@destroy')                              ->name('roles.destroy');                  #删除
 
 
