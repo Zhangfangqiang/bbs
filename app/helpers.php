@@ -214,3 +214,4 @@ if (!function_exists("aetherUploadPath")) {
         return '/' . config('aetherupload.root_dir') . '/' . str_replace('_', '/', $string);
     }
 }
+

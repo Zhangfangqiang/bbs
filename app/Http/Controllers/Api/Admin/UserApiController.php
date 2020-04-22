@@ -40,8 +40,11 @@ class UserApiController extends Controller
             } else {
                 $diff = array_diff($userPermissions, $permissions);
             }
-
-            $user->revokePermissionTo($diff);               #删除没有选中的
+            if (count($diff) == 1) {
+                $user->revokePermissionTo($diff[0]);               #删除没有选中的
+            }else{
+                $user->revokePermissionTo($diff);                  #删除没有选中的
+            }
         }
         $user->givePermissionTo($permissions);              #保存现有的
 
@@ -68,7 +71,11 @@ class UserApiController extends Controller
                 $diff = array_diff($userRoles, $roles);
             }
 
-            $user->removeRole($diff);               #删除没有选中的
+            if (count($diff) == 1) {
+                $user->removeRole($diff[0]);
+            } else {
+                $user->removeRole($diff);
+            }
         }
 
         $user->assignRole($roles);              #保存现有的

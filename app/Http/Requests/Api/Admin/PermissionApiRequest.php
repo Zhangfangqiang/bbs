@@ -16,10 +16,18 @@ class PermissionApiRequest extends BaseRequest
             case 'GET':
                 return $this->METHODGET;
             case 'POST':
-                return [];
+                return [
+                    'name'       => ['required', 'string', 'max:255','unique:permissions,name'],
+                    'alias'      => ['required', 'string', 'max:255','unique:permissions,alias'],
+                    'guard_name' => ['required', 'string', 'max:255'],
+                ];
             case'PUT':
             case'PATCH':
-                return [];
+                return [
+                    'name'       => ['required', 'string', 'max:255','unique:permissions,name,'. $this->route('permission')->id],
+                    'alias'      => ['required', 'string', 'max:255','unique:permissions,alias,'. $this->route('permission')->id],
+                    'guard_name' => ['required', 'string', 'max:255'],
+                ];
         }
     }
 }

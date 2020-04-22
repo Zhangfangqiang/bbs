@@ -69,7 +69,7 @@ Route::redirect('/zfadmin', '/admin/layouts/index');
 #后台路由
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
     #登录 && 邮件认证 后可以访问的地址
-    Route::group(['middleware' => ['auth', 'verified', 'wol']], function () {
+    Route::group(['middleware' => ['auth', 'verified', 'wol', 'aup']], function () {
         Route::any    ('/ueditor/upload'                          , 'UeditorController@upload')                                ->name('ueditor.upload');             #百度编辑器主控文件
 
         #框架外部需要嵌套的页面

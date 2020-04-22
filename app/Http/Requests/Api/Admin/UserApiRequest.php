@@ -19,7 +19,12 @@ class UserApiRequest extends BaseRequest
                 return [];
             case'PUT':
             case'PATCH':
-                return [];
+                return [
+                    'permission'   => ['nullable', 'array'],
+                    'permission.*' => ['required', 'string', 'exists:permissions,name'],
+                    'roles'        => ['nullable', 'array'],
+                    'roles.*'      => ['required', 'string', 'exists:roles,name'],
+                ];
         }
     }
 }

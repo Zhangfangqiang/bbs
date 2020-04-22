@@ -16,10 +16,18 @@ class LinkApiRequest extends BaseRequest
             case 'GET':
                 return $this->METHODGET;
             case 'POST':
-                return [];
+                return [
+                    'title'       => ['required','string','max:700','unique:links,title'],
+                    'description' => ['required','string','max:1000'],
+                    'link'        => ['required','string','max:700','unique:links,link']
+                ];
             case'PUT':
             case'PATCH':
-                return [];
+                return [
+                    'title'       => ['required','string','max:700','unique:links,title,'. $this->route('link')->id],
+                    'description' => ['required','string','max:1000'],
+                    'link'        => ['required','string','max:700','unique:links,link,'. $this->route('link')->id]
+                ];
         }
     }
 }
