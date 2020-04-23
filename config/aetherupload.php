@@ -40,7 +40,7 @@ return [
     |
     */
 
-    'instant_completion' => false,
+    'instant_completion' => true,
 
     /*
     |--------------------------------------------------------------------------
